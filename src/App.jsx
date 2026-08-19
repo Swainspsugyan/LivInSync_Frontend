@@ -24,11 +24,11 @@ export default function App() {
   }, [location.pathname, location.hash])
 
   return (
-    <div className="relative min-h-screen bg-white text-ink">
+    <div className="relative w-full min-h-dvh overflow-x-hidden bg-white text-ink">
       {!isLogin && (
         <Navbar onSignup={() => setAuth('signup')} />
       )}
-      <main className="relative z-10">
+      <main className="relative z-10 w-full">
         <Routes>
           <Route
             path="/"

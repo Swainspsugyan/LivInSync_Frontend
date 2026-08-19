@@ -1,12 +1,10 @@
 import { Check } from 'lucide-react'
 import { useState } from 'react'
-import SectionHeading from './SectionHeading'
 
 const plans = [
   {
-    name: 'Basic',
-    badge: 'Starter',
-    monthly: 29,
+    name: 'Starter',
+    monthly: 2499,
     blurb: 'Essential ops for boutique residences.',
     features: [
       'Up to 50 units',
@@ -17,9 +15,8 @@ const plans = [
     ],
   },
   {
-    name: 'Pro',
-    badge: 'Recommended',
-    monthly: 79,
+    name: 'Professional',
+    monthly: 7999,
     highlighted: true,
     blurb: 'The complete operating layer for growing communities.',
     features: [
@@ -33,8 +30,7 @@ const plans = [
   },
   {
     name: 'Enterprise',
-    badge: 'Scale',
-    monthly: 189,
+    monthly: 18999,
     blurb: 'White-glove control for multi-tower portfolios.',
     features: [
       'Unlimited units & towers',
@@ -51,20 +47,22 @@ export default function Pricing({ onSelect }) {
   const [annual, setAnnual] = useState(true)
 
   return (
-    <section className="section-pad z-10 bg-white">
-      <SectionHeading
-        eyebrow="Pricing"
-        title="Transparent tiers. Quietly luxurious ops."
-        subtitle="Start lean, scale into a full community OS. Annual billing includes two months complimentary."
-      />
+    <section id="pricing" className="section-pad bg-white">
+      <div className="mx-auto max-w-3xl text-center">
+        <p className="eyebrow">Pricing</p>
+        <h2 className="mt-3 font-display text-3xl font-bold text-navy sm:text-4xl">
+          Simple, Transparent Pricing
+        </h2>
+        <p className="mt-4 text-muted">Start lean, then scale into a full community OS.</p>
+      </div>
 
-      <div className="mt-10 flex justify-center">
-        <div className="glass inline-flex rounded-full p-1">
+      <div className="mt-8 flex justify-center">
+        <div className="inline-flex items-center gap-3 rounded-full border border-line bg-secondary px-2 py-1.5">
           <button
             type="button"
             onClick={() => setAnnual(false)}
-            className={`rounded-full px-5 py-2 font-ui text-sm ${
-              !annual ? 'bg-primary text-white font-semibold' : 'text-muted'
+            className={`rounded-full px-4 py-1.5 font-ui text-sm ${
+              !annual ? 'bg-white font-semibold text-navy shadow-sm' : 'text-muted'
             }`}
           >
             Monthly
@@ -72,68 +70,45 @@ export default function Pricing({ onSelect }) {
           <button
             type="button"
             onClick={() => setAnnual(true)}
-            className={`rounded-full px-5 py-2 font-ui text-sm ${
-              annual ? 'bg-primary text-white font-semibold' : 'text-muted'
+            className={`rounded-full px-4 py-1.5 font-ui text-sm ${
+              annual ? 'bg-white font-semibold text-navy shadow-sm' : 'text-muted'
             }`}
           >
-            Annual <span className="ml-1 text-[11px] opacity-80">Save 17%</span>
+            Yearly <span className="text-primary">(Save 20%)</span>
           </button>
         </div>
       </div>
 
       <div className="mx-auto mt-12 grid max-w-7xl gap-6 lg:grid-cols-3">
         {plans.map((plan) => {
-          const price = annual ? Math.round(plan.monthly * 10) : plan.monthly
+          const price = annual ? Math.round(plan.monthly * 12 * 0.8) : plan.monthly
           const period = annual ? '/yr' : '/mo'
           return (
             <article
               key={plan.name}
-              className={`relative flex h-full flex-col rounded-3xl p-7 ${
+              className={`relative flex h-full flex-col rounded-2xl p-7 ${
                 plan.highlighted
-                  ? 'bg-navy text-white'
-                  : 'glass'
+                  ? 'border-2 border-primary bg-white shadow-lg'
+                  : 'border border-line bg-white'
               }`}
             >
               {plan.highlighted && (
-                <span className="absolute right-5 top-5 rounded-full bg-primary px-3 py-1 font-ui text-[10px] font-bold uppercase tracking-wider text-white">
-                  {plan.badge}
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-primary px-3 py-1 font-ui text-[10px] font-bold uppercase tracking-wider text-white">
+                  Most Popular
                 </span>
               )}
-              {!plan.highlighted && (
-                <span className="mb-3 inline-flex w-fit rounded-full border border-line px-3 py-1 font-ui text-[10px] uppercase tracking-[0.2em] text-muted">
-                  {plan.badge}
-                </span>
-              )}
-              <h3 className={`font-display text-3xl ${plan.highlighted ? 'text-white' : 'text-ink'}`}>
-                {plan.name}
-              </h3>
-              <p className={`mt-2 text-sm ${plan.highlighted ? 'text-white/75' : 'text-muted'}`}>
-                {plan.blurb}
-              </p>
+              <h3 className="font-display text-2xl font-semibold text-navy">{plan.name}</h3>
+              <p className="mt-2 text-sm text-muted">{plan.blurb}</p>
               <div className="mt-6 flex items-end gap-1">
-                <span
-                  className={`font-ui text-5xl font-semibold ${
-                    plan.highlighted ? 'text-white' : 'text-ink'
-                  }`}
-                >
-                  ${price}
+                <span className="font-ui text-4xl font-bold text-navy">
+                  ₹{price.toLocaleString('en-IN')}
                 </span>
-                <span className={`mb-2 text-sm ${plan.highlighted ? 'text-white/70' : 'text-muted'}`}>
-                  {period}
-                </span>
+                <span className="mb-1 text-sm text-muted">{period}</span>
               </div>
               <ul className="mt-6 flex-1 space-y-3">
                 {plan.features.map((f) => (
-                  <li
-                    key={f}
-                    className={`flex items-start gap-2 text-sm ${
-                      plan.highlighted ? 'text-white/90' : 'text-ink'
-                    }`}
-                  >
-                    <Check
-                      size={16}
-                      className={`mt-0.5 shrink-0 ${plan.highlighted ? 'text-primary' : 'text-primary'}`}
-                    />
+                  <li key={f} className="flex items-start gap-2 text-sm text-navy">
+                    <Check size={16} className="mt-0.5 shrink-0 text-primary" />
                     {f}
                   </li>
                 ))}
@@ -141,9 +116,11 @@ export default function Pricing({ onSelect }) {
               <button
                 type="button"
                 onClick={() => onSelect?.(plan.name)}
-                className="btn-gold mt-8 w-full rounded-lg py-3 font-ui text-sm"
+                className={`mt-8 w-full rounded-lg py-3 font-ui text-sm ${
+                  plan.highlighted ? 'btn-gold' : 'btn-outline'
+                }`}
               >
-                Choose {plan.name}
+                {plan.highlighted ? 'Get Started' : `Choose ${plan.name}`}
               </button>
             </article>
           )

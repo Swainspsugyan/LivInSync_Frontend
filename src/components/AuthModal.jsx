@@ -20,7 +20,7 @@ export default function AuthModal({ mode, onClose, onSwitch }) {
       onClick={onClose}
     >
       <div
-        className="glass-strong relative max-h-[min(90vh,720px)] w-full max-w-md overflow-y-auto rounded-3xl p-6 sm:p-8"
+        className="glass-strong relative max-h-[min(90dvh,720px)] w-full max-w-md overflow-y-auto rounded-2xl p-5 sm:rounded-3xl sm:p-8"
         onClick={(e) => e.stopPropagation()}
       >
         <button

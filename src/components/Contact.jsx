@@ -156,10 +156,10 @@ export default function Contact() {
               Book a 25-minute live demo of gate, billing, and amenity flows on a sample community.
             </p>
             <Link
-              to="/pricing"
+              to="/#features"
               className="btn-outline mt-5 inline-flex w-fit rounded-full px-5 py-2 font-ui text-sm"
             >
-              View plans
+              View features
             </Link>
           </div>
         </div>

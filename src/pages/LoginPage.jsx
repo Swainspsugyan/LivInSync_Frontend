@@ -1,4 +1,4 @@
-import { Eye, EyeOff, Headphones, Lock, Mail, Phone, User } from 'lucide-react'
+﻿import { Eye, EyeOff, Headphones, Lock, Mail, Phone, User } from 'lucide-react'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -22,53 +22,66 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="login-page min-h-dvh text-[#222] lg:h-dvh lg:overflow-hidden">
-      <div className="grid min-h-dvh w-full lg:h-full lg:grid-cols-[minmax(0,1.45fr)_minmax(420px,480px)]">
-        <section className="relative flex min-h-[40vh] flex-col lg:h-full lg:min-h-0">
-          <div className="shrink-0 px-4 pb-1 pt-5 text-center sm:px-6 sm:pt-6 lg:px-8 lg:pt-7">
-            <p className="text-2xl font-medium leading-tight text-[#1f2937] sm:text-3xl lg:text-[32px] xl:text-[38px]">
-              This <span className="font-extrabold">Society</span> is{' '}
-              <span className="font-extrabold">Digitally</span> Powered by
-            </p>
-            <div className="mt-3 flex items-center justify-center gap-3">
-              <img
-                src="/image_0.png"
-                alt="LivinSync logo"
-                className="h-12 w-12 rounded-full object-cover ring-1 ring-[#c5d4e3] sm:h-14 sm:w-14 lg:h-[4.25rem] lg:w-[4.25rem]"
-              />
-              <span className="font-ui text-4xl font-semibold tracking-tight text-[#2563eb] sm:text-5xl lg:text-[3.25rem]">
-                LivinSync
-              </span>
+    <div className="login-page relative min-h-dvh w-full max-w-full overflow-x-hidden text-[#222]">
+      <img
+        src="/login-campus.png?v=8"
+        alt=""
+        className="login-lux-photo pointer-events-none absolute inset-0 h-full w-full object-cover object-center"
+      />
+      <div className="login-lux-grade pointer-events-none absolute inset-0" />
+      <div className="login-lux-sheen pointer-events-none absolute inset-0" />
+      <div className="login-lux-drift pointer-events-none absolute inset-0" />
+      <Link
+        to="/"
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        className="absolute left-4 top-4 z-20 sm:left-6 sm:top-5 lg:left-8 lg:top-6"
+      >
+        <img
+          src="/image_0.png"
+          alt="LivinSync logo"
+          className="h-14 w-14 rounded-full object-cover ring-2 ring-[#d4af37] shadow-[0_6px_20px_rgba(0,0,0,0.45)] sm:h-[4.75rem] sm:w-[4.75rem] lg:h-20 lg:w-20"
+        />
+      </Link>
+      <div className="relative z-10 grid min-h-dvh w-full lg:h-dvh lg:grid-cols-[minmax(0,1fr)_minmax(300px,min(42vw,440px))]">
+        <section className="relative flex min-h-[42vh] flex-col sm:min-h-[48vh] lg:h-full lg:min-h-0">
+          <div className="relative z-10 flex shrink-0 justify-end px-4 pb-3 pt-4 sm:px-6 sm:pt-6 lg:px-8 lg:pt-7">
+            <div className="mr-12 text-right sm:mr-24 lg:mr-40 xl:mr-52">
+              <p className="text-xl font-medium leading-tight tracking-wide text-white sm:text-3xl lg:text-[32px] xl:text-[38px]">
+                This <span className="font-extrabold">Society</span> is{' '}
+                <span className="font-extrabold">Digitally</span> Powered by
+              </p>
+              <Link
+                to="/"
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                className="mt-3 inline-flex items-center justify-end"
+              >
+                <span className="font-ui text-3xl font-extrabold tracking-tight text-[#d4af37] sm:text-5xl lg:text-[3.25rem]">
+                  LivinSync
+                </span>
+              </Link>
             </div>
-          </div>
-          <div className="relative min-h-0 flex-1 overflow-hidden">
-            <img
-              src="/login-campus.png?v=5"
-              alt="LivinSync digitally managed community"
-              className="absolute inset-0 h-full w-full object-contain object-[center_18%]"
-            />
           </div>
         </section>
 
-        <aside className="login-panel flex items-center justify-center px-4 py-8 sm:px-6 lg:h-full lg:overflow-y-auto lg:px-8">
-          <div className="w-full max-w-[420px] rounded-[28px] bg-white px-6 py-8 shadow-[0_12px_40px_rgba(15,23,42,0.12)] sm:px-8 sm:py-9">
-            <h1 className="text-center text-[26px] font-bold tracking-tight text-[#1a1a1a] sm:text-[30px]">
-              Welcome back 👋
+        <aside className="flex items-start justify-center px-3 py-6 sm:px-6 sm:py-8 lg:h-full lg:items-center lg:overflow-y-auto lg:px-6">
+          <div className="w-full max-w-[400px] rounded-2xl border border-white/10 bg-[#05111a]/45 px-4 py-6 shadow-[0_20px_60px_rgba(0,0,0,0.35)] backdrop-blur-md sm:rounded-[28px] sm:px-8 sm:py-9">
+            <h1 className="text-center font-display text-[22px] font-bold tracking-tight text-white sm:text-[30px]">
+              Welcome back
             </h1>
-            <p className="mt-1 text-center text-sm text-[#7a7a7a] sm:text-[15px]">
-              Login to your community account
+            <p className="mt-1 text-center text-sm tracking-wide text-slate-300 sm:text-[15px]">
+              Login to your Society account
             </p>
 
-            <h2 className="mt-7 text-center text-[21px] font-bold text-[#111] sm:text-[24px]">
+            <h2 className="mt-7 text-center text-[21px] font-bold tracking-[0.04em] text-white sm:text-[24px]">
               LivinSync Login
             </h2>
 
-            <div className="mt-4 grid grid-cols-2 rounded-full bg-[#f3f4f6] p-1">
+            <div className="mt-4 grid grid-cols-2 rounded-full border border-white/10 bg-white/5 p-1">
               <button
                 type="button"
                 onClick={() => setMode('password')}
-                className={`rounded-full py-2.5 text-[13px] font-semibold ${
-                  mode === 'password' ? 'bg-[#4a90e2] text-white' : 'text-[#4b5563]'
+                className={`rounded-full py-2 text-[12px] font-semibold sm:py-2.5 sm:text-[13px] ${
+                  mode === 'password' ? 'bg-emerald-500 text-white' : 'text-slate-300'
                 }`}
               >
                 With Password
@@ -76,8 +89,8 @@ export default function LoginPage() {
               <button
                 type="button"
                 onClick={() => setMode('pin')}
-                className={`rounded-full py-2.5 text-[13px] font-semibold ${
-                  mode === 'pin' ? 'bg-[#4a90e2] text-white' : 'text-[#4b5563]'
+                className={`rounded-full py-2 text-[12px] font-semibold sm:py-2.5 sm:text-[13px] ${
+                  mode === 'pin' ? 'bg-emerald-500 text-white' : 'text-slate-300'
                 }`}
               >
                 With PIN
@@ -88,31 +101,31 @@ export default function LoginPage() {
               <label className="relative block">
                 <User
                   size={16}
-                  className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-[#9ca3af]"
+                  className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"
                 />
                 <input
                   value={userId}
                   onChange={(e) => setUserId(e.target.value)}
                   placeholder="Enter User ID"
-                  className="w-full rounded-lg border border-[#d1d5db] py-3 pl-10 pr-3 text-sm text-[#111] placeholder:text-[#9ca3af]"
+                  className="w-full rounded-lg border border-white/15 bg-white/5 py-3 pl-10 pr-3 text-sm text-white placeholder:text-slate-400"
                 />
               </label>
               <label className="relative block">
                 <Lock
                   size={16}
-                  className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-[#9ca3af]"
+                  className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"
                 />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   value={secret}
                   onChange={(e) => setSecret(e.target.value)}
                   placeholder={mode === 'pin' ? 'Enter PIN' : 'Enter Password'}
-                  className="w-full rounded-lg border border-[#d1d5db] py-3 pl-10 pr-10 text-sm text-[#111] placeholder:text-[#9ca3af]"
+                  className="w-full rounded-lg border border-white/15 bg-white/5 py-3 pl-10 pr-10 text-sm text-white placeholder:text-slate-400"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword((v) => !v)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#9ca3af]"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400"
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
                   {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
@@ -120,34 +133,34 @@ export default function LoginPage() {
               </label>
 
               <div className="flex flex-wrap items-center justify-between gap-2 pt-1 text-[13px]">
-                <label className="flex cursor-pointer items-center gap-2 text-[#4b5563]">
+                <label className="flex cursor-pointer items-center gap-2 text-slate-300">
                   <input
                     type="checkbox"
                     checked={stay}
                     onChange={(e) => setStay(e.target.checked)}
-                    className="h-4 w-4 accent-[#4a90e2]"
+                    className="h-4 w-4 accent-emerald-500"
                   />
                   Stay logged in
                 </label>
-                <button type="button" className="font-medium text-[#3b82f6] hover:underline">
+                <button type="button" className="font-medium text-emerald-400 hover:underline">
                   Forgot password?
                 </button>
               </div>
 
-              {error && <p className="text-center text-xs text-red-500">{error}</p>}
+              {error && <p className="text-center text-xs text-red-400">{error}</p>}
 
               <button
                 type="submit"
-                className="mt-1 w-full rounded-lg bg-[#4a90e2] py-3 text-[15px] font-semibold text-white hover:bg-[#3b82f6]"
+                className="mt-1 w-full rounded-lg bg-emerald-500 py-3 text-[15px] font-semibold text-white hover:bg-emerald-400"
               >
                 Login
               </button>
             </form>
 
             <div className="mt-6 flex items-center gap-3">
-              <span className="h-px flex-1 bg-[#e5e7eb]" />
-              <span className="shrink-0 text-[13px] text-[#6b7280]">Or Login With</span>
-              <span className="h-px flex-1 bg-[#e5e7eb]" />
+              <span className="h-px flex-1 bg-white/15" />
+              <span className="shrink-0 text-[13px] tracking-wide text-slate-300">Or Login With</span>
+              <span className="h-px flex-1 bg-white/15" />
             </div>
 
             <div className="mt-4 flex justify-center gap-4">
@@ -155,7 +168,7 @@ export default function LoginPage() {
                 <button
                   key={i}
                   type="button"
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-[#93c5fd] text-[#3b82f6]"
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/25 text-white hover:border-emerald-400 hover:text-emerald-400"
                 >
                   <Icon size={15} />
                 </button>
@@ -165,7 +178,7 @@ export default function LoginPage() {
             <div className="mt-4 grid grid-cols-2 gap-3">
               <button
                 type="button"
-                className="flex items-center justify-center gap-2 rounded-lg border border-[#e5e7eb] py-2.5 text-sm font-medium text-[#374151]"
+                className="flex items-center justify-center gap-2 rounded-lg border border-white/15 bg-white/5 py-2.5 text-sm font-medium text-white hover:bg-white/10"
               >
                 <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden>
                   <path
@@ -177,7 +190,7 @@ export default function LoginPage() {
               </button>
               <button
                 type="button"
-                className="flex items-center justify-center gap-2 rounded-lg border border-[#e5e7eb] py-2.5 text-sm font-medium text-[#374151]"
+                className="flex items-center justify-center gap-2 rounded-lg border border-white/15 bg-white/5 py-2.5 text-sm font-medium text-white hover:bg-white/10"
               >
                 <svg viewBox="0 0 23 23" className="h-4 w-4" aria-hidden>
                   <path fill="#F25022" d="M1 1h10v10H1z" />
@@ -189,8 +202,8 @@ export default function LoginPage() {
               </button>
             </div>
 
-            <p className="mt-6 text-center text-xs text-[#9ca3af]">
-              <Link to="/" className="text-[#3b82f6] hover:underline">
+            <p className="mt-6 text-center text-xs text-slate-400">
+              <Link to="/" className="text-emerald-400 hover:underline">
                 Back to LivinSync
               </Link>
             </p>

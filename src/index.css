@@ -2,23 +2,22 @@
 
 @theme {
   --color-page: #ffffff;
-  --color-nav: #c4defd;
-  --color-ivory: #f4ead4;
-  --color-navy: #043873;
+  --color-nav: #ffffff;
+  --color-navy: #0b1e33;
   --color-card: #ffffff;
-  --color-line: #dbe7f3;
-  --color-ink: #212529;
-  --color-muted: #4d5b6a;
-  --color-primary: #4f9cf9;
-  --color-primary-dark: #3b8aee;
-  --color-pale: #c4defd;
-  --color-accent: #ffe492;
-  --color-secondary: #f5f9ff;
-  --color-gold: #4f9cf9;
-  --color-gold-light: #7ab6fb;
-  --color-gold-dark: #3b8aee;
+  --color-line: #e4ecee;
+  --color-ink: #0b1e33;
+  --color-muted: #5a6b78;
+  --color-primary: #0d8376;
+  --color-primary-dark: #0b666a;
+  --color-pale: #e8f4f2;
+  --color-accent: #0d8376;
+  --color-secondary: #f4f8f8;
+  --color-gold: #0d8376;
+  --color-gold-light: #14a394;
+  --color-gold-dark: #0b666a;
   --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
   --font-ui: "Outfit", ui-sans-serif, system-ui, sans-serif;
 }
 
@@ -31,35 +30,25 @@
     scroll-padding-top: 88px;
   }
 
-  @media (min-width: 640px) {
-    html {
-      scroll-padding-top: 104px;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    html {
-      scroll-padding-top: 112px;
-    }
-  }
-
   html,
   body,
   #root {
+    width: 100%;
     min-height: 100%;
-  }
-
-  body {
     margin: 0;
-    background: #ffffff;
-    color: #212529;
-    font-family: var(--font-sans);
+    padding: 0;
     overflow-x: hidden;
   }
 
+  body {
+    background: #ffffff;
+    color: #0b1e33;
+    font-family: var(--font-sans);
+  }
+
   ::selection {
-    background: rgba(79, 156, 249, 0.28);
-    color: #043873;
+    background: rgba(13, 131, 118, 0.22);
+    color: #0b1e33;
   }
 
   button,
@@ -75,77 +64,55 @@
 @layer components {
   .glass {
     background: #ffffff;
-    border: 1px solid #dbe7f3;
-    box-shadow: 0 1px 2px rgba(4, 56, 115, 0.05);
+    border: 1px solid #e4ecee;
+    box-shadow: 0 8px 24px rgba(11, 30, 51, 0.05);
   }
 
   .glass-strong {
     background: #ffffff;
-    border: 1px solid #dbe7f3;
-    box-shadow: 0 8px 24px rgba(4, 56, 115, 0.08);
+    border: 1px solid #e4ecee;
+    box-shadow: 0 12px 32px rgba(11, 30, 51, 0.08);
   }
 
   .nav-shell {
-    background: #c4defd;
-    border-bottom: 1px solid #4f9cf9;
+    background: transparent;
+    border-bottom: none;
+    width: 100%;
+    left: 0;
+    right: 0;
   }
 
   .btn-gold {
-    background: #4f9cf9;
+    background: #0d8376;
     color: #ffffff;
     font-weight: 600;
   }
 
   .btn-gold:hover {
-    background: #3b8aee;
+    background: #0b666a;
   }
 
   .btn-outline {
-    background: #ffe492;
-    border: 1px solid #ffe492;
-    color: #043873;
+    background: #ffffff;
+    border: 1px solid #d5e0e2;
+    color: #0b1e33;
     font-weight: 600;
   }
 
   .btn-outline:hover {
-    background: #ffd86a;
+    background: #f4f8f8;
   }
 
   .section-pad {
-    @apply relative px-4 sm:px-8 lg:px-12 xl:px-16 py-14 sm:py-20 md:py-28;
+    @apply relative w-full px-4 py-12 sm:px-6 sm:py-16 lg:px-10 lg:py-20 xl:px-16;
   }
 
   .field {
     @apply mt-1.5 w-full rounded-xl border border-line bg-white px-4 py-3 text-ink placeholder:text-muted;
   }
-}
 
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateX(48px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.animate-fade-in {
-  opacity: 0;
-  transform: translateX(48px);
-}
-
-.animate-fade-in.is-visible {
-  animation: fade-in 0.9s ease-out forwards;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-fade-in,
-  .animate-fade-in.is-visible {
-    animation: none;
-    opacity: 1;
-    transform: none;
+  .eyebrow {
+    @apply font-ui text-[10px] font-semibold uppercase tracking-[0.16em] text-primary sm:text-[11px] sm:tracking-[0.22em];
   }
 }
 
@@ -159,17 +126,212 @@ input:focus,
 textarea:focus,
 select:focus {
   outline: none;
-  border-color: #4f9cf9 !important;
-  box-shadow: 0 0 0 3px rgba(79, 156, 249, 0.22);
+  border-color: #0d8376 !important;
+  box-shadow: 0 0 0 3px rgba(13, 131, 118, 0.18);
 }
 
 .login-page {
   font-family: var(--font-ui);
-  background-color: #e8eef4;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88' height='88' viewBox='0 0 88 88'%3E%3Cg fill='none' stroke='%23c5d4e3' stroke-width='1.15' opacity='0.42'%3E%3Cpath d='M14 54h18v16H14zM18 48h10v6H18zM20 44h6v4h-6z'/%3E%3Cpath d='M48 50h22v20H48zM54 42h10v8H54zM57 36h4v6h-4z'/%3E%3C/g%3E%3C/svg%3E");
-  background-size: 88px 88px;
+  background-color: #05111a;
+  background-image: none;
+  overflow: hidden;
+}
+
+.login-lux-photo {
+  filter: brightness(0.9) contrast(1.08) saturate(1.1);
+  transform-origin: center center;
+  animation: login-kenburns 28s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.login-lux-grade {
+  background:
+    linear-gradient(90deg, rgba(5, 17, 26, 0.58) 0%, rgba(5, 17, 26, 0.32) 28%, rgba(10, 25, 47, 0.18) 58%, rgba(8, 18, 26, 0.28) 100%),
+    radial-gradient(ellipse 80% 70% at 50% 50%, transparent 48%, rgba(5, 17, 26, 0.28) 100%);
+}
+
+.login-lux-sheen {
+  background:
+    radial-gradient(ellipse 55% 44% at 16% 10%, rgba(52, 211, 153, 0.32), transparent 58%),
+    radial-gradient(ellipse 50% 42% at 80% 40%, rgba(16, 185, 129, 0.24), transparent 62%),
+    radial-gradient(ellipse 40% 34% at 50% 75%, rgba(110, 231, 183, 0.16), transparent 70%),
+    linear-gradient(115deg, transparent 0%, rgba(52, 211, 153, 0.12) 42%, transparent 70%);
+  animation: login-light-pulse 7s ease-in-out infinite;
+}
+
+.login-lux-drift {
+  background:
+    radial-gradient(circle at 20% 30%, rgba(52, 211, 153, 0.2), transparent 28%),
+    radial-gradient(circle at 78% 58%, rgba(16, 185, 129, 0.16), transparent 24%);
+  animation: login-light-drift 16s ease-in-out infinite alternate;
+}
+
+@keyframes login-kenburns {
+  from {
+    transform: scale(1.04) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.14) translate3d(-2.5%, 1.5%, 0);
+  }
+}
+
+@keyframes login-light-pulse {
+  0%,
+  100% {
+    opacity: 0.72;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes login-light-drift {
+  from {
+    transform: translate3d(-3%, -2%, 0);
+    opacity: 0.55;
+  }
+  to {
+    transform: translate3d(4%, 3%, 0);
+    opacity: 0.95;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .login-lux-photo,
+  .login-lux-sheen,
+  .login-lux-drift {
+    animation: none;
+  }
 }
 
 .login-panel {
   background-color: transparent;
+  background-image: none;
+}
+
+.reveal {
+  opacity: 0;
+  transition:
+    opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal-up {
+  transform: translateY(36px);
+}
+
+.reveal-left {
+  transform: translateX(-40px);
+}
+
+.reveal-right {
+  transform: translateX(40px);
+}
+
+.reveal-scale {
+  transform: translateY(20px) scale(0.96);
+}
+
+.reveal-fade {
+  transform: none;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.hero-in {
+  animation: hero-in 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-in-photo {
+  animation: hero-photo 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hero-photo {
+  from {
+    opacity: 0;
+    transform: scale(1.06);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.modules-shot {
+  animation: modules-kenburns 10s ease-in-out infinite alternate;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s ease;
+}
+
+.group:hover .modules-shot {
+  animation-play-state: paused;
+  transform: scale(1.08);
+  filter: brightness(1.08) saturate(1.1);
+}
+
+@keyframes modules-kenburns {
+  from {
+    transform: scale(1) translateY(0);
+  }
+  to {
+    transform: scale(1.05) translateY(-12px);
+  }
+}
+
+.solutions-card {
+  animation: solutions-float 4.8s ease-in-out infinite;
+}
+
+.solutions-card:hover {
+  animation-play-state: paused;
+  transform: translateY(-8px);
+}
+
+@keyframes solutions-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .hero-in,
+  .hero-in-photo,
+  .modules-shot,
+  .solutions-card {
+    animation: none;
+  }
+
+  .group:hover .modules-shot {
+    transform: none;
+    filter: none;
+  }
+
+  .solutions-card:hover {
+    transform: none;
+  }
 }
