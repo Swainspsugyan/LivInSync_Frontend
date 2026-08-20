@@ -3,6 +3,7 @@ import { Route, Routes, useLocation } from 'react-router-dom'
 import AuthModal from './components/AuthModal.jsx'
 import Footer from './components/Footer.jsx'
 import Navbar from './components/Navbar.jsx'
+import DashboardPage from './pages/DashboardPage.jsx'
 import Home from './pages/Home.jsx'
 import LoginPage from './pages/LoginPage.jsx'
 import PricingPage from './pages/PricingPage.jsx'
@@ -10,7 +11,7 @@ import PricingPage from './pages/PricingPage.jsx'
 export default function App() {
   const [auth, setAuth] = useState(null)
   const location = useLocation()
-  const isLogin = location.pathname === '/login'
+  const hideChrome = location.pathname === '/login' || location.pathname.startsWith('/dashboard')
 
   useEffect(() => {
     if (location.hash) {
@@ -25,7 +26,7 @@ export default function App() {
 
   return (
     <div className="relative w-full min-h-dvh overflow-x-hidden bg-white text-ink">
-      {!isLogin && (
+      {!hideChrome && (
         <Navbar onSignup={() => setAuth('signup')} />
       )}
       <main className="relative z-10 w-full">
@@ -44,9 +45,10 @@ export default function App() {
             element={<PricingPage onSelect={() => setAuth('signup')} />}
           />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
         </Routes>
       </main>
-      {!isLogin && <Footer />}
+      {!hideChrome && <Footer />}
       <AuthModal mode={auth} onClose={() => setAuth(null)} onSwitch={setAuth} />
     </div>
   )

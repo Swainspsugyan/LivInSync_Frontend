@@ -1,6 +1,7 @@
 ﻿import { Eye, EyeOff, Headphones, Lock, Mail, Phone, User } from 'lucide-react'
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { DEMO_CREDENTIALS, getSession, login } from '../lib/auth.js'
 
 export default function LoginPage() {
   const navigate = useNavigate()
@@ -11,14 +12,21 @@ export default function LoginPage() {
   const [secret, setSecret] = useState('')
   const [error, setError] = useState('')
 
+  if (getSession()) return <Navigate to="/dashboard" replace />
+
   const onSubmit = (e) => {
     e.preventDefault()
     if (!userId.trim() || !secret.trim()) {
       setError('Enter your User ID and credentials to continue.')
       return
     }
+    const ok = login({ userId, secret, mode, stay })
+    if (!ok) {
+      setError('Incorrect User ID or credentials. Please try again.')
+      return
+    }
     setError('')
-    navigate('/')
+    navigate('/dashboard', { replace: true })
   }
 
   return (
@@ -148,6 +156,12 @@ export default function LoginPage() {
               </div>
 
               {error && <p className="text-center text-xs text-red-400">{error}</p>}
+              <p className="text-center text-[11px] leading-relaxed text-slate-400">
+                Demo access — User ID <span className="text-slate-200">{DEMO_CREDENTIALS.userId}</span>
+                {mode === 'pin'
+                  ? <> · PIN <span className="text-slate-200">{DEMO_CREDENTIALS.pin}</span></>
+                  : <> · Password <span className="text-slate-200">{DEMO_CREDENTIALS.password}</span></>}
+              </p>
 
               <button
                 type="submit"

@@ -6,6 +6,7 @@ import Hero from '../components/Hero.jsx'
 import Security from '../components/Security.jsx'
 import Showcase from '../components/Showcase.jsx'
 import Solutions from '../components/Solutions.jsx'
+import Team from '../components/Team.jsx'
 import Trust from '../components/Trust.jsx'
 
 export default function Home({ onDemo, onRegister }) {
@@ -19,6 +20,7 @@ export default function Home({ onDemo, onRegister }) {
       <Clients />
       <Trust />
       <About />
+      <Team />
       <CtaBanner onDemo={onDemo} onRegister={onRegister} />
     </>
   )
