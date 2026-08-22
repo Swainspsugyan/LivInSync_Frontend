@@ -32,7 +32,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="login-page relative min-h-dvh w-full max-w-full overflow-x-hidden text-[#222]">
+    <div className="login-page relative w-full max-w-full text-[#222]">
       <img
         src={asset('login-campus.png?v=8')}
         alt=""
@@ -47,8 +47,8 @@ export default function LoginPage() {
         compact
         className="absolute left-3 top-3 z-20 max-w-[min(100%-1.5rem,280px)] sm:left-6 sm:top-5 lg:left-8 lg:top-6"
       />
-      <div className="relative z-10 grid min-h-dvh w-full pt-16 sm:pt-20 lg:h-dvh lg:grid-cols-[minmax(0,1fr)_minmax(280px,min(42vw,440px))] lg:pt-0">
-        <section className="relative flex min-h-[28vh] flex-col justify-center px-4 sm:min-h-[36vh] sm:px-6 lg:h-full lg:min-h-0 lg:px-8">
+      <div className="relative z-10 flex w-full flex-col pt-16 sm:pt-20 lg:grid lg:min-h-dvh lg:grid-cols-[minmax(0,1fr)_minmax(280px,min(42vw,440px))] lg:pt-0">
+        <section className="relative flex shrink-0 flex-col justify-center px-4 py-5 sm:px-6 sm:py-8 lg:h-full lg:min-h-0 lg:px-8">
           <div className="max-w-xl lg:ml-auto lg:mr-8 lg:text-right xl:mr-16">
             <p className="text-lg font-medium leading-tight tracking-wide text-white sm:text-3xl lg:text-[32px] xl:text-[38px]">
               This <span className="font-extrabold">Society</span> is{' '}
@@ -69,7 +69,7 @@ export default function LoginPage() {
           </div>
         </section>
 
-        <aside className="flex items-start justify-center px-3 py-6 sm:px-6 sm:py-8 lg:h-full lg:items-center lg:overflow-y-auto lg:px-6">
+        <aside className="flex items-start justify-center px-3 pb-[max(2rem,env(safe-area-inset-bottom))] pt-2 sm:px-6 sm:py-8 lg:h-full lg:items-center lg:overflow-y-auto lg:px-6">
           <div className="w-full max-w-[400px] rounded-2xl border border-white/10 bg-[#05111a]/85 px-4 py-6 shadow-[0_12px_32px_rgba(0,0,0,0.28)] sm:rounded-[28px] sm:px-8 sm:py-9 lg:bg-[#05111a]/45 lg:shadow-[0_20px_60px_rgba(0,0,0,0.35)] lg:backdrop-blur-md">
             <h1 className="text-center font-display text-[22px] font-bold tracking-tight text-white sm:text-[30px]">
               Welcome back

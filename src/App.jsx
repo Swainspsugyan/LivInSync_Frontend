@@ -25,7 +25,7 @@ export default function App() {
   }, [location.pathname, location.hash])
 
   return (
-    <div className="relative w-full min-h-dvh overflow-x-hidden bg-white text-ink">
+    <div className={`relative w-full min-h-dvh bg-white text-ink ${hideChrome ? 'overflow-x-clip' : 'overflow-x-hidden'}`}>
       {!hideChrome && (
         <Navbar onSignup={() => setAuth('signup')} />
       )}

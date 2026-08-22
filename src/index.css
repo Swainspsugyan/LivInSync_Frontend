@@ -130,13 +130,31 @@ select:focus {
   box-shadow: 0 0 0 3px rgba(13, 131, 118, 0.18);
 }
 
+html:has(.login-page),
+html:has(.login-page) body,
+html:has(.login-page) #root {
+  height: auto;
+  min-height: 100%;
+  overflow-x: clip;
+  overflow-y: auto;
+}
+
 .login-page {
   font-family: var(--font-ui);
   background-color: #05111a;
   background-image: none;
-  overflow-x: hidden;
+  min-height: 100dvh;
+  overflow: visible;
   -webkit-overflow-scrolling: touch;
-  overscroll-behavior-y: contain;
+}
+
+@media (max-width: 1023px) {
+  .login-page {
+    height: 100svh;
+    max-height: 100svh;
+    overflow-x: clip;
+    overflow-y: auto;
+  }
 }
 
 .login-lux-photo,
