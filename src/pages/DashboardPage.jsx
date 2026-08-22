@@ -24,6 +24,7 @@ import { useMemo, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { asset } from '../lib/asset.js'
 import { getSession, logout } from '../lib/auth.js'
+import BrandMark, { LOGO } from '../components/BrandMark.jsx'
 
 const navItems = [
   { icon: Home, label: 'Dashboard' },
@@ -81,30 +82,18 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="dash min-h-dvh bg-[#eef1f6] text-[#2b3340]">
+    <div className="dash min-h-dvh overflow-x-hidden bg-[#eef1f6] text-[#2b3340]">
       <div className="flex min-h-dvh">
         <aside
           className={`fixed inset-y-0 left-0 z-30 w-[240px] border-r border-white/10 bg-[#05111a] pt-3 transition-transform lg:static lg:translate-x-0 ${
             menu ? 'translate-x-0' : '-translate-x-full'
           }`}
         >
-          <div className="flex items-center justify-between px-4 pb-4">
-            <div className="flex min-w-0 items-center gap-2.5">
-              <img
-                src={asset('image_0.png')}
-                alt=""
-                className="h-10 w-10 rounded-full object-cover ring-2 ring-[#d4af37]/80"
-              />
-              <span className="min-w-0">
-                <span className="block font-ui text-sm font-bold leading-none text-white">LivinSync</span>
-                <span className="mt-1 block text-[10px] font-medium tracking-wide text-slate-400">
-                  Society workspace
-                </span>
-              </span>
-            </div>
+          <div className="flex items-center justify-between gap-2 px-3 pb-4">
+            <BrandMark compact className="min-w-0" />
             <button
               type="button"
-              className="text-slate-300 lg:hidden"
+              className="shrink-0 text-slate-300 lg:hidden"
               onClick={() => setMenu(false)}
               aria-label="Close menu"
             >
@@ -146,16 +135,17 @@ export default function DashboardPage() {
         )}
 
         <div className="min-w-0 flex-1">
-          <header className="sticky top-0 z-10 flex items-center gap-3 border-b border-white/10 bg-[#05111a]/95 px-4 py-2.5 shadow-[0_10px_28px_rgba(5,17,26,0.28)] backdrop-blur-md sm:px-6">
+          <header className="sticky top-0 z-10 flex min-w-0 items-center gap-2 border-b border-white/10 bg-[#05111a]/95 px-3 py-2.5 shadow-[0_10px_28px_rgba(5,17,26,0.28)] backdrop-blur-md sm:gap-3 sm:px-6">
             <button
               type="button"
-              className="text-white lg:hidden"
+              className="shrink-0 text-white lg:hidden"
               onClick={() => setMenu(true)}
               aria-label="Open menu"
             >
               <Menu size={20} />
             </button>
-            <label className="relative hidden min-w-0 flex-1 md:block">
+            <BrandMark compact className="min-w-0 flex-1 lg:hidden" />
+            <label className="relative hidden min-w-0 flex-1 lg:block">
               <Search size={15} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
               <input
                 placeholder="Search here..."
@@ -190,7 +180,7 @@ export default function DashboardPage() {
                   onClick={() => setProfile((v) => !v)}
                   className="flex items-center gap-2 rounded-full bg-white/10 py-1 pl-1 pr-2 text-white hover:bg-white/15"
                 >
-                  <img src={asset('image_0.png')} alt="" className="h-7 w-7 rounded-full object-cover ring-1 ring-[#d4af37]/70" />
+                  <img src={asset(LOGO)} alt="" className="h-7 w-7 rounded-md object-cover ring-1 ring-[#d4af37]/70" />
                   <span className="hidden text-xs font-semibold sm:inline">{session.name}</span>
                   <ChevronDown size={14} className="text-slate-300" />
                 </button>
@@ -213,16 +203,16 @@ export default function DashboardPage() {
           <div className="px-4 py-5 sm:px-6">
             {active === 'Dashboard' ? (
               <>
-                <div className="mb-4 flex items-start justify-between gap-3">
-                  <div>
-                    <h1 className="font-display text-xl font-semibold text-[#e8913a] sm:text-2xl">
+                <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                  <div className="min-w-0">
+                    <h1 className="font-display text-xl font-semibold break-words text-[#e8913a] sm:text-2xl">
                       {greeting()}, {session.name}!
                     </h1>
                     <p className="mt-1 text-xs text-[#9aa3b2]">{todayLabel()}</p>
                   </div>
                   <button
                     type="button"
-                    className="inline-flex items-center gap-1.5 rounded-lg border border-[#e6eaf1] bg-white px-3 py-1.5 text-xs font-semibold text-[#4b5563]"
+                    className="inline-flex w-fit shrink-0 items-center gap-1.5 rounded-lg border border-[#e6eaf1] bg-white px-3 py-1.5 text-xs font-semibold text-[#4b5563]"
                   >
                     <CalendarDays size={14} />
                     Schedule
@@ -233,7 +223,7 @@ export default function DashboardPage() {
                   <article className="rounded-2xl bg-[#fde8ee] p-4">
                     <p className="text-[11px] font-medium uppercase tracking-wide text-[#c45b73]">Total Ticket Capacity</p>
                     <div className="mt-3 flex items-end justify-between">
-                      <p className="font-display text-4xl font-semibold text-[#c45b73]">2909</p>
+                      <p className="font-display text-3xl font-semibold text-[#c45b73] sm:text-4xl">2909</p>
                       <span className="rounded-lg bg-white/70 p-2 text-[#c45b73]">
                         <Ticket size={18} />
                       </span>
@@ -243,7 +233,7 @@ export default function DashboardPage() {
                   <article className="rounded-2xl bg-[#fbf3d0] p-4">
                     <p className="text-[11px] font-medium uppercase tracking-wide text-[#b8860b]">Staff Leave Capacity</p>
                     <div className="mt-3 flex items-end justify-between">
-                      <p className="font-display text-4xl font-semibold text-[#b8860b]">2200</p>
+                      <p className="font-display text-3xl font-semibold text-[#b8860b] sm:text-4xl">2200</p>
                       <span className="rounded-lg bg-white/70 p-2 text-[#b8860b]">
                         <Users size={18} />
                       </span>
@@ -253,7 +243,7 @@ export default function DashboardPage() {
                   <article className="rounded-2xl bg-[#d8f3e4] p-4">
                     <p className="text-[11px] font-medium uppercase tracking-wide text-[#2f9d6a]">Occupancy Rate</p>
                     <div className="mt-3 flex items-end justify-between">
-                      <p className="font-display text-4xl font-semibold text-[#2f9d6a]">76%</p>
+                      <p className="font-display text-3xl font-semibold text-[#2f9d6a] sm:text-4xl">76%</p>
                       <svg viewBox="0 0 36 36" className="h-12 w-12 -rotate-90">
                         <circle cx="18" cy="18" r="14" fill="none" stroke="#bbecd2" strokeWidth="5" />
                         <circle
@@ -314,8 +304,8 @@ export default function DashboardPage() {
                     <p className="text-sm font-semibold">Open Subject / Issue Categories</p>
                     <ul className="mt-4 space-y-3">
                       {categories.map((item) => (
-                        <li key={item.label} className="flex items-center gap-3">
-                          <span className="w-40 shrink-0 text-sm text-[#4b5563]">{item.label}</span>
+                        <li key={item.label} className="flex min-w-0 items-center gap-2 sm:gap-3">
+                          <span className="w-24 shrink-0 truncate text-xs text-[#4b5563] sm:w-40 sm:text-sm">{item.label}</span>
                           <div className="h-2 flex-1 rounded-full bg-[#eef1f6]">
                             <div
                               className="h-2 rounded-full bg-[#93c5fd]"

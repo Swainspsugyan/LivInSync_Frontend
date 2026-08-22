@@ -16,7 +16,7 @@ export default function CtaBanner({ onDemo, onRegister }) {
           Ready to Build a Better Community?
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-sm text-white/70 sm:text-base">
-          See LivinSync live — gate, billing, and amenity flows on a sample society in 25 minutes.
+          See ResiQ live — gate, billing, and amenity flows on a sample society in 25 minutes.
         </p>
         <div className="mt-8 flex w-full flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
           <button

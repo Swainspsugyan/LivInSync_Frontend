@@ -32,7 +32,7 @@ export default function Team() {
   return (
     <section id="team" className="section-pad bg-white">
       <Reveal className="mx-auto max-w-3xl text-center">
-        <p className="eyebrow">The people behind LivinSync</p>
+        <p className="eyebrow">The people behind ResiQ</p>
         <h2 className="mt-3 font-display text-2xl font-bold text-navy sm:text-3xl lg:text-4xl">
           Meet Our Team
         </h2>

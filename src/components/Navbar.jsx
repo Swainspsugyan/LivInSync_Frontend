@@ -1,7 +1,7 @@
 import { Menu, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { asset } from '../lib/asset.js'
+import BrandMark from './BrandMark.jsx'
 
 const links = [
   { to: '/', hash: 'features', label: 'Features' },
@@ -45,46 +45,37 @@ export default function Navbar({ onSignup }) {
 
   const isActive = (link) => section === link.hash
 
+  const goHome = () => {
+    setOpen(false)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   return (
     <header
       className={`fixed left-0 right-0 top-0 z-40 w-full transition-colors duration-300 ${
-        open
-          ? 'bg-[#05111a]/95 backdrop-blur-md'
-          : onHome && !scrolled
-            ? 'bg-transparent'
-            : 'bg-[#05111a]/85 backdrop-blur-md'
+        open || !onHome || scrolled
+          ? 'bg-[#05111a]/95 shadow-[0_8px_24px_rgba(5,17,26,0.35)] backdrop-blur-md'
+          : 'bg-transparent'
       }`}
     >
-      <nav className="flex w-full min-h-[4.5rem] items-center gap-3 px-4 py-3 sm:px-6 lg:px-10 xl:px-16">
-        <Link
-          to="/"
-          onClick={() => {
-            setOpen(false)
-            window.scrollTo({ top: 0, behavior: 'smooth' })
-          }}
-          className="flex min-w-0 shrink-0 items-center gap-2 sm:gap-2.5"
+      <nav className="flex w-full min-h-16 items-center gap-1.5 px-2 py-2 sm:min-h-[4.25rem] sm:gap-3 sm:px-4 lg:px-8 xl:px-12">
+        <button
+          type="button"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-white lg:hidden"
+          onClick={() => setOpen((v) => !v)}
+          aria-label={open ? 'Close menu' : 'Open menu'}
         >
-          <img
-            src={asset('image_0.png')}
-            alt="LivinSync logo"
-            className="h-[4.5rem] w-[4.5rem] shrink-0 rounded-lg object-cover sm:h-20 sm:w-20"
-          />
-          <span className="min-w-0">
-            <span className="block truncate font-ui text-xl font-bold leading-none text-white sm:text-2xl">
-              LivinSync
-            </span>
-            <span className="mt-1 hidden truncate text-xs font-medium tracking-wide text-slate-300 sm:block">
-              Society Management System
-            </span>
-          </span>
-        </Link>
+          {open ? <X size={22} /> : <Menu size={22} />}
+        </button>
 
-        <ul className="hidden min-w-0 flex-1 items-center justify-center lg:flex">
+        <BrandMark to="/" onClick={goHome} className="min-w-0 flex-1 lg:flex-none" />
+
+        <ul className="hidden min-w-0 flex-1 items-center justify-center gap-0.5 lg:flex">
           {links.map((link) => (
             <li key={link.label}>
               <Link
                 to={hrefFor(link)}
-                className={`whitespace-nowrap rounded-lg px-3 py-2 font-ui text-base font-medium xl:px-4 xl:text-lg ${
+                className={`whitespace-nowrap rounded-lg px-3 py-2 font-ui text-sm font-medium xl:px-4 xl:text-base ${
                   isActive(link) ? 'text-emerald-400' : 'text-white/80 hover:text-white'
                 }`}
               >
@@ -94,33 +85,26 @@ export default function Navbar({ onSignup }) {
           ))}
         </ul>
 
-        <div className="ml-auto mr-32 flex shrink-0 items-center gap-2 sm:mr-48 sm:gap-3 lg:mr-64 xl:mr-80">
+        <div className="ml-auto flex shrink-0 items-center gap-1 sm:gap-2">
           <Link
             to="/login"
-            className="font-ui text-base font-semibold text-white hover:text-emerald-400"
+            className="rounded-lg px-2 py-1.5 font-ui text-xs font-semibold text-white hover:text-emerald-400 sm:px-3 sm:text-sm lg:text-base"
           >
             Login
           </Link>
           <button
             type="button"
             onClick={onSignup}
-            className="rounded-lg bg-emerald-500 px-4 py-2.5 font-ui text-base font-semibold text-white hover:bg-emerald-400 sm:px-5"
+            className="rounded-lg bg-emerald-500 px-2.5 py-1.5 font-ui text-xs font-semibold text-white hover:bg-emerald-400 sm:px-4 sm:py-2 sm:text-sm lg:px-5 lg:text-base"
           >
-            Book a Demo
-          </button>
-          <button
-            type="button"
-            className="flex h-11 w-11 items-center justify-center rounded-xl text-white lg:hidden"
-            onClick={() => setOpen((v) => !v)}
-            aria-label={open ? 'Close menu' : 'Open menu'}
-          >
-            {open ? <X size={24} /> : <Menu size={24} />}
+            <span className="sm:hidden">Demo</span>
+            <span className="hidden sm:inline">Book a Demo</span>
           </button>
         </div>
       </nav>
 
       {open && (
-        <div className="max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-white/10 bg-[#05111a]/95 px-4 pb-4 backdrop-blur-md lg:hidden">
+        <div className="max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-white/10 bg-[#05111a]/95 px-3 pb-4 backdrop-blur-md lg:hidden">
           <ul className="flex flex-col gap-1 pt-2">
             {links.map((link) => (
               <li key={link.label}>

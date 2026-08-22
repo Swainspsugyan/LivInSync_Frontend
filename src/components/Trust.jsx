@@ -4,7 +4,7 @@ import Tilt from './Tilt.jsx'
 const testimonials = [
   {
     quote:
-      'LivinSync replaced three vendor tools and a mountain of Excel. Collections closed 11 days faster in the first quarter.',
+      'ResiQ replaced three vendor tools and a mountain of Excel. Collections closed 11 days faster in the first quarter.',
     name: 'Priya Menon',
     role: 'Property Manager, Harborview Towers',
     card: 'bg-gradient-to-br from-[#e6f4f1] to-[#d4ebe6] ring-[#b7d9d1]',

@@ -13,13 +13,13 @@ export default function Hero({ onDemo, onRegister }) {
   return (
     <section
       id="home"
-      className="relative left-0 flex min-h-[100svh] w-full flex-col overflow-hidden pt-20"
+      className="relative left-0 flex min-h-[100svh] w-full flex-col overflow-hidden pt-20 sm:pt-24"
       style={{ background: 'linear-gradient(90deg, #05111a 0%, #0a192f 42%, #08121a 100%)' }}
     >
       <img
         src={asset('hero-society.png')}
         alt="Premium residential society"
-        className="hero-in-photo pointer-events-none absolute inset-y-0 right-0 h-full w-[68%] object-cover object-[70%_center]"
+        className="hero-in-photo pointer-events-none absolute inset-y-0 right-0 h-full w-full object-cover object-[70%_center] opacity-40 sm:w-[68%] sm:opacity-100"
       />
       <div
         className="pointer-events-none absolute inset-0"
@@ -28,6 +28,7 @@ export default function Hero({ onDemo, onRegister }) {
             'linear-gradient(90deg, #05111a 0%, #05111a 32%, rgba(5,17,26,0.88) 46%, rgba(8,18,26,0.35) 68%, transparent 86%)',
         }}
       />
+      <div className="pointer-events-none absolute inset-0 bg-[#05111a]/50 sm:hidden" />
 
       <div className="relative z-10 mx-0 flex w-full flex-1 items-center px-4 py-10 sm:px-6 sm:py-14 lg:px-10 xl:px-16">
         <Reveal className="w-full max-w-xl">

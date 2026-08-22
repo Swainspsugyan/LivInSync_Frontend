@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { asset } from '../lib/asset.js'
+import BrandMark from './BrandMark.jsx'
 import Reveal from './Reveal.jsx'
 
 const columns = {
@@ -20,7 +20,7 @@ const columns = {
   ],
   Company: [
     { to: '/#about', label: 'About Us' },
-    { href: 'mailto:support@livinsync.com', label: 'Contact' },
+    { href: 'mailto:support@resiq.com', label: 'Contact' },
   ],
 }
 
@@ -32,9 +32,9 @@ const legal = [
 
 const copy = {
   privacy:
-    'LivinSync processes resident, visitor, and billing data solely to operate your community. We never sell personal information. Access is role-scoped and encrypted in transit and at rest.',
+    'ResiQ processes resident, visitor, and billing data solely to operate your community. We never sell personal information. Access is role-scoped and encrypted in transit and at rest.',
   terms:
-    'By using LivinSync you agree to provide accurate society records, keep credentials confidential, and use the platform in accordance with housing society bylaws.',
+    'By using ResiQ you agree to provide accurate society records, keep credentials confidential, and use the platform in accordance with housing society bylaws.',
   security:
     'We use TLS 1.3 in transit, AES-256 at rest, role-based access, and audit logs. Payments run on PCI-aligned rails.',
 }
@@ -47,21 +47,12 @@ export default function Footer() {
     <footer className="relative z-10 bg-navy text-white">
       <Reveal className="mx-auto grid w-full gap-8 px-4 py-12 sm:grid-cols-2 sm:px-6 sm:py-14 lg:grid-cols-12 lg:gap-10 lg:px-10 xl:px-16">
         <div className="sm:col-span-2 lg:col-span-4">
-          <Link
+          <BrandMark
             to="/"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="flex items-center gap-3"
-          >
-            <img
-              src={asset('image_0.png')}
-              alt="LivinSync logo"
-              className="h-10 w-10 rounded-lg object-cover"
-            />
-            <span>
-              <span className="block font-ui text-lg font-semibold">LivinSync</span>
-              <span className="text-xs text-white/60">Society Management System</span>
-            </span>
-          </Link>
+            titleClass="text-white"
+            subtitleClass="text-white/60"
+          />
           <p className="mt-4 max-w-sm text-sm text-white/70">
             The operating system for apartments, gated societies, and mixed-use residences.
           </p>
@@ -91,7 +82,7 @@ export default function Footer() {
 
       <div className="border-t border-white/10">
         <div className="mx-auto flex w-full flex-col gap-3 px-4 py-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:px-6 lg:px-10 xl:px-16">
-          <p className="text-xs text-white/55">© {year} LivinSync. All rights reserved.</p>
+          <p className="text-xs text-white/55">© {year} ResiQ. All rights reserved.</p>
           <div className="flex flex-wrap gap-4">
             {legal.map((item) => (
               <button

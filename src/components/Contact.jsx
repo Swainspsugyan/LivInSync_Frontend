@@ -104,7 +104,7 @@ export default function Contact() {
           </button>
           {sent && (
             <p className="mt-4 text-sm text-primary">
-              Received. A LivinSync specialist will reach out within one business day.
+              Received. A ResiQ specialist will reach out within one business day.
             </p>
           )}
         </form>
@@ -114,8 +114,8 @@ export default function Contact() {
             {
               icon: Mail,
               title: 'Support email',
-              value: 'support@livinsync.com',
-              href: 'mailto:support@livinsync.com',
+              value: 'support@resiq.com',
+              href: 'mailto:support@resiq.com',
             },
             {
               icon: Phone,

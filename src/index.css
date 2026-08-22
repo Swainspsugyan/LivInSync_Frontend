@@ -27,7 +27,7 @@
   }
 
   html {
-    scroll-padding-top: 88px;
+    scroll-padding-top: 96px;
   }
 
   html,
@@ -134,7 +134,7 @@ select:focus {
   font-family: var(--font-ui);
   background-color: #05111a;
   background-image: none;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .login-lux-photo {

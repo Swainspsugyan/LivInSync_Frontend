@@ -33,7 +33,7 @@ export default function Showcase() {
           <div className="group relative overflow-hidden rounded-2xl border border-line bg-navy shadow-xl transition-all duration-500 ease-out hover:-translate-y-2 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/25 sm:rounded-3xl">
             <img
               src={asset('dashboard-preview.png')}
-              alt="LivinSync community dashboard"
+              alt="ResiQ community dashboard"
               className="modules-shot block h-auto w-full max-h-[52vh] object-cover object-top lg:max-h-[64vh]"
             />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-primary/0 via-white/0 to-white/0 opacity-0 transition-opacity duration-500 group-hover:from-primary/10 group-hover:via-white/10 group-hover:opacity-100" />

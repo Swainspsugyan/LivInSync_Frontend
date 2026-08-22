@@ -33,7 +33,7 @@ export default function About() {
             A digital ecosystem for how communities actually live
           </h2>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-muted">
-            LivinSync bridges property managers, security, and residents. From the first visitor QR to
+            ResiQ bridges property managers, security, and residents. From the first visitor QR to
             the last maintenance receipt, every interaction stays in sync.
           </p>
         </Reveal>

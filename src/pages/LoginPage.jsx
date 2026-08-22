@@ -1,6 +1,7 @@
 ﻿import { Eye, EyeOff, Headphones, Lock, Mail, Phone, User } from 'lucide-react'
 import { useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
+import BrandMark, { BRAND } from '../components/BrandMark.jsx'
 import { asset } from '../lib/asset.js'
 import { DEMO_CREDENTIALS, getSession, login } from '../lib/auth.js'
 
@@ -40,35 +41,31 @@ export default function LoginPage() {
       <div className="login-lux-grade pointer-events-none absolute inset-0" />
       <div className="login-lux-sheen pointer-events-none absolute inset-0" />
       <div className="login-lux-drift pointer-events-none absolute inset-0" />
-      <Link
+      <BrandMark
         to="/"
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className="absolute left-4 top-4 z-20 sm:left-6 sm:top-5 lg:left-8 lg:top-6"
-      >
-        <img
-          src={asset('image_0.png')}
-          alt="LivinSync logo"
-          className="h-14 w-14 rounded-full object-cover ring-2 ring-[#d4af37] shadow-[0_6px_20px_rgba(0,0,0,0.45)] sm:h-[4.75rem] sm:w-[4.75rem] lg:h-20 lg:w-20"
-        />
-      </Link>
-      <div className="relative z-10 grid min-h-dvh w-full lg:h-dvh lg:grid-cols-[minmax(0,1fr)_minmax(300px,min(42vw,440px))]">
-        <section className="relative flex min-h-[42vh] flex-col sm:min-h-[48vh] lg:h-full lg:min-h-0">
-          <div className="relative z-10 flex shrink-0 justify-end px-4 pb-3 pt-4 sm:px-6 sm:pt-6 lg:px-8 lg:pt-7">
-            <div className="mr-12 text-right sm:mr-24 lg:mr-40 xl:mr-52">
-              <p className="text-xl font-medium leading-tight tracking-wide text-white sm:text-3xl lg:text-[32px] xl:text-[38px]">
-                This <span className="font-extrabold">Society</span> is{' '}
-                <span className="font-extrabold">Digitally</span> Powered by
-              </p>
-              <Link
-                to="/"
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className="mt-3 inline-flex items-center justify-end"
-              >
-                <span className="font-ui text-3xl font-extrabold tracking-tight text-[#d4af37] sm:text-5xl lg:text-[3.25rem]">
-                  LivinSync
-                </span>
-              </Link>
-            </div>
+        compact
+        className="absolute left-3 top-3 z-20 max-w-[min(100%-1.5rem,280px)] sm:left-6 sm:top-5 lg:left-8 lg:top-6"
+      />
+      <div className="relative z-10 grid min-h-dvh w-full pt-16 sm:pt-20 lg:h-dvh lg:grid-cols-[minmax(0,1fr)_minmax(280px,min(42vw,440px))] lg:pt-0">
+        <section className="relative flex min-h-[28vh] flex-col justify-center px-4 sm:min-h-[36vh] sm:px-6 lg:h-full lg:min-h-0 lg:px-8">
+          <div className="max-w-xl lg:ml-auto lg:mr-8 lg:text-right xl:mr-16">
+            <p className="text-lg font-medium leading-tight tracking-wide text-white sm:text-3xl lg:text-[32px] xl:text-[38px]">
+              This <span className="font-extrabold">Society</span> is{' '}
+              <span className="font-extrabold">Digitally</span> Powered by
+            </p>
+            <Link
+              to="/"
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="mt-3 inline-flex flex-col lg:items-end"
+            >
+              <span className="font-ui text-3xl font-extrabold tracking-tight text-[#d4af37] sm:text-5xl lg:text-[3.25rem]">
+                {BRAND}
+              </span>
+              <span className="mt-1 text-sm font-medium text-white/80 sm:text-base">
+                Better living with ResiQ
+              </span>
+            </Link>
           </div>
         </section>
 
@@ -82,7 +79,7 @@ export default function LoginPage() {
             </p>
 
             <h2 className="mt-7 text-center text-[21px] font-bold tracking-[0.04em] text-white sm:text-[24px]">
-              LivinSync Login
+              ResiQ Login
             </h2>
 
             <div className="mt-4 grid grid-cols-2 rounded-full border border-white/10 bg-white/5 p-1">
@@ -219,7 +216,7 @@ export default function LoginPage() {
 
             <p className="mt-6 text-center text-xs text-slate-400">
               <Link to="/" className="text-emerald-400 hover:underline">
-                Back to LivinSync
+                Back to ResiQ
               </Link>
             </p>
           </div>
