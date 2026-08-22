@@ -135,13 +135,23 @@ select:focus {
   background-color: #05111a;
   background-image: none;
   overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+}
+
+.login-lux-photo,
+.login-lux-grade,
+.login-lux-sheen,
+.login-lux-drift {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
 }
 
 .login-lux-photo {
   filter: brightness(0.9) contrast(1.08) saturate(1.1);
   transform-origin: center center;
   animation: login-kenburns 28s ease-in-out infinite alternate;
-  will-change: transform;
 }
 
 .login-lux-grade {
@@ -164,6 +174,23 @@ select:focus {
     radial-gradient(circle at 20% 30%, rgba(52, 211, 153, 0.2), transparent 28%),
     radial-gradient(circle at 78% 58%, rgba(16, 185, 129, 0.16), transparent 24%);
   animation: login-light-drift 16s ease-in-out infinite alternate;
+}
+
+@media (max-width: 1023px) {
+  .login-lux-photo {
+    animation: none;
+    filter: none;
+    transform: none;
+  }
+
+  .login-lux-sheen,
+  .login-lux-drift {
+    display: none;
+  }
+
+  .login-lux-grade {
+    background: linear-gradient(180deg, rgba(5, 17, 26, 0.62) 0%, rgba(5, 17, 26, 0.48) 100%);
+  }
 }
 
 @keyframes login-kenburns {

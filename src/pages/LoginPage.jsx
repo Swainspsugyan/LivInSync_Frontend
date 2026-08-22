@@ -36,11 +36,11 @@ export default function LoginPage() {
       <img
         src={asset('login-campus.png?v=8')}
         alt=""
-        className="login-lux-photo pointer-events-none absolute inset-0 h-full w-full object-cover object-center"
+        className="login-lux-photo pointer-events-none h-full w-full object-cover object-center"
       />
-      <div className="login-lux-grade pointer-events-none absolute inset-0" />
-      <div className="login-lux-sheen pointer-events-none absolute inset-0" />
-      <div className="login-lux-drift pointer-events-none absolute inset-0" />
+      <div className="login-lux-grade pointer-events-none" />
+      <div className="login-lux-sheen pointer-events-none hidden lg:block" />
+      <div className="login-lux-drift pointer-events-none hidden lg:block" />
       <BrandMark
         to="/"
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
@@ -70,7 +70,7 @@ export default function LoginPage() {
         </section>
 
         <aside className="flex items-start justify-center px-3 py-6 sm:px-6 sm:py-8 lg:h-full lg:items-center lg:overflow-y-auto lg:px-6">
-          <div className="w-full max-w-[400px] rounded-2xl border border-white/10 bg-[#05111a]/45 px-4 py-6 shadow-[0_20px_60px_rgba(0,0,0,0.35)] backdrop-blur-md sm:rounded-[28px] sm:px-8 sm:py-9">
+          <div className="w-full max-w-[400px] rounded-2xl border border-white/10 bg-[#05111a]/85 px-4 py-6 shadow-[0_12px_32px_rgba(0,0,0,0.28)] sm:rounded-[28px] sm:px-8 sm:py-9 lg:bg-[#05111a]/45 lg:shadow-[0_20px_60px_rgba(0,0,0,0.35)] lg:backdrop-blur-md">
             <h1 className="text-center font-display text-[22px] font-bold tracking-tight text-white sm:text-[30px]">
               Welcome back
             </h1>
