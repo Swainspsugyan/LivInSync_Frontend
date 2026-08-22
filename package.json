@@ -3,9 +3,10 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://swainspsugyan.github.io/LivInSync_Frontend",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/spa-github-pages.js",
     "lint": "oxlint",
     "preview": "vite preview"
   },

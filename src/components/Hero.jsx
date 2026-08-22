@@ -1,4 +1,5 @@
 import { ArrowRight, Calendar, CheckCircle2, Headphones, ShieldCheck, Users } from 'lucide-react'
+import { asset } from '../lib/asset.js'
 import Reveal from './Reveal.jsx'
 
 const stats = [
@@ -16,7 +17,7 @@ export default function Hero({ onDemo, onRegister }) {
       style={{ background: 'linear-gradient(90deg, #05111a 0%, #0a192f 42%, #08121a 100%)' }}
     >
       <img
-        src="/hero-society.png"
+        src={asset('hero-society.png')}
         alt="Premium residential society"
         className="hero-in-photo pointer-events-none absolute inset-y-0 right-0 h-full w-[68%] object-cover object-[70%_center]"
       />

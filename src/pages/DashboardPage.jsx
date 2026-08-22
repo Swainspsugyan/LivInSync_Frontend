@@ -22,6 +22,7 @@ import {
 } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
+import { asset } from '../lib/asset.js'
 import { getSession, logout } from '../lib/auth.js'
 
 const navItems = [
@@ -90,7 +91,7 @@ export default function DashboardPage() {
           <div className="flex items-center justify-between px-4 pb-4">
             <div className="flex min-w-0 items-center gap-2.5">
               <img
-                src="/image_0.png"
+                src={asset('image_0.png')}
                 alt=""
                 className="h-10 w-10 rounded-full object-cover ring-2 ring-[#d4af37]/80"
               />
@@ -189,7 +190,7 @@ export default function DashboardPage() {
                   onClick={() => setProfile((v) => !v)}
                   className="flex items-center gap-2 rounded-full bg-white/10 py-1 pl-1 pr-2 text-white hover:bg-white/15"
                 >
-                  <img src="/image_0.png" alt="" className="h-7 w-7 rounded-full object-cover ring-1 ring-[#d4af37]/70" />
+                  <img src={asset('image_0.png')} alt="" className="h-7 w-7 rounded-full object-cover ring-1 ring-[#d4af37]/70" />
                   <span className="hidden text-xs font-semibold sm:inline">{session.name}</span>
                   <ChevronDown size={14} className="text-slate-300" />
                 </button>

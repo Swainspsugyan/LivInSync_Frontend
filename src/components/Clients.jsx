@@ -1,9 +1,10 @@
+import { asset } from '../lib/asset.js'
 import Reveal from './Reveal.jsx'
 
 const clients = [
   {
     name: 'Panchamukhi Greens',
-    logo: '/panchamukhi-greens.png',
+    logo: asset('panchamukhi-greens.png'),
   },
 ]
 

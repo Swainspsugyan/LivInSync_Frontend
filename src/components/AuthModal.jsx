@@ -1,6 +1,7 @@
 import { X } from 'lucide-react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { asset } from '../lib/asset.js'
 
 export default function AuthModal({ mode, onClose, onSwitch }) {
   const [done, setDone] = useState(false)
@@ -32,7 +33,7 @@ export default function AuthModal({ mode, onClose, onSwitch }) {
           <X size={18} />
         </button>
         <div className="mb-6 flex items-center gap-3">
-          <img src="/image_0.png" alt="" className="h-10 w-10 rounded-full ring-1 ring-line" />
+          <img src={asset('image_0.png')} alt="" className="h-10 w-10 rounded-full ring-1 ring-line" />
           <div>
             <p className="font-ui text-xs uppercase tracking-[0.24em] text-primary">
               {isLogin ? 'Admin access' : 'Create account'}

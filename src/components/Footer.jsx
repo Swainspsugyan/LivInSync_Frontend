@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { asset } from '../lib/asset.js'
 import Reveal from './Reveal.jsx'
 
 const columns = {
@@ -52,7 +53,7 @@ export default function Footer() {
             className="flex items-center gap-3"
           >
             <img
-              src="/image_0.png"
+              src={asset('image_0.png')}
               alt="LivinSync logo"
               className="h-10 w-10 rounded-lg object-cover"
             />

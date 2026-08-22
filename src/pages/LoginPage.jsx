@@ -1,6 +1,7 @@
 ﻿import { Eye, EyeOff, Headphones, Lock, Mail, Phone, User } from 'lucide-react'
 import { useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { asset } from '../lib/asset.js'
 import { DEMO_CREDENTIALS, getSession, login } from '../lib/auth.js'
 
 export default function LoginPage() {
@@ -32,7 +33,7 @@ export default function LoginPage() {
   return (
     <div className="login-page relative min-h-dvh w-full max-w-full overflow-x-hidden text-[#222]">
       <img
-        src="/login-campus.png?v=8"
+        src={asset('login-campus.png?v=8')}
         alt=""
         className="login-lux-photo pointer-events-none absolute inset-0 h-full w-full object-cover object-center"
       />
@@ -45,7 +46,7 @@ export default function LoginPage() {
         className="absolute left-4 top-4 z-20 sm:left-6 sm:top-5 lg:left-8 lg:top-6"
       >
         <img
-          src="/image_0.png"
+          src={asset('image_0.png')}
           alt="LivinSync logo"
           className="h-14 w-14 rounded-full object-cover ring-2 ring-[#d4af37] shadow-[0_6px_20px_rgba(0,0,0,0.45)] sm:h-[4.75rem] sm:w-[4.75rem] lg:h-20 lg:w-20"
         />

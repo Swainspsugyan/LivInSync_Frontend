@@ -1,6 +1,7 @@
 import { Menu, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { asset } from '../lib/asset.js'
 
 const links = [
   { to: '/', hash: 'features', label: 'Features' },
@@ -64,7 +65,7 @@ export default function Navbar({ onSignup }) {
           className="flex min-w-0 shrink-0 items-center gap-2 sm:gap-2.5"
         >
           <img
-            src="/image_0.png"
+            src={asset('image_0.png')}
             alt="LivinSync logo"
             className="h-[4.5rem] w-[4.5rem] shrink-0 rounded-lg object-cover sm:h-20 sm:w-20"
           />
