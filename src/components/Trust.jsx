@@ -27,10 +27,10 @@ const testimonials = [
 
 export default function Trust() {
   return (
-    <section className="section-pad bg-gradient-to-b from-[#eef5f4] to-[#e4eeec]">
+    <section className="theme-surface section-pad">
       <Reveal className="mx-auto max-w-3xl text-center">
         <p className="eyebrow">Testimonials</p>
-        <h2 className="mt-3 font-display text-2xl font-bold text-navy sm:text-3xl lg:text-4xl">
+        <h2 className="theme-heading mt-3 font-display text-2xl font-bold sm:text-3xl lg:text-4xl">
           What Our Customers Say
         </h2>
       </Reveal>
@@ -48,8 +48,8 @@ export default function Trust() {
                     .join('')}
                 </div>
                 <div>
-                  <p className="font-ui text-sm font-semibold text-navy">{t.name}</p>
-                  <p className="text-xs text-muted">{t.role}</p>
+                  <p className="theme-heading font-ui text-sm font-semibold">{t.name}</p>
+                  <p className="theme-muted text-xs">{t.role}</p>
                 </div>
               </div>
             </Tilt>

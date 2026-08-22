@@ -9,6 +9,23 @@
       content="ResiQ — Better living with ResiQ. Smart community management for rent, security, amenities, and resident communication."
     />
     <title>ResiQ — Better living with ResiQ</title>
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('resiq-theme')
+          if (t !== 'dark' && t !== 'light') {
+            t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+          }
+          if (t === 'dark') {
+            document.documentElement.classList.add('dark')
+            document.documentElement.setAttribute('data-theme', 'dark')
+          } else {
+            document.documentElement.classList.remove('dark')
+            document.documentElement.setAttribute('data-theme', 'light')
+          }
+        } catch (e) {}
+      })()
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

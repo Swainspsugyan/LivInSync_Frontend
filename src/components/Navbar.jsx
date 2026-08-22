@@ -2,6 +2,7 @@ import { Menu, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import BrandMark from './BrandMark.jsx'
+import ThemeToggle from './ThemeToggle.jsx'
 
 const links = [
   { to: '/', hash: 'features', label: 'Features' },
@@ -52,23 +53,27 @@ export default function Navbar({ onSignup }) {
 
   return (
     <header
-      className={`fixed left-0 right-0 top-0 z-40 w-full transition-colors duration-300 ${
-        open || !onHome || scrolled
-          ? 'bg-[#05111a]/95 shadow-[0_8px_24px_rgba(5,17,26,0.35)] backdrop-blur-md'
-          : 'bg-transparent'
+      className={`fixed left-0 right-0 top-0 z-40 w-full transition-[background-color,color,box-shadow] duration-[400ms] ease ${
+        open || !onHome || scrolled ? 'theme-nav shadow-sm' : 'bg-transparent theme-heading'
       }`}
     >
       <nav className="flex w-full min-h-16 items-center gap-1.5 px-2 py-2 sm:min-h-[4.25rem] sm:gap-3 sm:px-4 lg:px-8 xl:px-12">
         <button
           type="button"
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-white lg:hidden"
+          className="theme-heading flex h-10 w-10 shrink-0 items-center justify-center rounded-lg lg:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? 'Close menu' : 'Open menu'}
         >
           {open ? <X size={22} /> : <Menu size={22} />}
         </button>
 
-        <BrandMark to="/" onClick={goHome} className="min-w-0 flex-1 lg:flex-none" />
+        <BrandMark
+          to="/"
+          onClick={goHome}
+          className="min-w-0 flex-1 lg:flex-none"
+          titleClass="theme-heading"
+          subtitleClass="theme-muted"
+        />
 
         <ul className="hidden min-w-0 flex-1 items-center justify-center gap-0.5 lg:flex">
           {links.map((link) => (
@@ -76,7 +81,7 @@ export default function Navbar({ onSignup }) {
               <Link
                 to={hrefFor(link)}
                 className={`whitespace-nowrap rounded-lg px-3 py-2 font-ui text-sm font-medium xl:px-4 xl:text-base ${
-                  isActive(link) ? 'text-emerald-400' : 'text-white/80 hover:text-white'
+                  isActive(link) ? 'text-emerald-600' : 'theme-muted hover:opacity-100'
                 }`}
               >
                 {link.label}
@@ -85,10 +90,11 @@ export default function Navbar({ onSignup }) {
           ))}
         </ul>
 
-        <div className="ml-auto flex shrink-0 items-center gap-1 sm:gap-2">
+        <div className="relative z-[80] ml-auto flex shrink-0 items-center gap-1 sm:gap-2">
+          <ThemeToggle />
           <Link
             to="/login"
-            className="rounded-lg px-2 py-1.5 font-ui text-xs font-semibold text-white hover:text-emerald-400 sm:px-3 sm:text-sm lg:text-base"
+            className="theme-heading rounded-lg px-2 py-1.5 font-ui text-xs font-semibold hover:text-emerald-600 sm:px-3 sm:text-sm lg:text-base"
           >
             Login
           </Link>
@@ -104,14 +110,14 @@ export default function Navbar({ onSignup }) {
       </nav>
 
       {open && (
-        <div className="max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-white/10 bg-[#05111a]/95 px-3 pb-4 backdrop-blur-md lg:hidden">
+        <div className="theme-nav max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-[color:var(--resiq-line)] px-3 pb-4 backdrop-blur-md lg:hidden">
           <ul className="flex flex-col gap-1 pt-2">
             {links.map((link) => (
               <li key={link.label}>
                 <Link
                   to={hrefFor(link)}
                   onClick={() => setOpen(false)}
-                  className="block rounded-xl px-3 py-3 font-ui text-base text-white hover:bg-white/10"
+                  className="theme-heading block rounded-xl px-3 py-3 font-ui text-base hover:bg-[color:color-mix(in_srgb,var(--resiq-fg)_8%,transparent)]"
                 >
                   {link.label}
                 </Link>

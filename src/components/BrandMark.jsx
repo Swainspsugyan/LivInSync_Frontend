@@ -10,8 +10,8 @@ export default function BrandMark({
   onClick,
   compact = false,
   className = '',
-  titleClass = 'text-white',
-  subtitleClass = 'text-slate-300',
+  titleClass = 'theme-heading',
+  subtitleClass = 'theme-muted',
 }) {
   const inner = (
     <>

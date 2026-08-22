@@ -25,6 +25,7 @@ import { Navigate, useNavigate } from 'react-router-dom'
 import { asset } from '../lib/asset.js'
 import { getSession, logout } from '../lib/auth.js'
 import BrandMark, { LOGO } from '../components/BrandMark.jsx'
+import ThemeToggle from '../components/ThemeToggle.jsx'
 
 const navItems = [
   { icon: Home, label: 'Dashboard' },
@@ -82,10 +83,10 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="dash min-h-dvh overflow-x-hidden bg-[#eef1f6] text-[#2b3340]">
+    <div className="theme-surface dash min-h-dvh overflow-x-hidden">
       <div className="flex min-h-dvh">
         <aside
-          className={`fixed inset-y-0 left-0 z-30 w-[240px] border-r border-white/10 bg-[#05111a] pt-3 transition-transform lg:static lg:translate-x-0 ${
+          className={`theme-chrome fixed inset-y-0 left-0 z-30 w-[240px] border-r pt-3 transition-transform lg:static lg:translate-x-0 ${
             menu ? 'translate-x-0' : '-translate-x-full'
           }`}
         >
@@ -93,7 +94,7 @@ export default function DashboardPage() {
             <BrandMark compact className="min-w-0" />
             <button
               type="button"
-              className="shrink-0 text-slate-300 lg:hidden"
+              className="theme-heading shrink-0 lg:hidden"
               onClick={() => setMenu(false)}
               aria-label="Close menu"
             >
@@ -113,8 +114,8 @@ export default function DashboardPage() {
                   }}
                   className={`mb-0.5 flex w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-left text-[13px] ${
                     on
-                      ? 'bg-white/10 font-semibold text-emerald-400 shadow-[inset_3px_0_0_#34d399]'
-                      : 'font-medium text-slate-300 hover:bg-white/5 hover:text-white'
+                      ? 'bg-emerald-500/10 font-semibold text-emerald-600 shadow-[inset_3px_0_0_#10b981]'
+                      : 'theme-muted font-medium hover:bg-[color:color-mix(in_srgb,var(--resiq-fg)_6%,transparent)]'
                   }`}
                 >
                   <item.icon size={16} />
@@ -135,10 +136,10 @@ export default function DashboardPage() {
         )}
 
         <div className="min-w-0 flex-1">
-          <header className="sticky top-0 z-10 flex min-w-0 items-center gap-2 border-b border-white/10 bg-[#05111a]/95 px-3 py-2.5 shadow-[0_10px_28px_rgba(5,17,26,0.28)] backdrop-blur-md sm:gap-3 sm:px-6">
+          <header className="theme-chrome sticky top-0 z-10 flex min-w-0 items-center gap-2 border-b px-3 py-2.5 shadow-sm backdrop-blur-md sm:gap-3 sm:px-6">
             <button
               type="button"
-              className="shrink-0 text-white lg:hidden"
+              className="theme-heading shrink-0 lg:hidden"
               onClick={() => setMenu(true)}
               aria-label="Open menu"
             >
@@ -149,13 +150,14 @@ export default function DashboardPage() {
               <Search size={15} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
               <input
                 placeholder="Search here..."
-                className="w-full max-w-md rounded-full border border-white/15 bg-white/10 py-2 pl-9 pr-3 text-sm text-white outline-none placeholder:text-slate-400 focus:border-emerald-400/50"
+                className="theme-heading w-full max-w-md rounded-full border border-[color:var(--resiq-line)] bg-[color:color-mix(in_srgb,var(--resiq-fg)_6%,transparent)] py-2 pl-9 pr-3 text-sm outline-none placeholder:opacity-50 focus:border-emerald-400/50"
               />
             </label>
             <div className="ml-auto flex items-center gap-2">
+              <ThemeToggle />
               <button
                 type="button"
-                className="hidden rounded-lg border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-semibold text-slate-200 hover:bg-white/10 sm:inline"
+                className="theme-heading hidden rounded-lg border border-[color:var(--resiq-line)] bg-[color:color-mix(in_srgb,var(--resiq-fg)_6%,transparent)] px-3 py-1.5 text-xs font-semibold sm:inline"
               >
                 Export
               </button>
@@ -168,7 +170,7 @@ export default function DashboardPage() {
               </button>
               <button
                 type="button"
-                className="relative rounded-full bg-white/10 p-2 text-slate-200 hover:bg-white/15"
+                className="theme-heading relative rounded-full bg-[color:color-mix(in_srgb,var(--resiq-fg)_8%,transparent)] p-2"
                 aria-label="Notifications"
               >
                 <Bell size={16} />
@@ -178,18 +180,18 @@ export default function DashboardPage() {
                 <button
                   type="button"
                   onClick={() => setProfile((v) => !v)}
-                  className="flex items-center gap-2 rounded-full bg-white/10 py-1 pl-1 pr-2 text-white hover:bg-white/15"
+                  className="theme-heading flex items-center gap-2 rounded-full bg-[color:color-mix(in_srgb,var(--resiq-fg)_8%,transparent)] py-1 pl-1 pr-2"
                 >
                   <img src={asset(LOGO)} alt="" className="h-7 w-7 rounded-md object-cover ring-1 ring-[#d4af37]/70" />
                   <span className="hidden text-xs font-semibold sm:inline">{session.name}</span>
                   <ChevronDown size={14} className="text-slate-300" />
                 </button>
                 {profile && (
-                  <div className="absolute right-0 mt-2 w-44 rounded-xl border border-white/10 bg-[#0a192f] p-1 shadow-lg">
+                  <div className="theme-chrome absolute right-0 mt-2 w-44 rounded-xl border p-1 shadow-lg">
                     <button
                       type="button"
                       onClick={signOut}
-                      className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm text-slate-200 hover:bg-white/10"
+                      className="theme-heading flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm hover:bg-[color:color-mix(in_srgb,var(--resiq-fg)_8%,transparent)]"
                     >
                       <LogOut size={14} />
                       Log out
@@ -212,7 +214,7 @@ export default function DashboardPage() {
                   </div>
                   <button
                     type="button"
-                    className="inline-flex w-fit shrink-0 items-center gap-1.5 rounded-lg border border-[#e6eaf1] bg-white px-3 py-1.5 text-xs font-semibold text-[#4b5563]"
+                    className="inline-flex w-fit shrink-0 items-center gap-1.5 rounded-lg border border-[#e6eaf1] bg-white px-3 py-1.5 text-xs font-semibold text-[#4b5563] dark:border-[#1e3344] dark:bg-[#10202c] dark:text-slate-200"
                   >
                     <CalendarDays size={14} />
                     Schedule
@@ -270,7 +272,7 @@ export default function DashboardPage() {
                       Residents have raised issues quickly with precise tracking and faster resolutions.
                     </p>
                   </article>
-                  <article className="rounded-2xl border border-[#e6eaf1] bg-white p-4">
+                  <article className="rounded-2xl border border-[#e6eaf1] bg-white p-4 dark:border-[#1e3344] dark:bg-[#10202c]">
                     <div className="flex items-center justify-between">
                       <p className="text-sm font-semibold">Due tasks</p>
                       <span className="text-xs text-[#9aa3b2]">View All</span>
@@ -286,21 +288,21 @@ export default function DashboardPage() {
                   <label className="relative min-w-0 flex-1">
                     <input
                       placeholder="Log New Complaint"
-                      className="w-full rounded-xl border border-[#e6eaf1] bg-white py-2.5 pl-4 pr-10 text-sm"
+                      className="w-full rounded-xl border border-[#e6eaf1] bg-white py-2.5 pl-4 pr-10 text-sm dark:border-[#1e3344] dark:bg-[#10202c] dark:text-slate-100"
                     />
                     <ChevronDown size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-[#9aa3b2]" />
                   </label>
                   <label className="relative min-w-0 flex-1">
                     <input
                       placeholder="Create New Bill/Voucher"
-                      className="w-full rounded-xl border border-[#e6eaf1] bg-white py-2.5 pl-4 pr-10 text-sm"
+                      className="w-full rounded-xl border border-[#e6eaf1] bg-white py-2.5 pl-4 pr-10 text-sm dark:border-[#1e3344] dark:bg-[#10202c] dark:text-slate-100"
                     />
                     <ChevronDown size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-[#9aa3b2]" />
                   </label>
                 </div>
 
                 <div className="mt-3 grid gap-3 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
-                  <article className="rounded-2xl border border-[#e6eaf1] bg-white p-4">
+                  <article className="rounded-2xl border border-[#e6eaf1] bg-white p-4 dark:border-[#1e3344] dark:bg-[#10202c]">
                     <p className="text-sm font-semibold">Open Subject / Issue Categories</p>
                     <ul className="mt-4 space-y-3">
                       {categories.map((item) => (
@@ -317,7 +319,7 @@ export default function DashboardPage() {
                       ))}
                     </ul>
                   </article>
-                  <article className="rounded-2xl border border-[#e6eaf1] bg-white p-4">
+                  <article className="rounded-2xl border border-[#e6eaf1] bg-white p-4 dark:border-[#1e3344] dark:bg-[#10202c]">
                     <div className="flex items-center justify-between">
                       <p className="text-sm font-semibold">Notes</p>
                       <span className="text-xs text-[#9aa3b2]">View All</span>
@@ -327,7 +329,7 @@ export default function DashboardPage() {
                 </div>
 
                 <div className="mt-3 grid gap-3 lg:grid-cols-2">
-                  <article className="rounded-2xl border border-[#e6eaf1] bg-white p-4">
+                  <article className="rounded-2xl border border-[#e6eaf1] bg-white p-4 dark:border-[#1e3344] dark:bg-[#10202c]">
                     <div className="flex items-center justify-between">
                       <p className="text-sm font-semibold">Emergency</p>
                       <span className="text-xs text-[#9aa3b2]">View All</span>
@@ -347,7 +349,7 @@ export default function DashboardPage() {
                       </li>
                     </ul>
                   </article>
-                  <article className="rounded-2xl border border-[#e6eaf1] bg-white p-4">
+                  <article className="rounded-2xl border border-[#e6eaf1] bg-white p-4 dark:border-[#1e3344] dark:bg-[#10202c]">
                     <div className="flex items-center justify-between">
                       <p className="text-sm font-semibold">Suggestions</p>
                       <span className="text-xs text-[#9aa3b2]">View All</span>
@@ -357,7 +359,7 @@ export default function DashboardPage() {
                 </div>
               </>
             ) : (
-              <div className="rounded-2xl border border-[#e6eaf1] bg-white p-8 text-center">
+              <div className="rounded-2xl border border-[#e6eaf1] bg-white p-8 text-center dark:border-[#1e3344] dark:bg-[#10202c]">
                 <h2 className="font-display text-xl font-semibold text-navy">{active}</h2>
                 <p className="mt-2 text-sm text-[#6b7280]">This module is ready for data once the backend is connected.</p>
               </div>

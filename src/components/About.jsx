@@ -25,14 +25,14 @@ const personas = [
 
 export default function About() {
   return (
-    <section id="about" className="section-pad bg-gradient-to-b from-[#eef5f4] to-[#e4eeec]">
+    <section id="about" className="theme-surface section-pad">
       <div className="mx-auto grid w-full items-center gap-8 lg:grid-cols-2 lg:gap-12">
         <Reveal variant="left" className="min-w-0">
           <p className="eyebrow">About us</p>
-          <h2 className="mt-3 font-display text-2xl font-bold text-navy sm:text-3xl lg:text-4xl">
+          <h2 className="theme-heading mt-3 font-display text-2xl font-bold sm:text-3xl lg:text-4xl">
             A digital ecosystem for how communities actually live
           </h2>
-          <p className="mt-4 max-w-xl text-base leading-relaxed text-muted">
+          <p className="theme-muted mt-4 max-w-xl text-base leading-relaxed">
             ResiQ bridges property managers, security, and residents. From the first visitor QR to
             the last maintenance receipt, every interaction stays in sync.
           </p>
@@ -45,8 +45,8 @@ export default function About() {
                   <item.icon size={20} />
                 </div>
                 <div>
-                  <h3 className="font-display text-lg font-semibold text-navy">{item.title}</h3>
-                  <p className="mt-1 text-sm text-muted">{item.copy}</p>
+                  <h3 className="theme-heading font-display text-lg font-semibold">{item.title}</h3>
+                  <p className="theme-muted mt-1 text-sm">{item.copy}</p>
                 </div>
               </Tilt>
             </Reveal>

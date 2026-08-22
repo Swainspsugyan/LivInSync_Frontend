@@ -27,7 +27,7 @@ const benefits = [
 
 export default function Showcase() {
   return (
-    <section id="modules" className="section-pad bg-secondary">
+    <section id="modules" className="theme-surface section-pad">
       <div className="mx-auto grid w-full items-center gap-8 lg:grid-cols-2 lg:gap-12">
         <Reveal variant="left" className="min-w-0">
           <div className="group relative overflow-hidden rounded-2xl border border-line bg-navy shadow-xl transition-all duration-500 ease-out hover:-translate-y-2 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/25 sm:rounded-3xl">
@@ -43,7 +43,7 @@ export default function Showcase() {
         <div className="min-w-0">
           <Reveal variant="right">
             <p className="eyebrow">Built for modern communities</p>
-            <h2 className="mt-3 font-display text-2xl font-bold text-navy sm:text-3xl lg:text-4xl">
+            <h2 className="theme-heading mt-3 font-display text-2xl font-bold sm:text-3xl lg:text-4xl">
               Everything Your Community Needs to Run Better
             </h2>
           </Reveal>
@@ -54,8 +54,8 @@ export default function Showcase() {
                   <Check size={14} />
                 </span>
                 <div>
-                  <p className="font-ui text-base font-semibold text-navy">{item.title}</p>
-                  <p className="mt-1 text-sm text-muted">{item.copy}</p>
+                  <p className="theme-heading font-ui text-base font-semibold">{item.title}</p>
+                  <p className="theme-muted mt-1 text-sm">{item.copy}</p>
                 </div>
               </Reveal>
             ))}
