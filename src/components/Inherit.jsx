@@ -1,6 +1,9 @@
 import { motion } from 'framer-motion'
 
 const inheritVariants = {
+  rest: {
+    transition: { duration: 0 },
+  },
   animate: {
     transition: { staggerChildren: 0.03, delayChildren: 0 },
   },

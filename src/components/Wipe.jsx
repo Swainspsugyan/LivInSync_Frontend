@@ -37,6 +37,9 @@ export default function Wipe({
   return (
     <MotionTag
       variants={variantsBySide[side] ?? centerWipeVariants}
+      initial="initial"
+      whileInView="animate"
+      viewport={{ once: false, amount: 0.22, margin: '0px 0px -10% 0px' }}
       transition={delay ? { delay: delay / 1000 } : undefined}
       className={className}
       style={style}

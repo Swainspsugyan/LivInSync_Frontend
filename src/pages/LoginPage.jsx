@@ -2,7 +2,6 @@
 import { useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import BrandMark, { BRAND } from '../components/BrandMark.jsx'
-import ThemeToggle from '../components/ThemeToggle.jsx'
 import { asset } from '../lib/asset.js'
 import { DEMO_CREDENTIALS, getSession, login } from '../lib/auth.js'
 
@@ -46,11 +45,8 @@ export default function LoginPage() {
         to="/"
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         compact
-        className="absolute left-3 top-3 z-20 max-w-[min(100%-7.5rem,280px)] sm:left-6 sm:top-5 lg:left-8 lg:top-6"
+        className="absolute left-3 top-3 z-20 max-w-[min(100%-1.5rem,280px)] sm:left-6 sm:top-5 lg:left-8 lg:top-6"
       />
-      <div className="absolute right-3 top-3 z-20 sm:right-6 sm:top-5 lg:right-8 lg:top-6">
-        <ThemeToggle />
-      </div>
       <div className="relative z-10 flex w-full flex-col pt-16 sm:pt-20 lg:grid lg:min-h-dvh lg:grid-cols-[minmax(0,1fr)_minmax(280px,min(42vw,440px))] lg:pt-0">
         <section className="relative flex shrink-0 flex-col justify-center px-4 py-5 sm:px-6 sm:py-8 lg:h-full lg:min-h-0 lg:px-8">
           <div className="max-w-xl lg:ml-auto lg:mr-8 lg:text-right xl:mr-16">

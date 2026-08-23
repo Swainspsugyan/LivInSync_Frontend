@@ -47,7 +47,7 @@ export default function Reveal({
       variants={variantsByName[variant] ?? itemVariants}
       initial="initial"
       whileInView="animate"
-      viewport={{ once: true, amount: 0.18 }}
+      viewport={{ once: false, amount: 0.2, margin: '0px 0px -8% 0px' }}
       transition={{ ...transitionConfig, delay: delay / 1000 }}
       className={className}
       style={style}

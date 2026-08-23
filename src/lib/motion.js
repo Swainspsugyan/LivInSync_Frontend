@@ -56,6 +56,10 @@ export const centerWipeVariants = {
 
 export const panelVariants = {
   initial: { opacity: 1 },
+  rest: {
+    opacity: 1,
+    transition: { duration: 0 },
+  },
   animate: {
     opacity: 1,
     transition: {

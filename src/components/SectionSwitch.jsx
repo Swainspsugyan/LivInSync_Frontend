@@ -15,9 +15,10 @@ function placeAt(id) {
 
 export default function SectionSwitch({ targetId = 'home', children }) {
   const reduce = useReducedMotion()
-  const [phase, setPhase] = useState('animate')
+  const [phase, setPhase] = useState('rest')
   const pending = useRef(targetId)
   const boot = useRef(true)
+  const settle = useRef(0)
 
   useLayoutEffect(() => {
     placeAt(targetId)
@@ -36,14 +37,19 @@ export default function SectionSwitch({ targetId = 'home', children }) {
       return
     }
 
+    window.clearTimeout(settle.current)
     setPhase('exit')
     const showNext = window.setTimeout(() => {
       placeAt(targetId)
       pending.current = targetId
       setPhase('animate')
+      settle.current = window.setTimeout(() => setPhase('rest'), 920)
     }, 450)
 
-    return () => window.clearTimeout(showNext)
+    return () => {
+      window.clearTimeout(showNext)
+      window.clearTimeout(settle.current)
+    }
   }, [targetId, reduce])
 
   if (reduce) {
