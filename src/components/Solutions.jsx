@@ -1,6 +1,8 @@
 import { Building, Shield, UserRound, Users } from 'lucide-react'
-import Reveal from './Reveal.jsx'
+import { wipeSide } from '../lib/motion.js'
+import Inherit from './Inherit.jsx'
 import Tilt from './Tilt.jsx'
+import Wipe from './Wipe.jsx'
 
 const roles = [
   {
@@ -27,17 +29,22 @@ const roles = [
 
 export default function Solutions() {
   return (
-    <section id="solutions" className="theme-surface section-pad">
-      <Reveal className="mx-auto max-w-3xl text-center">
+    <Inherit as="section" id="solutions" className="theme-surface section-pad">
+      <Wipe side="header" className="mx-auto max-w-3xl text-center">
         <p className="eyebrow">Solutions for everyone</p>
         <h2 className="theme-heading mt-3 font-display text-2xl font-bold sm:text-3xl lg:text-4xl">
           Built Around How Communities Actually Work
         </h2>
-      </Reveal>
-      <div className="mx-auto mt-8 grid w-full gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
+      </Wipe>
+      <Inherit className="mx-auto mt-8 grid w-full gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
         {roles.map((role, i) => (
-          <Reveal key={role.title} as="article" variant="scale" className="min-w-0 [transform-style:preserve-3d]" delay={i * 90}>
-            <Tilt className="group h-full rounded-2xl border border-line bg-secondary p-5 text-center dark:border-[#1e3344] dark:bg-[#10202c] sm:p-6">
+          <Wipe
+            key={role.title}
+            as="article"
+            side={wipeSide(i, 4)}
+            className="min-w-0 [transform-style:preserve-3d]"
+          >
+            <Tilt className="dash-glass group h-full rounded-2xl p-5 text-center sm:p-6">
               <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-white text-primary shadow-sm transition-all duration-300 ease-out group-hover:scale-110 group-hover:-rotate-6 group-hover:bg-primary group-hover:text-white group-hover:shadow-md">
                 <role.icon size={22} className="transition-transform duration-300 group-hover:scale-110" />
               </div>
@@ -46,9 +53,9 @@ export default function Solutions() {
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-muted">{role.copy}</p>
             </Tilt>
-          </Reveal>
+          </Wipe>
         ))}
-      </div>
-    </section>
+      </Inherit>
+    </Inherit>
   )
 }

@@ -1,5 +1,6 @@
 import { Check } from 'lucide-react'
 import { useState } from 'react'
+import Reveal from './Reveal.jsx'
 
 const plans = [
   {
@@ -47,14 +48,14 @@ export default function Pricing({ onSelect }) {
   const [annual, setAnnual] = useState(true)
 
   return (
-    <section id="pricing" className="section-pad bg-white">
-      <div className="mx-auto max-w-3xl text-center">
+    <section id="pricing" className="section-pad">
+      <Reveal className="mx-auto max-w-3xl text-center">
         <p className="eyebrow">Pricing</p>
-        <h2 className="mt-3 font-display text-3xl font-bold text-navy sm:text-4xl">
+        <h2 className="theme-heading mt-3 font-display text-3xl font-bold sm:text-4xl">
           Simple, Transparent Pricing
         </h2>
-        <p className="mt-4 text-muted">Start lean, then scale into a full community OS.</p>
-      </div>
+        <p className="theme-muted mt-4">Start lean, then scale into a full community OS.</p>
+      </Reveal>
 
       <div className="mt-8 flex justify-center">
         <div className="inline-flex items-center gap-3 rounded-full border border-line bg-secondary px-2 py-1.5">
@@ -80,16 +81,18 @@ export default function Pricing({ onSelect }) {
       </div>
 
       <div className="mx-auto mt-12 grid max-w-7xl gap-6 lg:grid-cols-3">
-        {plans.map((plan) => {
+        {plans.map((plan, i) => {
           const price = annual ? Math.round(plan.monthly * 12 * 0.8) : plan.monthly
           const period = annual ? '/yr' : '/mo'
           return (
-            <article
+            <Reveal
+              as="article"
               key={plan.name}
+              delay={i * 80}
               className={`relative flex h-full flex-col rounded-2xl p-7 ${
                 plan.highlighted
-                  ? 'border-2 border-primary bg-white shadow-lg'
-                  : 'border border-line bg-white'
+                  ? 'dash-glass border-2 border-primary shadow-lg'
+                  : 'dash-glass'
               }`}
             >
               {plan.highlighted && (
@@ -97,17 +100,17 @@ export default function Pricing({ onSelect }) {
                   Most Popular
                 </span>
               )}
-              <h3 className="font-display text-2xl font-semibold text-navy">{plan.name}</h3>
+              <h3 className="theme-heading font-display text-2xl font-semibold">{plan.name}</h3>
               <p className="mt-2 text-sm text-muted">{plan.blurb}</p>
               <div className="mt-6 flex items-end gap-1">
-                <span className="font-ui text-4xl font-bold text-navy">
+                <span className="theme-heading font-ui text-4xl font-bold">
                   ₹{price.toLocaleString('en-IN')}
                 </span>
                 <span className="mb-1 text-sm text-muted">{period}</span>
               </div>
               <ul className="mt-6 flex-1 space-y-3">
                 {plan.features.map((f) => (
-                  <li key={f} className="flex items-start gap-2 text-sm text-navy">
+                  <li key={f} className="theme-heading flex items-start gap-2 text-sm">
                     <Check size={16} className="mt-0.5 shrink-0 text-primary" />
                     {f}
                   </li>
@@ -122,7 +125,7 @@ export default function Pricing({ onSelect }) {
               >
                 {plan.highlighted ? 'Get Started' : `Choose ${plan.name}`}
               </button>
-            </article>
+            </Reveal>
           )
         })}
       </div>

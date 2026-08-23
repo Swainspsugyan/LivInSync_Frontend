@@ -1,6 +1,6 @@
 import { ArrowRight, Calendar, CheckCircle2, Headphones, ShieldCheck, Users } from 'lucide-react'
 import { asset } from '../lib/asset.js'
-import Reveal from './Reveal.jsx'
+import Wipe from './Wipe.jsx'
 
 const stats = [
   { icon: Users, label: '5+ Communities' },
@@ -13,18 +13,19 @@ export default function Hero({ onDemo, onRegister }) {
   return (
     <section
       id="home"
-      className="theme-surface relative left-0 flex min-h-[100svh] w-full flex-col overflow-hidden pt-20 sm:pt-24"
+      className="theme-surface relative flex min-h-[100svh] w-full flex-col overflow-hidden pt-20 sm:pt-24"
     >
-      <img
-        src={asset('hero-society.png')}
-        alt="Premium residential society"
-        className="hero-in-photo hero-photo pointer-events-none absolute inset-y-0 right-0 h-full w-full object-cover object-[70%_center] sm:w-[68%]"
-      />
+      <div className="hero-photo-wrap pointer-events-none absolute inset-0">
+        <img
+          src={asset('hero-society.png')}
+          alt="Premium residential society"
+          className="hero-in-photo hero-photo absolute inset-0 h-full w-full object-cover object-[72%_center]"
+        />
+      </div>
       <div className="hero-fade pointer-events-none absolute inset-0" />
-      <div className="pointer-events-none absolute inset-0 bg-[color:color-mix(in_srgb,var(--resiq-bg)_50%,transparent)] sm:hidden" />
 
       <div className="relative z-10 mx-0 flex w-full flex-1 items-center px-4 py-10 sm:px-6 sm:py-14 lg:px-10 xl:px-16">
-        <Reveal className="w-full max-w-xl">
+        <Wipe side="left" className="w-full max-w-xl">
           <div className="mb-4 inline-flex max-w-full items-center gap-2 rounded-full border border-[color:var(--resiq-line)] bg-[color:color-mix(in_srgb,var(--resiq-card)_70%,transparent)] px-3 py-1.5">
             <CheckCircle2 size={14} className="shrink-0 text-emerald-500" />
             <span className="font-ui text-[11px] font-semibold theme-heading sm:text-xs">
@@ -68,7 +69,7 @@ export default function Hero({ onDemo, onRegister }) {
               </div>
             ))}
           </div>
-        </Reveal>
+        </Wipe>
       </div>
     </section>
   )

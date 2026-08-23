@@ -1,7 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 
 const STORAGE_KEY = 'resiq-theme'
-const ECLIPSE_MS = 460
+const ECLIPSE_MS = 780
 const ThemeContext = createContext(null)
 
 let sweepLock = false

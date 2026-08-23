@@ -1,7 +1,28 @@
-import { useEffect, useRef, useState } from 'react'
+import { motion, useReducedMotion } from 'framer-motion'
+import { itemVariants, transitionConfig, viewVariants } from '../lib/motion.js'
+
+const variantsByName = {
+  up: itemVariants,
+  left: {
+    initial: { opacity: 0, x: -32, filter: 'blur(6px)' },
+    animate: { opacity: 1, x: 0, filter: 'blur(0px)' },
+    exit: { opacity: 0, y: 30, filter: 'blur(6px)' },
+  },
+  right: {
+    initial: { opacity: 0, x: 32, filter: 'blur(6px)' },
+    animate: { opacity: 1, x: 0, filter: 'blur(0px)' },
+    exit: { opacity: 0, y: 30, filter: 'blur(6px)' },
+  },
+  scale: viewVariants,
+  fade: {
+    initial: { opacity: 0, filter: 'blur(6px)' },
+    animate: { opacity: 1, filter: 'blur(0px)' },
+    exit: { opacity: 0, filter: 'blur(6px)' },
+  },
+}
 
 export default function Reveal({
-  as: Tag = 'div',
+  as = 'div',
   children,
   className = '',
   variant = 'up',
@@ -9,32 +30,30 @@ export default function Reveal({
   style,
   ...props
 }) {
-  const ref = useRef(null)
-  const [shown, setShown] = useState(false)
+  const reduce = useReducedMotion()
+  const MotionTag = motion[as] ?? motion.div
 
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        setShown(entry.isIntersecting)
-      },
-      { threshold: 0.16, rootMargin: '0px 0px -12% 0px' },
+  if (reduce) {
+    const Tag = as
+    return (
+      <Tag className={className} style={style} {...props}>
+        {children}
+      </Tag>
     )
-
-    io.observe(el)
-    return () => io.disconnect()
-  }, [])
+  }
 
   return (
-    <Tag
-      ref={ref}
-      className={`reveal reveal-${variant}${shown ? ' is-visible' : ''} ${className}`.trim()}
-      style={{ '--reveal-delay': shown ? `${delay}ms` : '0ms', ...style }}
+    <MotionTag
+      variants={variantsByName[variant] ?? itemVariants}
+      initial="initial"
+      whileInView="animate"
+      viewport={{ once: true, amount: 0.18 }}
+      transition={{ ...transitionConfig, delay: delay / 1000 }}
+      className={className}
+      style={style}
       {...props}
     >
       {children}
-    </Tag>
+    </MotionTag>
   )
 }

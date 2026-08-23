@@ -5,21 +5,21 @@ import Reveal from './Reveal.jsx'
 
 const columns = {
   Product: [
-    { to: '/#features', label: 'Features' },
-    { to: '/#modules', label: 'Modules' },
+    { to: '/?tab=features', label: 'Features' },
+    { to: '/?tab=modules', label: 'Modules' },
   ],
   Solutions: [
-    { to: '/#solutions', label: 'Associations' },
-    { to: '/#solutions', label: 'Managers' },
-    { to: '/#solutions', label: 'Security' },
-    { to: '/#solutions', label: 'Residents' },
+    { to: '/?tab=solutions', label: 'Associations' },
+    { to: '/?tab=solutions', label: 'Managers' },
+    { to: '/?tab=solutions', label: 'Security' },
+    { to: '/?tab=solutions', label: 'Residents' },
   ],
   Resources: [
-    { to: '/#about', label: 'About' },
+    { to: '/?tab=about', label: 'About' },
     { to: '/login', label: 'Admin Login' },
   ],
   Company: [
-    { to: '/#about', label: 'About Us' },
+    { to: '/?tab=about', label: 'About Us' },
     { href: 'mailto:support@resiq.com', label: 'Contact' },
   ],
 }
@@ -44,32 +44,27 @@ export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="relative z-10 bg-navy text-white">
+    <footer className="relative z-10">
       <Reveal className="mx-auto grid w-full gap-8 px-4 py-12 sm:grid-cols-2 sm:px-6 sm:py-14 lg:grid-cols-12 lg:gap-10 lg:px-10 xl:px-16">
         <div className="sm:col-span-2 lg:col-span-4">
-          <BrandMark
-            to="/"
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            titleClass="text-white"
-            subtitleClass="text-white/60"
-          />
-          <p className="mt-4 max-w-sm text-sm text-white/70">
+          <BrandMark to="/" />
+          <p className="theme-muted mt-4 max-w-sm text-sm">
             The operating system for apartments, gated societies, and mixed-use residences.
           </p>
         </div>
 
         {Object.entries(columns).map(([title, items]) => (
           <div key={title} className="lg:col-span-2">
-            <p className="font-ui text-xs uppercase tracking-[0.2em] text-teal-300">{title}</p>
+            <p className="eyebrow">{title}</p>
             <ul className="mt-4 space-y-2">
               {items.map((item) => (
                 <li key={item.label}>
                   {item.href ? (
-                    <a href={item.href} className="text-sm text-white/75 hover:text-white">
+                    <a href={item.href} className="theme-muted text-sm hover:opacity-100 hover:text-emerald-600">
                       {item.label}
                     </a>
                   ) : (
-                    <Link to={item.to} className="text-sm text-white/75 hover:text-white">
+                    <Link to={item.to} className="theme-muted text-sm hover:opacity-100 hover:text-emerald-600">
                       {item.label}
                     </Link>
                   )}
@@ -80,16 +75,16 @@ export default function Footer() {
         ))}
       </Reveal>
 
-      <div className="border-t border-white/10">
+      <div className="border-t border-[color:var(--resiq-line)]">
         <div className="mx-auto flex w-full flex-col gap-3 px-4 py-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:px-6 lg:px-10 xl:px-16">
-          <p className="text-xs text-white/55">© {year} ResiQ. All rights reserved.</p>
+          <p className="theme-muted text-xs">© {year} ResiQ. All rights reserved.</p>
           <div className="flex flex-wrap gap-4">
             {legal.map((item) => (
               <button
                 key={item.id}
                 type="button"
                 onClick={() => setLegalId(item.id)}
-                className="text-xs text-white/55 hover:text-white"
+                className="theme-muted text-xs hover:opacity-100 hover:text-emerald-600"
               >
                 {item.label}
               </button>

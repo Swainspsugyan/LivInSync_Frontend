@@ -1,30 +1,28 @@
 import { Menu, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { tabHref, viewFromLocation } from '../lib/homeView.js'
 import BrandMark from './BrandMark.jsx'
 import ThemeToggle from './ThemeToggle.jsx'
 
 const links = [
-  { to: '/', hash: 'features', label: 'Features' },
-  { to: '/', hash: 'modules', label: 'Modules' },
-  { to: '/', hash: 'solutions', label: 'Solutions' },
-  { to: '/', hash: 'about', label: 'About Us' },
+  { tab: 'features', label: 'Features' },
+  { tab: 'modules', label: 'Modules' },
+  { tab: 'solutions', label: 'Solutions' },
+  { tab: 'about', label: 'About Us' },
 ]
-
-function hrefFor(link) {
-  return link.hash ? `${link.to}#${link.hash}` : link.to
-}
 
 export default function Navbar({ onSignup }) {
   const [open, setOpen] = useState(false)
-  const [section, setSection] = useState('home')
   const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
   const onHome = location.pathname === '/'
+  const [section, setSection] = useState(() => (onHome ? viewFromLocation(location) : ''))
+  const solidNav = open || !onHome || section !== 'home' || scrolled
 
   useEffect(() => {
     setOpen(false)
-  }, [location.pathname])
+  }, [location.pathname, location.search])
 
   useEffect(() => {
     const onScroll = () => {
@@ -42,19 +40,12 @@ export default function Navbar({ onSignup }) {
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
-  }, [location.pathname])
-
-  const isActive = (link) => section === link.hash
-
-  const goHome = () => {
-    setOpen(false)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
+  }, [location.pathname, location.search])
 
   return (
     <header
       className={`fixed left-0 right-0 top-0 z-40 w-full transition-[background-color,color,box-shadow] duration-[400ms] ease ${
-        open || !onHome || scrolled ? 'theme-nav shadow-sm' : 'bg-transparent theme-heading'
+        solidNav ? 'theme-nav shadow-sm' : 'bg-transparent theme-heading'
       }`}
     >
       <nav className="flex w-full min-h-16 items-center gap-1.5 px-2 py-2 sm:min-h-[4.25rem] sm:gap-3 sm:px-4 lg:px-8 xl:px-12">
@@ -69,7 +60,7 @@ export default function Navbar({ onSignup }) {
 
         <BrandMark
           to="/"
-          onClick={goHome}
+          onClick={() => setOpen(false)}
           className="min-w-0 flex-1 lg:flex-none"
           titleClass="theme-heading"
           subtitleClass="theme-muted"
@@ -79,9 +70,9 @@ export default function Navbar({ onSignup }) {
           {links.map((link) => (
             <li key={link.label}>
               <Link
-                to={hrefFor(link)}
+                to={tabHref(link.tab)}
                 className={`whitespace-nowrap rounded-lg px-3 py-2 font-ui text-sm font-medium xl:px-4 xl:text-base ${
-                  isActive(link) ? 'text-emerald-600' : 'theme-muted hover:opacity-100'
+                  section === link.tab ? 'text-emerald-600' : 'theme-muted hover:opacity-100'
                 }`}
               >
                 {link.label}
@@ -115,8 +106,7 @@ export default function Navbar({ onSignup }) {
             {links.map((link) => (
               <li key={link.label}>
                 <Link
-                  to={hrefFor(link)}
-                  onClick={() => setOpen(false)}
+                  to={tabHref(link.tab)}
                   className="theme-heading block rounded-xl px-3 py-3 font-ui text-base hover:bg-[color:color-mix(in_srgb,var(--resiq-fg)_8%,transparent)]"
                 >
                   {link.label}
