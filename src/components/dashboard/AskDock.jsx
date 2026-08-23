@@ -9,12 +9,12 @@ export default function AskDock() {
   return (
     <div className="pointer-events-auto w-full max-w-md">
       <ComponentWrapper show={Boolean(reply)} itemKey={reply}>
-        <p className="dash-glass mb-2 rounded-2xl px-3 py-2 text-sm text-slate-700 dark:text-slate-100">
+        <p className="dash-card mb-2 rounded-2xl px-3 py-2 text-sm text-slate-700 dark:text-slate-100">
           {reply}
         </p>
       </ComponentWrapper>
       <form
-        className="dash-glass rounded-2xl p-2 shadow-lg"
+        className="dash-card rounded-2xl p-2 shadow-lg"
         onSubmit={(e) => {
           e.preventDefault()
           const text = q.trim()
@@ -35,7 +35,7 @@ export default function AskDock() {
           />
           <button
             type="submit"
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-slate-900 text-white hover:bg-slate-800"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-slate-900 text-white hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-100"
             aria-label="Send"
           >
             <ArrowUp size={16} />

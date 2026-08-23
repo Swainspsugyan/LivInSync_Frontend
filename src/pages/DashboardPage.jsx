@@ -1,56 +1,92 @@
-import { CalendarDays } from 'lucide-react'
-import { useState } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useEffect, useMemo, useState } from 'react'
+import { Navigate, useLocation, useNavigate } from 'react-router-dom'
+import AnalyticsView from '../components/dashboard/AnalyticsView.jsx'
 import AskDock from '../components/dashboard/AskDock.jsx'
-import DashboardGrid from '../components/dashboard/DashboardGrid.jsx'
+import DashboardHome from '../components/dashboard/DashboardHome.jsx'
 import DetailPanel from '../components/dashboard/DetailPanel.jsx'
 import Header from '../components/dashboard/Header.jsx'
+import ModuleView from '../components/dashboard/ModuleView.jsx'
 import PageWrapper from '../components/dashboard/PageWrapper.jsx'
 import Sidebar from '../components/dashboard/Sidebar.jsx'
+import { DASH_NAV, DEFAULT_VIEW } from '../lib/dashboardNav.js'
 import { getSession, logout } from '../lib/auth.js'
+
+function labelFor(viewId) {
+  for (const item of DASH_NAV) {
+    if (item.id === viewId) return item.label
+    const child = item.children?.find((entry) => entry.id === viewId)
+    if (child) return child.label
+  }
+  return viewId
+}
+
+function formatStamp(date) {
+  return {
+    date: date.toLocaleDateString('en-IN', {
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    }),
+    time: date.toLocaleTimeString('en-IN', {
+      hour: '2-digit',
+      minute: '2-digit',
+    }),
+  }
+}
 
 export default function DashboardPage() {
   const session = getSession()
   const navigate = useNavigate()
+  const location = useLocation()
   const [menu, setMenu] = useState(false)
   const [profile, setProfile] = useState(false)
-  const [active, setActive] = useState('Dashboard')
+  const [active, setActive] = useState(location.pathname === '/analytics' ? 'insights' : DEFAULT_VIEW)
   const [detail, setDetail] = useState(null)
+  const [now, setNow] = useState(() => new Date())
+
+  useEffect(() => {
+    const tick = window.setInterval(() => setNow(new Date()), 30000)
+    return () => window.clearInterval(tick)
+  }, [])
+
+  useEffect(() => {
+    if (location.pathname === '/analytics') {
+      setActive('insights')
+      setDetail(null)
+    }
+  }, [location.pathname])
+
+  const stamp = useMemo(() => formatStamp(now), [now])
 
   if (!session) return <Navigate to="/login" replace />
-
-  const hour = new Date().getHours()
-  const hello = hour < 12 ? 'Good Morning' : hour < 17 ? 'Good Afternoon' : 'Good Evening'
-  const today = new Date().toLocaleDateString('en-IN', {
-    weekday: 'long',
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-  })
 
   const signOut = () => {
     logout()
     navigate('/login', { replace: true })
   }
 
+  const goTo = (id) => {
+    setDetail(null)
+    setMenu(false)
+    if (id === 'insights') {
+      navigate('/analytics')
+      setActive('insights')
+      return
+    }
+    if (location.pathname !== '/dashboard') navigate('/dashboard')
+    setActive(id)
+  }
+
   return (
     <div className="dash-shell min-h-dvh overflow-x-hidden">
       <div className="flex min-h-dvh">
-        <Sidebar
-          active={active}
-          open={menu}
-          onClose={() => setMenu(false)}
-          onSelect={(label) => {
-            setActive(label)
-            setDetail(null)
-            setMenu(false)
-          }}
-        />
+        <Sidebar active={active} open={menu} onClose={() => setMenu(false)} onSelect={goTo} />
 
         {menu && (
           <button
             type="button"
-            className="fixed inset-0 z-20 bg-black/25 lg:hidden"
+            className="fixed inset-0 z-20 bg-slate-900/30 lg:hidden"
             onClick={() => setMenu(false)}
             aria-label="Close sidebar"
           />
@@ -64,35 +100,38 @@ export default function DashboardPage() {
             profile={profile}
             setProfile={setProfile}
           />
-          <div className="flex flex-col gap-3 px-4 pb-6 pt-1 sm:flex-row sm:items-end sm:justify-between sm:px-6">
+
+          <div className="flex flex-col gap-1 px-4 pb-4 pt-5 sm:flex-row sm:items-start sm:justify-between sm:px-6">
             <div>
-              <h1 className="font-display text-2xl font-semibold text-white sm:text-3xl">
-                {hello}, {session.name}!
+              <h1 className="font-display text-2xl font-semibold text-slate-900 dark:text-white sm:text-3xl">
+                Welcome back, {session.name.split(' ')[0]} 👋
               </h1>
-              <p className="mt-1 text-sm text-white/80">{today}</p>
+              <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Welcome to your dashboard</p>
             </div>
-            <button
-              type="button"
-              className="inline-flex w-fit items-center gap-1.5 rounded-full bg-white/15 px-3 py-1.5 text-xs font-semibold text-white hover:bg-white/25"
-            >
-              <CalendarDays size={14} />
-              Schedule
-            </button>
+            <p className="text-sm text-slate-500 dark:text-slate-400 sm:text-right">
+              <span className="block font-medium text-slate-700 dark:text-slate-200">{stamp.date}</span>
+              <time dateTime={now.toISOString()}>{stamp.time}</time>
+            </p>
           </div>
 
           <div className="relative z-10 flex-1 px-4 pb-28 sm:px-6">
             <PageWrapper viewKey={detail ? `detail-${detail.title}` : active}>
               {detail ? (
                 <DetailPanel title={detail.title} copy={detail.copy} onBack={() => setDetail(null)} />
-              ) : active === 'Dashboard' ? (
-                <DashboardGrid onOpenDetail={setDetail} />
+              ) : active === 'overview' ? (
+                <DashboardHome
+                  onAssign={(unit) => goTo('directory')}
+                  onViewUnit={(unit) =>
+                    setDetail({
+                      title: `${unit.room} · ${unit.block}`,
+                      copy: `${unit.type} listed at ${unit.rent} / month. Status: Vacant. Assign a resident or publish this unit to the waitlist.`,
+                    })
+                  }
+                />
+              ) : active === 'insights' ? (
+                <AnalyticsView />
               ) : (
-                <div className="dash-glass rounded-2xl p-8 text-center">
-                  <h2 className="font-display text-xl font-semibold text-slate-900 dark:text-white">{active}</h2>
-                  <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
-                    This module is ready for data once the backend is connected.
-                  </p>
-                </div>
+                <ModuleView viewId={active} title={labelFor(active)} />
               )}
             </PageWrapper>
           </div>

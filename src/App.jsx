@@ -12,7 +12,10 @@ import PricingPage from './pages/PricingPage.jsx'
 export default function App() {
   const [auth, setAuth] = useState(null)
   const location = useLocation()
-  const hideChrome = location.pathname === '/login' || location.pathname.startsWith('/dashboard')
+  const hideChrome =
+    location.pathname === '/login' ||
+    location.pathname === '/analytics' ||
+    location.pathname.startsWith('/dashboard')
 
   useEffect(() => {
     document.documentElement.classList.remove('tabs-lock')
@@ -41,6 +44,7 @@ export default function App() {
             <Route path="/pricing" element={<PricingPage onSelect={() => setAuth('signup')} />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/analytics" element={<DashboardPage />} />
           </Routes>
         </PageWrapper>
       </main>

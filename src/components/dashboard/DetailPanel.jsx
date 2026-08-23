@@ -2,7 +2,7 @@ import { ArrowLeft } from 'lucide-react'
 
 export default function DetailPanel({ title, copy, onBack }) {
   return (
-    <div className="dash-glass rounded-2xl p-6 sm:p-8">
+    <div className="dash-card rounded-2xl p-6 sm:p-8">
       <button
         type="button"
         onClick={onBack}

@@ -88,7 +88,10 @@ html.theme-sweeping body,
 html.theme-sweeping #root,
 html.theme-sweeping .theme-surface,
 html.theme-sweeping .feature-card,
-html.theme-sweeping header {
+html.theme-sweeping header,
+html.theme-sweeping .dash-shell,
+html.theme-sweeping .dash-card,
+html.theme-sweeping .neon-metric-card {
   transition: none !important;
 }
 
@@ -175,6 +178,18 @@ html.theme-sweeping header {
 
   .btn-outline:hover {
     background: #f4f8f8;
+  }
+
+  html.dark .btn-outline,
+  html[data-theme="dark"] .btn-outline {
+    background: #10233a;
+    border-color: #1e3a5f;
+    color: #f8fafc;
+  }
+
+  html.dark .btn-outline:hover,
+  html[data-theme="dark"] .btn-outline:hover {
+    background: #16324d;
   }
 
   .section-pad {
@@ -789,6 +804,202 @@ html.dark .theme-toggle .theme-toggle-knob {
 @media (prefers-reduced-motion: reduce) {
   .theme-eclipse-layer {
     display: none;
+  }
+}
+
+.dash-shell {
+  background: #f8fafc;
+  color: #0f172a;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+html.dark .dash-shell,
+html[data-theme="dark"] .dash-shell {
+  background: #0a192f;
+  color: #f8fafc;
+}
+
+.dash-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+  color: #0f172a;
+  transition:
+    background-color 0.4s ease,
+    border-color 0.4s ease,
+    color 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+html.dark .dash-card,
+html[data-theme="dark"] .dash-card {
+  background: #10233a;
+  border-color: #1e3a5f;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  color: #e2e8f0;
+}
+
+.neon-metric-card {
+  background: #ffffff;
+  color: #0f172a;
+  box-shadow:
+    0 0 0 1px rgba(13, 131, 118, 0.08),
+    0 12px 28px rgba(15, 23, 42, 0.06);
+  transition:
+    background-color 0.4s ease,
+    box-shadow 0.28s ease,
+    border-color 0.28s ease,
+    color 0.4s ease;
+}
+
+.neon-metric-card:hover,
+.neon-metric-card:focus-visible {
+  border-color: rgba(13, 131, 118, 0.38);
+  box-shadow:
+    0 0 0 1px rgba(13, 131, 118, 0.22),
+    0 0 22px rgba(13, 131, 118, 0.12),
+    0 18px 36px rgba(15, 23, 42, 0.1);
+}
+
+html.dark .neon-metric-card,
+html[data-theme="dark"] .neon-metric-card {
+  background: linear-gradient(180deg, rgba(21, 32, 64, 0.96), rgba(11, 19, 43, 0.98));
+  color: #f8fafc;
+  box-shadow:
+    0 0 0 1px rgba(34, 211, 238, 0.08),
+    0 18px 40px rgba(2, 6, 23, 0.35);
+}
+
+html.dark .neon-metric-card:hover,
+html.dark .neon-metric-card:focus-visible,
+html[data-theme="dark"] .neon-metric-card:hover,
+html[data-theme="dark"] .neon-metric-card:focus-visible {
+  border-color: rgba(34, 211, 238, 0.5);
+  box-shadow:
+    0 0 0 1px rgba(34, 211, 238, 0.32),
+    0 0 26px rgba(34, 211, 238, 0.22),
+    0 0 44px rgba(168, 85, 247, 0.16),
+    0 22px 44px rgba(2, 6, 23, 0.45);
+}
+
+.neon-metric-card__wash {
+  background:
+    radial-gradient(circle at 16% 0%, rgba(13, 131, 118, 0.14), transparent 42%),
+    radial-gradient(circle at 90% 100%, rgba(14, 165, 233, 0.1), transparent 48%);
+  opacity: 0.75;
+  transition: opacity 0.28s ease, background 0.4s ease;
+}
+
+html.dark .neon-metric-card__wash,
+html[data-theme="dark"] .neon-metric-card__wash {
+  background:
+    radial-gradient(circle at 16% 0%, rgba(34, 211, 238, 0.22), transparent 42%),
+    radial-gradient(circle at 90% 100%, rgba(168, 85, 247, 0.2), transparent 48%);
+  opacity: 0.7;
+}
+
+.neon-metric-card:hover .neon-metric-card__wash,
+.neon-metric-card:focus-visible .neon-metric-card__wash {
+  opacity: 1;
+}
+
+.neon-metric-card__sheen {
+  opacity: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 18%,
+    rgba(13, 131, 118, 0.1) 42%,
+    transparent 62%
+  );
+  transform: translateX(-30%);
+  transition:
+    opacity 0.35s ease,
+    transform 0.45s ease;
+}
+
+html.dark .neon-metric-card__sheen,
+html[data-theme="dark"] .neon-metric-card__sheen {
+  background: linear-gradient(
+    115deg,
+    transparent 18%,
+    rgba(255, 255, 255, 0.08) 42%,
+    transparent 62%
+  );
+}
+
+.neon-metric-card:hover .neon-metric-card__sheen,
+.neon-metric-card:focus-visible .neon-metric-card__sheen {
+  opacity: 1;
+  transform: translateX(18%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .neon-metric-card,
+  .neon-metric-card__wash,
+  .neon-metric-card__sheen {
+    transition: none;
+  }
+
+  .neon-metric-card__sheen {
+    transform: none;
+  }
+}
+
+.iso-donut-scene {
+  position: relative;
+}
+
+.iso-donut-layer {
+  position: absolute;
+  inset: 0;
+}
+
+.iso-donut-top {
+  filter: drop-shadow(0 10px 14px rgba(34, 211, 238, 0.28));
+}
+
+.pie-spin-ring {
+  transform-origin: 66px 66px;
+  animation: pie-spin 8s linear infinite;
+}
+
+.pie-spin-ring--rev {
+  animation-direction: reverse;
+  animation-duration: 11s;
+}
+
+@keyframes pie-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pie-spin-ring {
+    animation: none;
+  }
+}
+
+.iso-donut-live {
+  transform-origin: center;
+  animation: iso-donut-live 8s linear infinite;
+}
+
+@keyframes iso-donut-live {
+  0% {
+    filter: hue-rotate(0deg) drop-shadow(0 0 10px rgba(34, 211, 238, 0.3));
+  }
+  50% {
+    filter: hue-rotate(180deg) drop-shadow(0 0 20px rgba(168, 85, 247, 0.45));
+  }
+  100% {
+    filter: hue-rotate(360deg) drop-shadow(0 0 10px rgba(34, 211, 238, 0.3));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .iso-donut-live {
+    animation: none;
   }
 }
 
