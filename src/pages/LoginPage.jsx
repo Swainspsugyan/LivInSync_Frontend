@@ -2,11 +2,14 @@
 import { useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import BrandMark, { BRAND } from '../components/BrandMark.jsx'
+import LanguageToggle from '../components/LanguageToggle.jsx'
+import { useI18n } from '../lib/i18n.jsx'
 import { asset } from '../lib/asset.js'
 import { DEMO_CREDENTIALS, getSession, login } from '../lib/auth.js'
 
 export default function LoginPage() {
   const navigate = useNavigate()
+  const { t } = useI18n()
   const [mode, setMode] = useState('password')
   const [showPassword, setShowPassword] = useState(false)
   const [stay, setStay] = useState(true)
@@ -19,12 +22,12 @@ export default function LoginPage() {
   const onSubmit = (e) => {
     e.preventDefault()
     if (!userId.trim() || !secret.trim()) {
-      setError('Enter your User ID and credentials to continue.')
+      setError('login.errEmpty')
       return
     }
     const ok = login({ userId, secret, mode, stay })
     if (!ok) {
-      setError('Incorrect User ID or credentials. Please try again.')
+      setError('login.errBad')
       return
     }
     setError('')
@@ -41,6 +44,7 @@ export default function LoginPage() {
       <div className="login-lux-grade pointer-events-none" />
       <div className="login-lux-sheen pointer-events-none hidden lg:block" />
       <div className="login-lux-drift pointer-events-none hidden lg:block" />
+      <LanguageToggle className="absolute right-3 top-3 z-20 sm:right-6 sm:top-5 lg:right-8 lg:top-6" />
       <BrandMark
         to="/"
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
@@ -51,8 +55,11 @@ export default function LoginPage() {
         <section className="relative flex shrink-0 flex-col justify-center px-4 py-5 sm:px-6 sm:py-8 lg:h-full lg:min-h-0 lg:px-8">
           <div className="max-w-xl lg:ml-auto lg:mr-8 lg:text-right xl:mr-16">
             <p className="text-lg font-medium leading-tight tracking-wide text-white sm:text-3xl lg:text-[32px] xl:text-[38px]">
-              This <span className="font-extrabold">Society</span> is{' '}
-              <span className="font-extrabold">Digitally</span> Powered by
+              {t('login.poweredLead')}
+              <span className="font-extrabold">{t('login.society')}</span>
+              {t('login.is')}
+              <span className="font-extrabold">{t('login.digitally')}</span>
+              {t('login.poweredBy')}
             </p>
             <Link
               to="/"
@@ -63,7 +70,7 @@ export default function LoginPage() {
                 {BRAND}
               </span>
               <span className="mt-1 text-sm font-medium text-white/80 sm:text-base">
-                Better living with ResiQ
+                {t('brand.punchline')}
               </span>
             </Link>
           </div>
@@ -72,14 +79,14 @@ export default function LoginPage() {
         <aside className="flex items-start justify-center px-3 pb-[max(2rem,env(safe-area-inset-bottom))] pt-2 sm:px-6 sm:py-8 lg:h-full lg:items-center lg:overflow-y-auto lg:px-6">
           <div className="w-full max-w-[400px] rounded-2xl border border-white/10 bg-[#05111a]/85 px-4 py-6 shadow-[0_12px_32px_rgba(0,0,0,0.28)] sm:rounded-[28px] sm:px-8 sm:py-9 lg:bg-[#05111a]/45 lg:shadow-[0_20px_60px_rgba(0,0,0,0.35)] lg:backdrop-blur-md">
             <h1 className="text-center font-display text-[22px] font-bold tracking-tight text-white sm:text-[30px]">
-              Welcome back
+              {t('login.welcome')}
             </h1>
             <p className="mt-1 text-center text-sm tracking-wide text-slate-300 sm:text-[15px]">
-              Login to your Society account
+              {t('login.subtitle')}
             </p>
 
             <h2 className="mt-7 text-center text-[21px] font-bold tracking-[0.04em] text-white sm:text-[24px]">
-              ResiQ Login
+              {t('login.heading')}
             </h2>
 
             <div className="mt-4 grid grid-cols-2 rounded-full border border-white/10 bg-white/5 p-1">
@@ -90,7 +97,7 @@ export default function LoginPage() {
                   mode === 'password' ? 'bg-emerald-500 text-white' : 'text-slate-300'
                 }`}
               >
-                With Password
+                {t('login.withPassword')}
               </button>
               <button
                 type="button"
@@ -99,7 +106,7 @@ export default function LoginPage() {
                   mode === 'pin' ? 'bg-emerald-500 text-white' : 'text-slate-300'
                 }`}
               >
-                With PIN
+                {t('login.withPin')}
               </button>
             </div>
 
@@ -112,7 +119,7 @@ export default function LoginPage() {
                 <input
                   value={userId}
                   onChange={(e) => setUserId(e.target.value)}
-                  placeholder="Enter User ID"
+                  placeholder={t('login.userId')}
                   className="w-full rounded-lg border border-white/15 bg-white/5 py-3 pl-10 pr-3 text-sm text-white placeholder:text-slate-400"
                 />
               </label>
@@ -125,14 +132,14 @@ export default function LoginPage() {
                   type={showPassword ? 'text' : 'password'}
                   value={secret}
                   onChange={(e) => setSecret(e.target.value)}
-                  placeholder={mode === 'pin' ? 'Enter PIN' : 'Enter Password'}
+                  placeholder={mode === 'pin' ? t('login.pin') : t('login.password')}
                   className="w-full rounded-lg border border-white/15 bg-white/5 py-3 pl-10 pr-10 text-sm text-white placeholder:text-slate-400"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword((v) => !v)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400"
-                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                  aria-label={showPassword ? t('common.hidePassword') : t('common.showPassword')}
                 >
                   {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
@@ -146,32 +153,33 @@ export default function LoginPage() {
                     onChange={(e) => setStay(e.target.checked)}
                     className="h-4 w-4 accent-emerald-500"
                   />
-                  Stay logged in
+                  {t('login.stay')}
                 </label>
                 <button type="button" className="font-medium text-emerald-400 hover:underline">
-                  Forgot password?
+                  {t('login.forgot')}
                 </button>
               </div>
 
-              {error && <p className="text-center text-xs text-red-400">{error}</p>}
+              {error && <p className="text-center text-xs text-red-400">{t(error)}</p>}
               <p className="text-center text-[11px] leading-relaxed text-slate-400">
-                Demo access — User ID <span className="text-slate-200">{DEMO_CREDENTIALS.userId}</span>
-                {mode === 'pin'
-                  ? <> · PIN <span className="text-slate-200">{DEMO_CREDENTIALS.pin}</span></>
-                  : <> · Password <span className="text-slate-200">{DEMO_CREDENTIALS.password}</span></>}
+                {t('login.demo', {
+                  userId: DEMO_CREDENTIALS.userId,
+                  secretLabel: mode === 'pin' ? t('login.demoPin') : t('login.demoPassword'),
+                  secret: mode === 'pin' ? DEMO_CREDENTIALS.pin : DEMO_CREDENTIALS.password,
+                })}
               </p>
 
               <button
                 type="submit"
                 className="mt-1 w-full rounded-lg bg-emerald-500 py-3 text-[15px] font-semibold text-white hover:bg-emerald-400"
               >
-                Login
+                {t('login.submit')}
               </button>
             </form>
 
             <div className="mt-6 flex items-center gap-3">
               <span className="h-px flex-1 bg-white/15" />
-              <span className="shrink-0 text-[13px] tracking-wide text-slate-300">Or Login With</span>
+              <span className="shrink-0 text-[13px] tracking-wide text-slate-300">{t('login.orWith')}</span>
               <span className="h-px flex-1 bg-white/15" />
             </div>
 
@@ -198,7 +206,7 @@ export default function LoginPage() {
                     d="M12 10.2v3.6h5.1c-.2 1.2-1.5 3.6-5.1 3.6-3.1 0-5.6-2.5-5.6-5.6S8.9 6.2 12 6.2c1.7 0 2.9.7 3.6 1.3l2.4-2.4C16.5 3.7 14.5 2.8 12 2.8 6.9 2.8 2.8 6.9 2.8 12S6.9 21.2 12 21.2c5.3 0 8.8-3.7 8.8-8.9 0-.6 0-1-.1-1.5H12z"
                   />
                 </svg>
-                Google
+                {t('login.google')}
               </button>
               <button
                 type="button"
@@ -210,13 +218,13 @@ export default function LoginPage() {
                   <path fill="#7FBA00" d="M1 12h10v10H1z" />
                   <path fill="#FFB900" d="M12 12h10v10H12z" />
                 </svg>
-                Microsoft
+                {t('login.microsoft')}
               </button>
             </div>
 
             <p className="mt-6 text-center text-xs text-slate-400">
               <Link to="/" className="text-emerald-400 hover:underline">
-                Back to ResiQ
+                {t('login.back')}
               </Link>
             </p>
           </div>

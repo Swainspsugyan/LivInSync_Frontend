@@ -1,7 +1,9 @@
 import { motion, useReducedMotion } from 'framer-motion'
+import { useI18n } from '../../lib/i18n.jsx'
 import IsoDonutChart from './IsoDonutChart.jsx'
 
 export default function DonutMetricCard({ metric, delay = 0, onOpen }) {
+  const { t } = useI18n()
   const reduce = useReducedMotion()
   const clickable = Boolean(onOpen || metric.href)
 
@@ -36,17 +38,23 @@ export default function DonutMetricCard({ metric, delay = 0, onOpen }) {
       <div className="relative">
         <div className="flex items-baseline justify-between gap-2">
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-emerald-700 transition-colors group-hover:text-emerald-800 dark:text-cyan-200/80 dark:group-hover:text-cyan-100">
-            {metric.title}
+            {t(metric.titleKey)}
           </p>
           {metric.href ? (
-            <span className="text-xs font-semibold text-emerald-700 group-hover:underline dark:text-cyan-300">Insights</span>
+            <span className="text-xs font-semibold text-emerald-700 group-hover:underline dark:text-cyan-300">
+              {t('common.insights')}
+            </span>
           ) : null}
         </div>
         <p className="mt-1.5 font-display text-3xl font-semibold leading-none text-slate-900 dark:text-white">
           {metric.value}
-          <span className="ml-1.5 text-sm font-medium text-slate-500 dark:text-slate-400">{metric.unit}</span>
+          <span className="ml-1.5 text-sm font-medium text-slate-500 dark:text-slate-400">{t(metric.unitKey)}</span>
         </p>
-        <IsoDonutChart slices={metric.slices} summary={metric.summary} delay={delay + 0.12} />
+        <IsoDonutChart
+          slices={metric.slices.map((slice) => ({ ...slice, name: t(slice.nameKey) }))}
+          summary={t(metric.summaryKey)}
+          delay={delay + 0.12}
+        />
       </div>
     </motion.article>
   )

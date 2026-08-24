@@ -1,15 +1,18 @@
 import { ArrowRight, Calendar, CheckCircle2, Headphones, ShieldCheck, Users } from 'lucide-react'
+import { useI18n } from '../lib/i18n.jsx'
 import { asset } from '../lib/asset.js'
 import Wipe from './Wipe.jsx'
 
-const stats = [
-  { icon: Users, label: '5+ Communities' },
-  { icon: ShieldCheck, label: '50K+ Residents' },
-  { icon: CheckCircle2, label: '99.9% Uptime' },
-  { icon: Headphones, label: '24/7 Support' },
+const STATS = [
+  { icon: Users, key: 'hero.statCommunities' },
+  { icon: ShieldCheck, key: 'hero.statResidents' },
+  { icon: CheckCircle2, key: 'hero.statUptime' },
+  { icon: Headphones, key: 'hero.statSupport' },
 ]
 
 export default function Hero({ onDemo, onRegister }) {
+  const { t } = useI18n()
+
   return (
     <section
       id="home"
@@ -18,7 +21,7 @@ export default function Hero({ onDemo, onRegister }) {
       <div className="hero-photo-wrap pointer-events-none absolute inset-0">
         <img
           src={asset('hero-society.png')}
-          alt="Premium residential society"
+          alt={t('hero.photoAlt')}
           className="hero-in-photo hero-photo absolute inset-0 h-full w-full object-cover object-[72%_center]"
         />
       </div>
@@ -29,16 +32,15 @@ export default function Hero({ onDemo, onRegister }) {
           <div className="mb-4 inline-flex max-w-full items-center gap-2 rounded-full border border-[color:var(--resiq-line)] bg-[color:color-mix(in_srgb,var(--resiq-card)_70%,transparent)] px-3 py-1.5">
             <CheckCircle2 size={14} className="shrink-0 text-emerald-500" />
             <span className="font-ui text-[11px] font-semibold theme-heading sm:text-xs">
-              Trusted by 5+ Communities
+              {t('hero.badge')}
             </span>
           </div>
           <h1 className="font-display text-[1.85rem] font-bold leading-[1.15] sm:text-4xl lg:text-5xl xl:text-[3.25rem]">
-            <span className="theme-heading">Smarter Management, </span>
-            <span className="text-emerald-600">Happier Communities.</span>
+            <span className="theme-heading">{t('hero.titleLead')}</span>
+            <span className="text-emerald-600">{t('hero.titleAccent')}</span>
           </h1>
           <p className="theme-muted mt-4 max-w-lg text-sm leading-relaxed sm:text-base lg:text-lg">
-            Manage residents, visitors, maintenance, billing, and amenities from one unified platform
-            built for modern societies.
+            {t('hero.copy')}
           </p>
           <div className="mt-6 flex w-full flex-col gap-3 sm:mt-8 sm:flex-row sm:items-center">
             <button
@@ -46,7 +48,7 @@ export default function Hero({ onDemo, onRegister }) {
               onClick={onRegister}
               className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-emerald-500 px-6 py-3 font-ui text-sm font-semibold text-white hover:bg-emerald-400 sm:w-auto"
             >
-              Get Started
+              {t('common.getStarted')}
               <ArrowRight size={16} />
             </button>
             <button
@@ -55,17 +57,17 @@ export default function Hero({ onDemo, onRegister }) {
               className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-[color:var(--resiq-line)] bg-transparent px-6 py-3 font-ui text-sm font-semibold theme-heading hover:bg-[color:color-mix(in_srgb,var(--resiq-fg)_8%,transparent)] sm:w-auto"
             >
               <Calendar size={16} />
-              Book a Demo
+              {t('common.bookDemo')}
             </button>
           </div>
           <div className="mt-8 grid grid-cols-2 gap-3 sm:mt-10 sm:grid-cols-4 sm:gap-4">
-            {stats.map((item) => (
+            {STATS.map((item) => (
               <div
-                key={item.label}
+                key={item.key}
                 className="theme-muted flex min-w-0 items-center gap-2 text-[12px] font-medium sm:text-sm"
               >
                 <item.icon size={15} className="shrink-0 text-emerald-500" />
-                <span className="leading-tight">{item.label}</span>
+                <span className="leading-tight">{t(item.key)}</span>
               </div>
             ))}
           </div>

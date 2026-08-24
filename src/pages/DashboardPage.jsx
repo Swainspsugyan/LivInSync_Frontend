@@ -8,27 +8,25 @@ import Header from '../components/dashboard/Header.jsx'
 import ModuleView from '../components/dashboard/ModuleView.jsx'
 import PageWrapper from '../components/dashboard/PageWrapper.jsx'
 import Sidebar from '../components/dashboard/Sidebar.jsx'
-import { DASH_NAV, DEFAULT_VIEW } from '../lib/dashboardNav.js'
+import { DEFAULT_VIEW } from '../lib/dashboardNav.js'
+import { useI18n } from '../lib/i18n.jsx'
 import { getSession, logout } from '../lib/auth.js'
 
-function labelFor(viewId) {
-  for (const item of DASH_NAV) {
-    if (item.id === viewId) return item.label
-    const child = item.children?.find((entry) => entry.id === viewId)
-    if (child) return child.label
-  }
-  return viewId
+function labelFor(viewId, t) {
+  const key = `nav.${viewId}`
+  const value = t(key)
+  return value === key ? viewId : value
 }
 
-function formatStamp(date) {
+function formatStamp(date, locale) {
   return {
-    date: date.toLocaleDateString('en-IN', {
+    date: date.toLocaleDateString(locale, {
       weekday: 'long',
       month: 'long',
       day: 'numeric',
       year: 'numeric',
     }),
-    time: date.toLocaleTimeString('en-IN', {
+    time: date.toLocaleTimeString(locale, {
       hour: '2-digit',
       minute: '2-digit',
     }),
@@ -37,6 +35,7 @@ function formatStamp(date) {
 
 export default function DashboardPage() {
   const session = getSession()
+  const { t, locale } = useI18n()
   const navigate = useNavigate()
   const location = useLocation()
   const [menu, setMenu] = useState(false)
@@ -57,7 +56,7 @@ export default function DashboardPage() {
     }
   }, [location.pathname])
 
-  const stamp = useMemo(() => formatStamp(now), [now])
+  const stamp = useMemo(() => formatStamp(now, locale), [now, locale])
 
   if (!session) return <Navigate to="/login" replace />
 
@@ -88,7 +87,7 @@ export default function DashboardPage() {
             type="button"
             className="fixed inset-0 z-20 bg-slate-900/30 lg:hidden"
             onClick={() => setMenu(false)}
-            aria-label="Close sidebar"
+            aria-label={t('common.closeSidebar')}
           />
         )}
 
@@ -104,9 +103,9 @@ export default function DashboardPage() {
           <div className="flex flex-col gap-1 px-4 pb-4 pt-5 sm:flex-row sm:items-start sm:justify-between sm:px-6">
             <div>
               <h1 className="font-display text-2xl font-semibold text-slate-900 dark:text-white sm:text-3xl">
-                Welcome back, {session.name.split(' ')[0]} 👋
+                {t('dash.welcome', { name: session.name.split(' ')[0] })}
               </h1>
-              <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Welcome to your dashboard</p>
+              <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{t('dash.welcomeSub')}</p>
             </div>
             <p className="text-sm text-slate-500 dark:text-slate-400 sm:text-right">
               <span className="block font-medium text-slate-700 dark:text-slate-200">{stamp.date}</span>
@@ -124,14 +123,14 @@ export default function DashboardPage() {
                   onViewUnit={(unit) =>
                     setDetail({
                       title: `${unit.room} · ${unit.block}`,
-                      copy: `${unit.type} listed at ${unit.rent} / month. Status: Vacant. Assign a resident or publish this unit to the waitlist.`,
+                      copy: t('dash.unitDetail', { type: unit.type, rent: unit.rent }),
                     })
                   }
                 />
               ) : active === 'insights' ? (
                 <AnalyticsView />
               ) : (
-                <ModuleView viewId={active} title={labelFor(active)} />
+                <ModuleView viewId={active} title={labelFor(active, t)} />
               )}
             </PageWrapper>
           </div>

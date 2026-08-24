@@ -1,8 +1,10 @@
 import { asset } from '../lib/asset.js'
 import { runThemeTransition, useTheme } from '../lib/theme.jsx'
+import { useI18n } from '../lib/i18n.jsx'
 
 export default function ThemeToggle({ className = '' }) {
   const { isDark, setTheme } = useTheme()
+  const { t } = useI18n()
 
   const onToggle = (e) => {
     e.preventDefault()
@@ -17,7 +19,7 @@ export default function ThemeToggle({ className = '' }) {
       role="switch"
       tabIndex={0}
       aria-checked={isDark}
-      aria-label="Toggle theme"
+      aria-label={t('theme.toggle')}
       onClick={onToggle}
       onPointerDown={(e) => e.stopPropagation()}
       className={`theme-toggle ${isDark ? 'is-dark' : 'is-light'} ${className}`}

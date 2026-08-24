@@ -1,7 +1,9 @@
 import { ArrowRight, Calendar } from 'lucide-react'
+import { useI18n } from '../lib/i18n.jsx'
 import Wipe from './Wipe.jsx'
 
 export default function CtaBanner({ onDemo, onRegister }) {
+  const { t } = useI18n()
   return (
     <section className="relative overflow-hidden section-pad">
       <div className="pointer-events-none absolute -right-8 bottom-0 hidden h-56 w-80 opacity-20 lg:block">
@@ -13,10 +15,10 @@ export default function CtaBanner({ onDemo, onRegister }) {
       </div>
       <Wipe side="center" className="relative mx-auto w-full max-w-4xl text-center">
         <h2 className="theme-heading font-display text-2xl font-bold sm:text-3xl lg:text-4xl">
-          Ready to Build a Better Community?
+          {t('cta.title')}
         </h2>
         <p className="theme-muted mx-auto mt-4 max-w-xl text-sm sm:text-base">
-          See ResiQ live — gate, billing, and amenity flows on a sample society in 25 minutes.
+          {t('cta.copy')}
         </p>
         <div className="mt-8 flex w-full flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
           <button
@@ -25,14 +27,14 @@ export default function CtaBanner({ onDemo, onRegister }) {
             className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3.5 font-ui text-sm font-semibold text-white hover:bg-primary-dark"
           >
             <Calendar size={16} />
-            Book a Demo
+            {t('common.bookDemo')}
           </button>
           <button
             type="button"
             onClick={onRegister}
             className="inline-flex items-center justify-center gap-2 rounded-lg border border-[color:var(--resiq-line)] px-6 py-3.5 font-ui text-sm font-semibold theme-heading hover:bg-[color:color-mix(in_srgb,var(--resiq-fg)_8%,transparent)]"
           >
-            Get Started
+            {t('common.getStarted')}
             <ArrowRight size={16} />
           </button>
         </div>

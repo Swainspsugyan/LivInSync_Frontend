@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useI18n } from '../lib/i18n.jsx'
 import { asset } from '../lib/asset.js'
 
 export const BRAND = 'ResiQ'
@@ -13,11 +14,14 @@ export default function BrandMark({
   titleClass = 'theme-heading',
   subtitleClass = 'theme-muted',
 }) {
+  const { t } = useI18n()
+  const brand = t('brand.name')
+  const punchline = t('brand.punchline')
   const inner = (
     <>
       <img
         src={asset(LOGO)}
-        alt={`${BRAND} logo`}
+        alt={t('brand.logoAlt')}
         className={`shrink-0 rounded-md object-cover ring-1 ring-white/15 ${
           compact ? 'h-9 w-9 sm:h-10 sm:w-10' : 'h-10 w-10 sm:h-12 sm:w-12 lg:h-14 lg:w-14'
         }`}
@@ -28,7 +32,7 @@ export default function BrandMark({
             compact ? 'text-base sm:text-lg' : 'text-lg sm:text-xl lg:text-2xl'
           }`}
         >
-          {BRAND}
+          {brand}
         </span>
         <span
           className={`mt-0.5 block leading-snug ${subtitleClass} ${
@@ -37,7 +41,7 @@ export default function BrandMark({
               : 'text-[9px] sm:text-[11px] lg:text-xs'
           }`}
         >
-          {PUNCHLINE}
+          {punchline}
         </span>
       </span>
     </>

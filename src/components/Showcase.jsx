@@ -1,32 +1,14 @@
 import { Check } from 'lucide-react'
+import { useI18n } from '../lib/i18n.jsx'
 import { asset } from '../lib/asset.js'
 import Inherit from './Inherit.jsx'
 import Wipe from './Wipe.jsx'
 
-const benefits = [
-  {
-    title: 'Smart Operations',
-    copy: 'Run gates, billing, and amenities from a single command center.',
-  },
-  {
-    title: 'Faster Communication',
-    copy: 'Reach every tower instantly with notices, polls, and emergency alerts.',
-  },
-  {
-    title: 'Transparent Collections',
-    copy: 'See dues, receipts, and recovery trends without chasing spreadsheets.',
-  },
-  {
-    title: 'Secure Access',
-    copy: 'Role-based logins for managers, guards, vendors, and residents.',
-  },
-  {
-    title: 'Happier Residents',
-    copy: 'Bookings, payments, and tickets that actually get resolved.',
-  },
-]
+const BENEFITS = ['ops', 'comms', 'collections', 'access', 'residents']
 
 export default function Showcase() {
+  const { t } = useI18n()
+
   return (
     <Inherit as="section" id="modules" className="theme-surface section-pad">
       <Inherit className="mx-auto grid w-full items-center gap-8 lg:grid-cols-2 lg:gap-12">
@@ -34,7 +16,7 @@ export default function Showcase() {
           <div className="group relative overflow-hidden rounded-2xl border border-line bg-navy shadow-xl transition-all duration-500 ease-out hover:-translate-y-2 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/25 sm:rounded-3xl">
             <img
               src={asset('dashboard-preview.png')}
-              alt="ResiQ community dashboard"
+              alt={t('showcase.photoAlt')}
               className="modules-shot block h-auto w-full max-h-[52vh] object-cover object-top lg:max-h-[64vh]"
             />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-primary/0 via-white/0 to-white/0 opacity-0 transition-opacity duration-500 group-hover:from-primary/10 group-hover:via-white/10 group-hover:opacity-100" />
@@ -43,20 +25,20 @@ export default function Showcase() {
         </Wipe>
         <Inherit className="min-w-0">
           <Wipe side="header">
-            <p className="eyebrow">Built for modern communities</p>
+            <p className="eyebrow">{t('showcase.eyebrow')}</p>
             <h2 className="theme-heading mt-3 font-display text-2xl font-bold sm:text-3xl lg:text-4xl">
-              Everything Your Community Needs to Run Better
+              {t('showcase.title')}
             </h2>
           </Wipe>
           <Inherit as="ul" className="mt-8 space-y-5">
-            {benefits.map((item) => (
-              <Wipe key={item.title} as="li" side="right" className="flex gap-3">
+            {BENEFITS.map((id) => (
+              <Wipe key={id} as="li" side="right" className="flex gap-3">
                 <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary text-white">
                   <Check size={14} />
                 </span>
                 <div>
-                  <p className="theme-heading font-ui text-base font-semibold">{item.title}</p>
-                  <p className="theme-muted mt-1 text-sm">{item.copy}</p>
+                  <p className="theme-heading font-ui text-base font-semibold">{t(`showcase.${id}.title`)}</p>
+                  <p className="theme-muted mt-1 text-sm">{t(`showcase.${id}.copy`)}</p>
                 </div>
               </Wipe>
             ))}

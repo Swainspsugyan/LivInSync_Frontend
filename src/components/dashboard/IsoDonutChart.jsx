@@ -2,6 +2,7 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { useId, useMemo, useState } from 'react'
 import { Cell, Pie, PieChart, ResponsiveContainer, Sector, Tooltip } from 'recharts'
 import { useTheme } from '../../lib/theme.jsx'
+import { useI18n } from '../../lib/i18n.jsx'
 
 function polar(cx, cy, r, deg) {
   const rad = ((deg - 90) * Math.PI) / 180
@@ -44,7 +45,7 @@ function ActiveSlice(props) {
 }
 
 const tipClass =
-  'rounded-lg border border-slate-200 bg-white px-2.5 py-2 text-xs text-slate-800 shadow-xl dark:border-cyan-500/30 dark:bg-slate-900/90 dark:text-white'
+  'rounded-lg border border-slate-200 bg-[#fafafa] px-2.5 py-2 text-xs text-slate-800 shadow-xl dark:border-cyan-500/30 dark:bg-slate-900/90 dark:text-white'
 
 function NeonTooltip({ active, payload, summary }) {
   if (!active || !payload?.length) return null
@@ -79,6 +80,7 @@ function SliceLabel({ item, hover, align }) {
 export default function IsoDonutChart({ slices, summary, delay = 0 }) {
   const uid = useId().replace(/:/g, '')
   const { isDark } = useTheme()
+  const { t } = useI18n()
   const reduce = useReducedMotion()
   const [hover, setHover] = useState(null)
   const items = useMemo(() => buildItems(slices), [slices])
@@ -225,7 +227,7 @@ export default function IsoDonutChart({ slices, summary, delay = 0 }) {
             {summary ? <p className="mt-1 text-[11px] leading-relaxed text-slate-500 dark:text-slate-300">{summary}</p> : null}
           </motion.div>
         ) : (
-          <p className="text-[11px] leading-relaxed text-slate-500 dark:text-slate-400">Hover a slice</p>
+          <p className="text-[11px] leading-relaxed text-slate-500 dark:text-slate-400">{t('dash.hoverSlice')}</p>
         )}
       </div>
     </div>

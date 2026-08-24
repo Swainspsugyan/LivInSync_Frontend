@@ -1,8 +1,10 @@
 import { ArrowUp, Sparkles } from 'lucide-react'
 import { useState } from 'react'
+import { useI18n } from '../../lib/i18n.jsx'
 import ComponentWrapper from './ComponentWrapper.jsx'
 
 export default function AskDock() {
+  const { t } = useI18n()
   const [q, setQ] = useState('')
   const [reply, setReply] = useState('')
 
@@ -19,7 +21,7 @@ export default function AskDock() {
           e.preventDefault()
           const text = q.trim()
           if (!text) return
-          setReply(`Noted: “${text}”. I’ll keep this in your activity feed.`)
+          setReply(t('dash.askReply', { text }))
           setQ('')
         }}
       >
@@ -30,13 +32,13 @@ export default function AskDock() {
           <input
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="What's on your mind today?"
+            placeholder={t('dash.askPlaceholder')}
             className="min-w-0 flex-1 bg-transparent py-2 text-sm text-slate-800 outline-none placeholder:text-slate-400 dark:text-slate-100"
           />
           <button
             type="submit"
             className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-slate-900 text-white hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-100"
-            aria-label="Send"
+            aria-label={t('common.send')}
           >
             <ArrowUp size={16} />
           </button>

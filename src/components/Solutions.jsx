@@ -1,45 +1,32 @@
 import { Building, Shield, UserRound, Users } from 'lucide-react'
+import { useI18n } from '../lib/i18n.jsx'
 import { wipeSide } from '../lib/motion.js'
 import Inherit from './Inherit.jsx'
 import Tilt from './Tilt.jsx'
 import Wipe from './Wipe.jsx'
 
-const roles = [
-  {
-    icon: Building,
-    title: 'Apartment Associations',
-    copy: 'One operating layer for billing, vendors, occupancy, and compliance.',
-  },
-  {
-    icon: UserRound,
-    title: 'Facility Managers',
-    copy: 'Assign tickets, track SLAs, and keep towers running without chase-ups.',
-  },
-  {
-    icon: Shield,
-    title: 'Security Teams',
-    copy: 'QR gate flow, staff attendance, and visitor trails that stay searchable.',
-  },
-  {
-    icon: Users,
-    title: 'Residents',
-    copy: 'Pay dues, book amenities, raise tickets, and vote from a single app.',
-  },
+const ROLES = [
+  { id: 'associations', icon: Building },
+  { id: 'managers', icon: UserRound },
+  { id: 'security', icon: Shield },
+  { id: 'residents', icon: Users },
 ]
 
 export default function Solutions() {
+  const { t } = useI18n()
+
   return (
     <Inherit as="section" id="solutions" className="theme-surface section-pad">
       <Wipe side="header" className="mx-auto max-w-3xl text-center">
-        <p className="eyebrow">Solutions for everyone</p>
+        <p className="eyebrow">{t('solutions.eyebrow')}</p>
         <h2 className="theme-heading mt-3 font-display text-2xl font-bold sm:text-3xl lg:text-4xl">
-          Built Around How Communities Actually Work
+          {t('solutions.title')}
         </h2>
       </Wipe>
       <Inherit className="mx-auto mt-8 grid w-full gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
-        {roles.map((role, i) => (
+        {ROLES.map((role, i) => (
           <Wipe
-            key={role.title}
+            key={role.id}
             as="article"
             side={wipeSide(i, 4)}
             className="min-w-0 [transform-style:preserve-3d]"
@@ -49,9 +36,9 @@ export default function Solutions() {
                 <role.icon size={22} className="transition-transform duration-300 group-hover:scale-110" />
               </div>
               <h3 className="theme-heading mt-4 font-display text-lg font-semibold transition-colors duration-300 group-hover:text-primary">
-                {role.title}
+                {t(`solutions.${role.id}.title`)}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted">{role.copy}</p>
+              <p className="mt-2 text-sm leading-relaxed text-muted">{t(`solutions.${role.id}.copy`)}</p>
             </Tilt>
           </Wipe>
         ))}

@@ -1,0 +1,421 @@
+{
+  "brand": {
+    "name": "ResiQ",
+    "punchline": "Better living with ResiQ",
+    "logoAlt": "ResiQ logo"
+  },
+  "lang": {
+    "en": "EN",
+    "or": "ଓଡ଼ିଆ",
+    "switchToEn": "Switch to English",
+    "switchToOr": "Switch to Odia"
+  },
+  "theme": {
+    "toggle": "Toggle theme"
+  },
+  "common": {
+    "login": "Login",
+    "logout": "Log out",
+    "close": "Close",
+    "back": "Back",
+    "demo": "Demo",
+    "bookDemo": "Book a Demo",
+    "getStarted": "Get Started",
+    "send": "Send",
+    "module": "Module",
+    "insights": "Insights",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "closeSidebar": "Close sidebar",
+    "notifications": "Notifications",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password"
+  },
+  "nav": {
+    "features": "Features",
+    "modules": "Modules",
+    "solutions": "Solutions",
+    "about": "About Us",
+    "overview": "Overview",
+    "insights": "Insights",
+    "community": "Community",
+    "directory": "Directory",
+    "identity": "Identity Verification",
+    "settings": "Settings",
+    "team-roles": "Team & Roles",
+    "policies": "Policies",
+    "resources": "Resources",
+    "events": "Events",
+    "facilities": "Facilities",
+    "towers-blocks": "Towers & Blocks",
+    "units": "Units",
+    "notice-board": "Notice Board",
+    "visitor-gate": "Visitor & Gate",
+    "guest-log": "Guest Log",
+    "security-gate": "Security Gate",
+    "entry-pass": "Entry Pass",
+    "reports": "Reports",
+    "daily-summary": "Daily Summary",
+    "monthly-audit": "Monthly Audit",
+    "admin": "Admin"
+  },
+  "hero": {
+    "badge": "Trusted by 5+ Communities",
+    "titleLead": "Smarter Management, ",
+    "titleAccent": "Happier Communities.",
+    "copy": "Manage residents, visitors, maintenance, billing, and amenities from one unified platform built for modern societies.",
+    "photoAlt": "Premium residential society",
+    "statCommunities": "5+ Communities",
+    "statResidents": "50K+ Residents",
+    "statUptime": "99.9% Uptime",
+    "statSupport": "24/7 Support"
+  },
+  "features": {
+    "eyebrow": "All-in-one platform",
+    "title": "Everything You Need, In One Place",
+    "subtitle": "Six connected modules that replace WhatsApp chaos, paper registers, and midnight follow-ups.",
+    "resident": {
+      "title": "Resident Management",
+      "copy": "Onboard families, maintain a live directory, and keep every unit record in one place."
+    },
+    "visitor": {
+      "title": "Visitor Management",
+      "copy": "Pre-approved QR passes, gate logs, and instant alerts for every entry and exit."
+    },
+    "maintenance": {
+      "title": "Maintenance & Complaints",
+      "copy": "Raise tickets, assign vendors, and track resolution from open to closed."
+    },
+    "billing": {
+      "title": "Billing & Collections",
+      "copy": "Automate rent and maintenance, send receipts, and watch collections in real time."
+    },
+    "amenity": {
+      "title": "Amenity Booking",
+      "copy": "Let residents book the clubhouse, pool, gym, and halls without clipboard clashes."
+    },
+    "notices": {
+      "title": "Notices & Communication",
+      "copy": "Broadcast alerts, polls, and event invites to every resident in seconds."
+    }
+  },
+  "showcase": {
+    "eyebrow": "Built for modern communities",
+    "title": "Everything Your Community Needs to Run Better",
+    "photoAlt": "ResiQ community dashboard",
+    "ops": {
+      "title": "Smart Operations",
+      "copy": "Run gates, billing, and amenities from a single command center."
+    },
+    "comms": {
+      "title": "Faster Communication",
+      "copy": "Reach every tower instantly with notices, polls, and emergency alerts."
+    },
+    "collections": {
+      "title": "Transparent Collections",
+      "copy": "See dues, receipts, and recovery trends without chasing spreadsheets."
+    },
+    "access": {
+      "title": "Secure Access",
+      "copy": "Role-based logins for managers, guards, vendors, and residents."
+    },
+    "residents": {
+      "title": "Happier Residents",
+      "copy": "Bookings, payments, and tickets that actually get resolved."
+    }
+  },
+  "solutions": {
+    "eyebrow": "Solutions for everyone",
+    "title": "Built Around How Communities Actually Work",
+    "associations": {
+      "title": "Apartment Associations",
+      "copy": "One operating layer for billing, vendors, occupancy, and compliance."
+    },
+    "managers": {
+      "title": "Facility Managers",
+      "copy": "Assign tickets, track SLAs, and keep towers running without chase-ups."
+    },
+    "security": {
+      "title": "Security Teams",
+      "copy": "QR gate flow, staff attendance, and visitor trails that stay searchable."
+    },
+    "residents": {
+      "title": "Residents",
+      "copy": "Pay dues, book amenities, raise tickets, and vote from a single app."
+    }
+  },
+  "security": {
+    "eyebrow": "Security you can trust",
+    "title": "Security Built Into Every Interaction",
+    "featuresTitle": "Security Features",
+    "rbac": "Role-Based Access",
+    "auth": "Secure Authentication",
+    "data": "Data Protection",
+    "encrypt": "Encrypted Communication",
+    "audit": "Audit Logs",
+    "device": "Device Controls",
+    "monitor": "Always-On Monitoring"
+  },
+  "clients": {
+    "eyebrow": "Partners",
+    "title": "Trusted by Our Clients",
+    "logoAlt": "{name} logo"
+  },
+  "trust": {
+    "eyebrow": "Testimonials",
+    "title": "What Our Customers Say",
+    "q1": "ResiQ replaced three vendor tools and a mountain of Excel. Collections closed 11 days faster in the first quarter.",
+    "r1": "Property Manager, Harborview Towers",
+    "q2": "Gate chaos disappeared. Pre-approved QR guests move through in seconds, and our security team finally has a clean log.",
+    "r2": "RWA President, Silver Oak Society",
+    "q3": "Residents actually enjoy paying maintenance now. Receipts are instant, and amenity bookings no longer live in WhatsApp.",
+    "r3": "Community Director, The Atrium"
+  },
+  "about": {
+    "eyebrow": "About us",
+    "title": "A digital ecosystem for how communities actually live",
+    "copy": "ResiQ bridges property managers, security, and residents. From the first visitor QR to the last maintenance receipt, every interaction stays in sync.",
+    "managers": {
+      "title": "Property Managers",
+      "copy": "One command center for billing, vendors, occupancy, and compliance."
+    },
+    "security": {
+      "title": "Security Teams",
+      "copy": "QR-first gate flow and visitor trails that make every entry searchable."
+    },
+    "residents": {
+      "title": "Residents & RWAs",
+      "copy": "Pay rent, book amenities, raise tickets, and vote from a single app."
+    }
+  },
+  "team": {
+    "eyebrow": "The people behind ResiQ",
+    "title": "Meet Our Team",
+    "ceo": "CEO & Founder",
+    "cto": "CTO",
+    "coo": "COO",
+    "pm": "Product Manager"
+  },
+  "cta": {
+    "title": "Ready to Build a Better Community?",
+    "copy": "See ResiQ live — gate, billing, and amenity flows on a sample society in 25 minutes."
+  },
+  "footer": {
+    "tagline": "The operating system for apartments, gated societies, and mixed-use residences.",
+    "product": "Product",
+    "solutions": "Solutions",
+    "resources": "Resources",
+    "company": "Company",
+    "associations": "Associations",
+    "managers": "Managers",
+    "security": "Security",
+    "residents": "Residents",
+    "about": "About",
+    "adminLogin": "Admin Login",
+    "aboutUs": "About Us",
+    "contact": "Contact",
+    "rights": "© {year} ResiQ. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "privacyCopy": "ResiQ processes resident, visitor, and billing data solely to operate your community. We never sell personal information. Access is role-scoped and encrypted in transit and at rest.",
+    "termsCopy": "By using ResiQ you agree to provide accurate society records, keep credentials confidential, and use the platform in accordance with housing society bylaws.",
+    "securityCopy": "We use TLS 1.3 in transit, AES-256 at rest, role-based access, and audit logs. Payments run on PCI-aligned rails."
+  },
+  "login": {
+    "powered": "This Society is Digitally Powered by",
+    "poweredLead": "This ",
+    "society": "Society",
+    "is": " is ",
+    "digitally": "Digitally",
+    "poweredBy": " Powered by",
+    "welcome": "Welcome back",
+    "subtitle": "Login to your Society account",
+    "heading": "ResiQ Login",
+    "withPassword": "With Password",
+    "withPin": "With PIN",
+    "userId": "Enter User ID",
+    "password": "Enter Password",
+    "pin": "Enter PIN",
+    "stay": "Stay logged in",
+    "forgot": "Forgot password?",
+    "submit": "Login",
+    "orWith": "Or Login With",
+    "google": "Google",
+    "microsoft": "Microsoft",
+    "back": "Back to ResiQ",
+    "demo": "Demo access — User ID {userId} · {secretLabel} {secret}",
+    "demoPassword": "Password",
+    "demoPin": "PIN",
+    "errEmpty": "Enter your User ID and credentials to continue.",
+    "errBad": "Incorrect User ID or credentials. Please try again."
+  },
+  "auth": {
+    "admin": "Admin access",
+    "create": "Create account",
+    "welcome": "Welcome back",
+    "begin": "Begin with ResiQ",
+    "loginDone": "Secure session initialized. In production this would open your admin dashboard.",
+    "signupDone": "Your society workspace is queued. Our concierge team will confirm onboarding shortly.",
+    "fullName": "Full name",
+    "email": "Email",
+    "password": "Password",
+    "enter": "Enter community",
+    "createWorkspace": "Create workspace",
+    "newHere": "New to ResiQ?",
+    "already": "Already an admin?",
+    "signUp": "Sign up",
+    "logIn": "Log in"
+  },
+  "pricing": {
+    "eyebrow": "Pricing",
+    "title": "Simple, Transparent Pricing",
+    "subtitle": "Start lean, then scale into a full community OS.",
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "save": "(Save 20%)",
+    "perMo": "/mo",
+    "perYr": "/yr",
+    "popular": "Most Popular",
+    "choose": "Choose {name}",
+    "starter": "Starter",
+    "starterBlurb": "Essential ops for boutique residences.",
+    "pro": "Professional",
+    "proBlurb": "The complete operating layer for growing communities.",
+    "ent": "Enterprise",
+    "entBlurb": "White-glove control for multi-tower portfolios.",
+    "s1": "Up to 50 units",
+    "s2": "Digital resident directory",
+    "s3": "Notice board & alerts",
+    "s4": "Complaint ticketing",
+    "s5": "Email support",
+    "p1": "Up to 200 units",
+    "p2": "Rent & maintenance auto-pay",
+    "p3": "Visitor QR & gate logs",
+    "p4": "Amenity booking engine",
+    "p5": "RWA polls & broadcasts",
+    "p6": "Priority onboarding",
+    "e1": "Unlimited units & towers",
+    "e2": "White-label resident app",
+    "e3": "API & ERP connectors",
+    "e4": "Dedicated success manager",
+    "e5": "Custom SLAs & SSO",
+    "e6": "Advanced audit trails"
+  },
+  "contact": {
+    "eyebrow": "Contact Us",
+    "title": "Let’s design your community OS",
+    "subtitle": "Tell us about your society. We’ll map a rollout that feels effortless for managers, guards, and residents alike.",
+    "name": "Name",
+    "email": "Email",
+    "society": "Society name",
+    "units": "Unit count",
+    "message": "Message",
+    "send": "Send inquiry",
+    "sent": "Received. A ResiQ specialist will reach out within one business day.",
+    "support": "Support email",
+    "phone": "Concierge line",
+    "studios": "Studios",
+    "walkTitle": "Prefer a walkthrough?",
+    "walkCopy": "Book a 25-minute live demo of gate, billing, and amenity flows on a sample community.",
+    "viewFeatures": "View features",
+    "msgPlaceholder": "Share towers, current tools, and what you’d like to simplify first."
+  },
+  "dash": {
+    "search": "Search residents, units, or tickets...",
+    "welcome": "Welcome back, {name} 👋",
+    "welcomeSub": "Welcome to your dashboard",
+    "vacantUnits": "Vacant units",
+    "readyAssign": "{count} rooms ready to assign",
+    "shown": "{count} shown",
+    "vacant": "Vacant",
+    "perMonth": " / month",
+    "viewDetails": "View details",
+    "assign": "Assign resident",
+    "unitDetail": "{type} listed at {rent} / month. Status: Vacant. Assign a resident or publish this unit to the waitlist.",
+    "askPlaceholder": "What's on your mind today?",
+    "askReply": "Noted: “{text}”. I’ll keep this in your activity feed.",
+    "hoverSlice": "Hover a slice",
+    "workspaceFallback": "This workspace is ready for live data once the backend is connected.",
+    "blockA3": "Block A, Building 3",
+    "blockB1": "Block B, Tower 1",
+    "blockC2": "Block C, Building 2",
+    "blockA1": "Block A, Building 1",
+    "blockD2": "Block D, Tower 2",
+    "flat402": "Flat 402",
+    "flat108": "Flat 108",
+    "studio12": "Studio 12",
+    "flat705": "Flat 705",
+    "flat219": "Flat 219",
+    "typeStudio": "Studio",
+    "type1bhk": "1 BHK",
+    "type2bhk": "2 BHK",
+    "type3bhk": "3 BHK"
+  },
+  "rooms": {
+    "heading": "Room capacity",
+    "hint": "Hover or focus a card to slide the cover down and see occupancy.",
+    "label": "Room {id}",
+    "total": "Total Capacity: {n}",
+    "occupied": "Occupied: {n}",
+    "remaining": "Remaining: {n}",
+    "totalLabel": "Total capacity",
+    "occupiedLabel": "Currently occupied",
+    "remainingLabel": "Remaining beds"
+  },
+  "metrics": {
+    "capacity": "Total Room Capacity",
+    "occupiedUnits": "Occupied Units",
+    "revenue": "Monthly Revenue",
+    "vacantUnits": "Vacant Units",
+    "units": "Units",
+    "perMonth": "/ month",
+    "occupied": "Occupied",
+    "vacant": "Vacant",
+    "permanent": "Permanent",
+    "shortTerm": "Short-Term",
+    "baseRent": "Base Rent",
+    "amenities": "Amenities",
+    "maintenance": "Maintenance Fees",
+    "studios": "Studios",
+    "oneBed": "1-Bedroom",
+    "twoBed": "2-Bedroom",
+    "sumCapacity": "Total Capacity: 500 Units (375 Occupied, 125 Vacant)",
+    "sumOccupied": "Occupied: 375 Units (300 Permanent, 75 Short-Term)",
+    "sumRevenue": "Total Revenue: $65,000 / month",
+    "sumVacant": "Total Vacant: 125 Units"
+  },
+  "analytics": {
+    "occupancy": "Occupancy",
+    "vsMonth": "+2.4% vs last month",
+    "occVacant": "Occupied / vacant",
+    "totalRooms": "500 total rooms across 4 towers",
+    "collected": "Collected this month",
+    "collectedHint": "Rent, amenities, and maintenance this month",
+    "byTower": "Occupancy by tower",
+    "byType": "Vacant by room type",
+    "layout": "Layout",
+    "vacant": "Vacant",
+    "typicalRent": "Typical rent",
+    "blockA": "Block A",
+    "blockB": "Block B",
+    "blockC": "Block C",
+    "blockD": "Block D"
+  },
+  "module": {
+    "insights": "Occupancy, revenue, and gate activity broken down by tower and room type.",
+    "directory": "Directory of every household, owner, and tenant across the community.",
+    "identity": "Verify identity documents and approval status for incoming residents.",
+    "team-roles": "Manage admin roles, staff access, and committee permissions.",
+    "policies": "Publish and version society policies, bylaws, and house rules.",
+    "resources": "Shared files, forms, and useful links for residents and staff.",
+    "events": "Plan community events, bookings, and attendance.",
+    "towers-blocks": "Towers, blocks, and common-area inventory.",
+    "units": "Flats, villas, and unit records with occupancy status.",
+    "notice-board": "Broadcast notices, circulars, and emergency alerts.",
+    "guest-log": "Live visitor log with host, purpose, and entry time.",
+    "security-gate": "Gate staff roster, booth status, and incident notes.",
+    "entry-pass": "Pre-approved QR passes waiting at the gate.",
+    "daily-summary": "Today’s collections, complaints, and gate summary.",
+    "monthly-audit": "Month-to-date occupancy, revenue, and SLA trends."
+  }
+}

@@ -1,6 +1,7 @@
 import { ChevronDown, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { DASH_NAV, groupForView } from '../../lib/dashboardNav.js'
+import { useI18n } from '../../lib/i18n.jsx'
 import BrandMark from '../BrandMark.jsx'
 
 function parentClass(active) {
@@ -20,6 +21,7 @@ function childClass(active) {
 }
 
 export default function Sidebar({ active, onSelect, open, onClose }) {
+  const { t } = useI18n()
   const [openGroups, setOpenGroups] = useState(() => {
     const group = groupForView(active)
     return group ? { [group]: true } : {}
@@ -36,7 +38,7 @@ export default function Sidebar({ active, onSelect, open, onClose }) {
 
   return (
     <aside
-      className={`fixed inset-y-0 left-0 z-30 flex w-[248px] flex-col border-r border-slate-200 bg-white pt-4 transition-[color,background-color,border-color,transform] duration-300 dark:border-white/10 dark:bg-[#0b1b2b] lg:static lg:translate-x-0 ${
+      className={`fixed inset-y-0 left-0 z-30 flex w-[248px] flex-col border-r border-white/25 bg-transparent pt-4 backdrop-blur-[2px] transition-[color,background-color,border-color,transform] duration-300 dark:border-white/10 dark:bg-[#0b1b2b] lg:static lg:translate-x-0 ${
         open ? 'translate-x-0' : '-translate-x-full'
       }`}
     >
@@ -51,13 +53,13 @@ export default function Sidebar({ active, onSelect, open, onClose }) {
           type="button"
           className="shrink-0 rounded-md p-1 text-slate-500 hover:bg-slate-100 dark:text-white/70 dark:hover:bg-white/10 lg:hidden"
           onClick={onClose}
-          aria-label="Close menu"
+          aria-label={t('common.closeMenu')}
         >
           <X size={18} />
         </button>
       </div>
 
-      <nav className="flex-1 overflow-y-auto px-3 pb-6" aria-label="Admin">
+      <nav className="flex-1 overflow-y-auto px-3 pb-6" aria-label={t('nav.admin')}>
         {DASH_NAV.map((item) => {
           if (!item.children) {
             return (
@@ -69,7 +71,7 @@ export default function Sidebar({ active, onSelect, open, onClose }) {
                 className={`mb-1 ${parentClass(active === item.id)}`}
               >
                 <item.icon size={16} aria-hidden />
-                {item.label}
+                {t(`nav.${item.id}`)}
               </button>
             )
           }
@@ -91,7 +93,7 @@ export default function Sidebar({ active, onSelect, open, onClose }) {
                 }`}
               >
                 <item.icon size={16} aria-hidden />
-                <span className="min-w-0 flex-1">{item.label}</span>
+                <span className="min-w-0 flex-1">{t(`nav.${item.id}`)}</span>
                 <ChevronDown
                   size={14}
                   className={`shrink-0 text-slate-400 transition-transform ${expanded ? 'rotate-180' : ''}`}
@@ -108,7 +110,7 @@ export default function Sidebar({ active, onSelect, open, onClose }) {
                         aria-current={active === child.id ? 'page' : undefined}
                         className={childClass(active === child.id)}
                       >
-                        {child.label}
+                        {t(`nav.${child.id}`)}
                       </button>
                     </li>
                   ))}

@@ -2,11 +2,13 @@ import { X } from 'lucide-react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { asset } from '../lib/asset.js'
+import { useI18n } from '../lib/i18n.jsx'
 import { LOGO } from './BrandMark.jsx'
 
 export default function AuthModal({ mode, onClose, onSwitch }) {
   const [done, setDone] = useState(false)
   const navigate = useNavigate()
+  const { t } = useI18n()
   const isLogin = mode === 'login'
 
   if (!mode) return null
@@ -29,7 +31,7 @@ export default function AuthModal({ mode, onClose, onSwitch }) {
           type="button"
           onClick={onClose}
           className="absolute right-4 top-4 text-muted hover:text-ink"
-          aria-label="Close"
+          aria-label={t('common.close')}
         >
           <X size={18} />
         </button>
@@ -37,35 +39,33 @@ export default function AuthModal({ mode, onClose, onSwitch }) {
           <img src={asset(LOGO)} alt="" className="h-10 w-10 rounded-md object-cover ring-1 ring-line" />
           <div>
             <p className="font-ui text-xs uppercase tracking-[0.24em] text-primary">
-              {isLogin ? 'Admin access' : 'Create account'}
+              {isLogin ? t('auth.admin') : t('auth.create')}
             </p>
             <h3 className="font-display text-2xl text-ink">
-              {isLogin ? 'Welcome back' : 'Begin with ResiQ'}
+              {isLogin ? t('auth.welcome') : t('auth.begin')}
             </h3>
           </div>
         </div>
 
         {done ? (
           <p className="text-sm text-primary">
-            {isLogin
-              ? 'Secure session initialized. In production this would open your admin dashboard.'
-              : 'Your society workspace is queued. Our concierge team will confirm onboarding shortly.'}
+            {isLogin ? t('auth.loginDone') : t('auth.signupDone')}
           </p>
         ) : (
           <form onSubmit={submit} className="grid gap-3">
             {!isLogin && (
-              <input required placeholder="Full name" className="field" />
+              <input required placeholder={t('auth.fullName')} className="field" />
             )}
-            <input required type="email" placeholder="Email" className="field" />
-            <input required type="password" placeholder="Password" className="field" />
+            <input required type="email" placeholder={t('auth.email')} className="field" />
+            <input required type="password" placeholder={t('auth.password')} className="field" />
             <button type="submit" className="btn-gold mt-2 rounded-full py-3 font-ui text-sm">
-              {isLogin ? 'Enter community' : 'Create workspace'}
+              {isLogin ? t('auth.enter') : t('auth.createWorkspace')}
             </button>
           </form>
         )}
 
         <p className="mt-5 text-center text-sm text-muted">
-          {isLogin ? 'New to ResiQ?' : 'Already an admin?'}{' '}
+          {isLogin ? t('auth.newHere') : t('auth.already')}{' '}
           <button
             type="button"
             className="text-primary hover:underline"
@@ -79,7 +79,7 @@ export default function AuthModal({ mode, onClose, onSwitch }) {
               }
             }}
           >
-            {isLogin ? 'Sign up' : 'Log in'}
+            {isLogin ? t('auth.signUp') : t('auth.logIn')}
           </button>
         </p>
       </div>

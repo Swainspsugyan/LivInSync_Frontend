@@ -2,17 +2,20 @@ import { Menu, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { tabHref, viewFromLocation } from '../lib/homeView.js'
+import { useI18n } from '../lib/i18n.jsx'
 import BrandMark from './BrandMark.jsx'
+import LanguageToggle from './LanguageToggle.jsx'
 import ThemeToggle from './ThemeToggle.jsx'
 
 const links = [
-  { tab: 'features', label: 'Features' },
-  { tab: 'modules', label: 'Modules' },
-  { tab: 'solutions', label: 'Solutions' },
-  { tab: 'about', label: 'About Us' },
+  { tab: 'features', key: 'nav.features' },
+  { tab: 'modules', key: 'nav.modules' },
+  { tab: 'solutions', key: 'nav.solutions' },
+  { tab: 'about', key: 'nav.about' },
 ]
 
 export default function Navbar({ onSignup }) {
+  const { t } = useI18n()
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
@@ -53,7 +56,7 @@ export default function Navbar({ onSignup }) {
           type="button"
           className="theme-heading flex h-10 w-10 shrink-0 items-center justify-center rounded-lg lg:hidden"
           onClick={() => setOpen((v) => !v)}
-          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-label={open ? t('common.closeMenu') : t('common.openMenu')}
         >
           {open ? <X size={22} /> : <Menu size={22} />}
         </button>
@@ -68,34 +71,35 @@ export default function Navbar({ onSignup }) {
 
         <ul className="hidden min-w-0 flex-1 items-center justify-center gap-0.5 lg:flex">
           {links.map((link) => (
-            <li key={link.label}>
+            <li key={link.tab}>
               <Link
                 to={tabHref(link.tab)}
                 className={`whitespace-nowrap rounded-lg px-3 py-2 font-ui text-sm font-medium xl:px-4 xl:text-base ${
                   section === link.tab ? 'text-emerald-600' : 'theme-muted hover:opacity-100'
                 }`}
               >
-                {link.label}
+                {t(link.key)}
               </Link>
             </li>
           ))}
         </ul>
 
         <div className="relative z-[80] ml-auto flex shrink-0 items-center gap-1 sm:gap-2">
+          <LanguageToggle />
           <ThemeToggle />
           <Link
             to="/login"
             className="theme-heading rounded-lg px-2 py-1.5 font-ui text-xs font-semibold hover:text-emerald-600 sm:px-3 sm:text-sm lg:text-base"
           >
-            Login
+            {t('common.login')}
           </Link>
           <button
             type="button"
             onClick={onSignup}
             className="rounded-lg bg-emerald-500 px-2.5 py-1.5 font-ui text-xs font-semibold text-white hover:bg-emerald-400 sm:px-4 sm:py-2 sm:text-sm lg:px-5 lg:text-base"
           >
-            <span className="sm:hidden">Demo</span>
-            <span className="hidden sm:inline">Book a Demo</span>
+            <span className="sm:hidden">{t('common.demo')}</span>
+            <span className="hidden sm:inline">{t('common.bookDemo')}</span>
           </button>
         </div>
       </nav>
@@ -104,12 +108,12 @@ export default function Navbar({ onSignup }) {
         <div className="theme-nav max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-[color:var(--resiq-line)] px-3 pb-4 backdrop-blur-md lg:hidden">
           <ul className="flex flex-col gap-1 pt-2">
             {links.map((link) => (
-              <li key={link.label}>
+              <li key={link.tab}>
                 <Link
                   to={tabHref(link.tab)}
                   className="theme-heading block rounded-xl px-3 py-3 font-ui text-base hover:bg-[color:color-mix(in_srgb,var(--resiq-fg)_8%,transparent)]"
                 >
-                  {link.label}
+                  {t(link.key)}
                 </Link>
               </li>
             ))}

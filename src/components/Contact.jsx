@@ -1,6 +1,7 @@
 import { Mail, MapPin, Phone, Send } from 'lucide-react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useI18n } from '../lib/i18n.jsx'
 import SectionHeading from './SectionHeading'
 
 const initial = {
@@ -12,6 +13,7 @@ const initial = {
 }
 
 export default function Contact() {
+  const { t } = useI18n()
   const [form, setForm] = useState(initial)
   const [sent, setSent] = useState(false)
 
@@ -27,16 +29,16 @@ export default function Contact() {
     <section id="contact" className="section-pad z-10">
       <SectionHeading
         tone="dark"
-        eyebrow="Contact Us"
-        title="Let’s design your community OS"
-        subtitle="Tell us about your society. We’ll map a rollout that feels effortless for managers, guards, and residents alike."
+        eyebrow={t('contact.eyebrow')}
+        title={t('contact.title')}
+        subtitle={t('contact.subtitle')}
       />
 
       <div className="mx-auto mt-14 grid max-w-7xl gap-8 lg:grid-cols-[1.15fr_0.85fr]">
         <form onSubmit={onSubmit} className="glass-strong rounded-3xl p-5 sm:p-8">
           <div className="grid gap-4 sm:grid-cols-2">
             <label className="block text-sm text-ink">
-              Name
+              {t('contact.name')}
               <input
                 required
                 name="name"
@@ -47,7 +49,7 @@ export default function Contact() {
               />
             </label>
             <label className="block text-sm text-ink">
-              Email
+              {t('contact.email')}
               <input
                 required
                 type="email"
@@ -59,7 +61,7 @@ export default function Contact() {
               />
             </label>
             <label className="block text-sm text-ink">
-              Society name
+              {t('contact.society')}
               <input
                 required
                 name="society"
@@ -70,7 +72,7 @@ export default function Contact() {
               />
             </label>
             <label className="block text-sm text-ink">
-              Unit count
+              {t('contact.units')}
               <input
                 required
                 name="units"
@@ -84,7 +86,7 @@ export default function Contact() {
             </label>
           </div>
           <label className="mt-4 block text-sm text-ink">
-            Message
+            {t('contact.message')}
             <textarea
               required
               name="message"
@@ -92,19 +94,19 @@ export default function Contact() {
               value={form.message}
               onChange={onChange}
               className="field resize-none"
-              placeholder="Share towers, current tools, and what you’d like to simplify first."
+              placeholder={t('contact.msgPlaceholder')}
             />
           </label>
           <button
             type="submit"
             className="btn-gold mt-6 inline-flex items-center gap-2 rounded-full px-7 py-3 font-ui text-sm"
           >
-            Send inquiry
+            {t('contact.send')}
             <Send size={15} />
           </button>
           {sent && (
             <p className="mt-4 text-sm text-primary">
-              Received. A ResiQ specialist will reach out within one business day.
+              {t('contact.sent')}
             </p>
           )}
         </form>
@@ -113,19 +115,19 @@ export default function Contact() {
           {[
             {
               icon: Mail,
-              title: 'Support email',
+              title: t('contact.support'),
               value: 'support@resiq.com',
               href: 'mailto:support@resiq.com',
             },
             {
               icon: Phone,
-              title: 'Concierge line',
+              title: t('contact.phone'),
               value: '+91 1800 548 4672',
               href: 'tel:+9118005484672',
             },
             {
               icon: MapPin,
-              title: 'Studios',
+              title: t('contact.studios'),
               value: 'Mumbai · Bengaluru · Dubai',
               href: null,
             },
@@ -151,15 +153,13 @@ export default function Contact() {
             </div>
           ))}
           <div className="glass flex flex-1 flex-col justify-end rounded-2xl p-5">
-            <p className="font-display text-2xl text-ink">Prefer a walkthrough?</p>
-            <p className="mt-2 text-sm text-muted">
-              Book a 25-minute live demo of gate, billing, and amenity flows on a sample community.
-            </p>
+            <p className="font-display text-2xl text-ink">{t('contact.walkTitle')}</p>
+            <p className="mt-2 text-sm text-muted">{t('contact.walkCopy')}</p>
             <Link
               to="/?tab=features"
               className="btn-outline mt-5 inline-flex w-fit rounded-full px-5 py-2 font-ui text-sm"
             >
-              View features
+              {t('contact.viewFeatures')}
             </Link>
           </div>
         </div>
