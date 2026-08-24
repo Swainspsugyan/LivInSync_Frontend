@@ -69,14 +69,13 @@ export default function Navbar({ onSignup }) {
           subtitleClass="theme-muted"
         />
 
-        <ul className="hidden min-w-0 flex-1 items-center justify-center gap-0.5 lg:flex">
+        <ul id="primary" className="nav-primary hidden min-w-0 flex-1 items-center justify-center gap-1 lg:flex">
           {links.map((link) => (
             <li key={link.tab}>
               <Link
                 to={tabHref(link.tab)}
-                className={`whitespace-nowrap rounded-lg px-3 py-2 font-ui text-sm font-medium xl:px-4 xl:text-base ${
-                  section === link.tab ? 'text-emerald-600' : 'theme-muted hover:opacity-100'
-                }`}
+                href={`#${link.tab === 'about' ? 'about-us' : link.tab}`}
+                aria-current={section === link.tab ? 'page' : undefined}
               >
                 {t(link.key)}
               </Link>
@@ -106,12 +105,13 @@ export default function Navbar({ onSignup }) {
 
       {open && (
         <div className="theme-nav max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-[color:var(--resiq-line)] px-3 pb-4 backdrop-blur-md lg:hidden">
-          <ul className="flex flex-col gap-1 pt-2">
+          <ul id="primary-mobile" className="nav-primary flex flex-col gap-1 pt-2">
             {links.map((link) => (
               <li key={link.tab}>
                 <Link
                   to={tabHref(link.tab)}
-                  className="theme-heading block rounded-xl px-3 py-3 font-ui text-base hover:bg-[color:color-mix(in_srgb,var(--resiq-fg)_8%,transparent)]"
+                  href={`#${link.tab === 'about' ? 'about-us' : link.tab}`}
+                  aria-current={section === link.tab ? 'page' : undefined}
                 >
                   {t(link.key)}
                 </Link>

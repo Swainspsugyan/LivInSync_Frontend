@@ -4,6 +4,7 @@ const VIEW_ALIASES = {
   modules: 'modules',
   solutions: 'solutions',
   about: 'about',
+  'about-us': 'about',
   team: 'about',
   contact: 'about',
 }

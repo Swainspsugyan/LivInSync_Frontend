@@ -37,6 +37,13 @@ const COLUMN_KEYS = [
   },
 ]
 
+const SOCIAL = [
+  { name: 'Instagram', icon: 'logo-instagram', href: 'https://www.instagram.com/', i: '#e1306c', j: '#f77737' },
+  { name: 'Facebook', icon: 'logo-facebook', href: 'https://www.facebook.com/', i: '#1877f2', j: '#3b5998' },
+  { name: 'LinkedIn', icon: 'logo-linkedin', href: 'https://www.linkedin.com/', i: '#0077b5', j: '#00a0dc' },
+  { name: 'Twitter', icon: 'logo-twitter', href: 'https://twitter.com/', i: '#1da1f2', j: '#0d8ecf' },
+]
+
 const LEGAL = [
   { id: 'privacy', label: 'footer.privacy', copy: 'footer.privacyCopy' },
   { id: 'terms', label: 'footer.terms', copy: 'footer.termsCopy' },
@@ -55,6 +62,18 @@ export default function Footer() {
         <div className="sm:col-span-2 lg:col-span-4">
           <BrandMark to="/" />
           <p className="theme-muted mt-4 max-w-sm text-sm">{t('footer.tagline')}</p>
+          <ul className="social-pills" aria-label={t('footer.social')}>
+            {SOCIAL.map((item) => (
+              <li key={item.name} style={{ '--i': item.i, '--j': item.j }}>
+                <a href={item.href} target="_blank" rel="noopener noreferrer" aria-label={item.name}>
+                  <span className="icon">
+                    <ion-icon name={item.icon}></ion-icon>
+                  </span>
+                  <span className="title">{item.name}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
 
         {COLUMN_KEYS.map((column) => (
