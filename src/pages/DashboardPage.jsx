@@ -2,13 +2,20 @@ import { useEffect, useMemo, useState } from 'react'
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import AnalyticsView from '../components/dashboard/AnalyticsView.jsx'
 import AskDock from '../components/dashboard/AskDock.jsx'
+import BulkRoomChangeView from '../components/dashboard/BulkRoomChangeView.jsx'
+import BulkUploadView from '../components/dashboard/BulkUploadView.jsx'
+import ComplaintsView from '../components/dashboard/ComplaintsView.jsx'
 import DashboardHome from '../components/dashboard/DashboardHome.jsx'
 import DetailPanel from '../components/dashboard/DetailPanel.jsx'
+import DirectoryView from '../components/dashboard/DirectoryView.jsx'
 import Header from '../components/dashboard/Header.jsx'
 import ModuleView from '../components/dashboard/ModuleView.jsx'
 import PageWrapper from '../components/dashboard/PageWrapper.jsx'
+import PastResidentsView from '../components/dashboard/PastResidentsView.jsx'
+import ResidentForm from '../components/dashboard/ResidentForm.jsx'
+import RoomChangeRequestsView from '../components/dashboard/RoomChangeRequestsView.jsx'
 import Sidebar from '../components/dashboard/Sidebar.jsx'
-import { DEFAULT_VIEW } from '../lib/dashboardNav.js'
+import { DEFAULT_VIEW, pathForView, viewFromPath } from '../lib/dashboardNav.js'
 import { useI18n } from '../lib/i18n.jsx'
 import { getSession, logout } from '../lib/auth.js'
 
@@ -33,6 +40,31 @@ function formatStamp(date, locale) {
   }
 }
 
+function renderView({ active, t, goTo, setDetail }) {
+  if (active === 'overview') {
+    return (
+      <DashboardHome
+        onAssign={(unit) => goTo('directory-new', { roomId: unit.id })}
+        onViewUnit={(unit) =>
+          setDetail({
+            title: `${unit.room} · ${unit.block}`,
+            copy: t('dash.unitDetail', { type: unit.type, rent: unit.rent }),
+          })
+        }
+      />
+    )
+  }
+  if (active === 'insights') return <AnalyticsView />
+  if (active === 'complaints') return <ComplaintsView />
+  if (active === 'directory') return <DirectoryView onNavigate={goTo} />
+  if (active === 'directory-new') return <ResidentForm />
+  if (active === 'directory-past') return <PastResidentsView onBack={() => goTo('directory')} />
+  if (active === 'directory-requests') return <RoomChangeRequestsView onBack={() => goTo('directory')} />
+  if (active === 'directory-bulk-change') return <BulkRoomChangeView onBack={() => goTo('directory')} />
+  if (active === 'directory-bulk-upload') return <BulkUploadView onBack={() => goTo('directory')} />
+  return <ModuleView viewId={active} title={labelFor(active, t)} />
+}
+
 export default function DashboardPage() {
   const session = getSession()
   const { t, locale } = useI18n()
@@ -40,7 +72,7 @@ export default function DashboardPage() {
   const location = useLocation()
   const [menu, setMenu] = useState(false)
   const [profile, setProfile] = useState(false)
-  const [active, setActive] = useState(location.pathname === '/analytics' ? 'insights' : DEFAULT_VIEW)
+  const [active, setActive] = useState(() => viewFromPath(location.pathname) || DEFAULT_VIEW)
   const [detail, setDetail] = useState(null)
   const [now, setNow] = useState(() => new Date())
 
@@ -50,10 +82,8 @@ export default function DashboardPage() {
   }, [])
 
   useEffect(() => {
-    if (location.pathname === '/analytics') {
-      setActive('insights')
-      setDetail(null)
-    }
+    setActive(viewFromPath(location.pathname) || DEFAULT_VIEW)
+    setDetail(null)
   }, [location.pathname])
 
   const stamp = useMemo(() => formatStamp(now, locale), [now, locale])
@@ -65,16 +95,10 @@ export default function DashboardPage() {
     navigate('/login', { replace: true })
   }
 
-  const goTo = (id) => {
+  const goTo = (id, state) => {
     setDetail(null)
     setMenu(false)
-    if (id === 'insights') {
-      navigate('/analytics')
-      setActive('insights')
-      return
-    }
-    if (location.pathname !== '/dashboard') navigate('/dashboard')
-    setActive(id)
+    navigate(pathForView(id), state ? { state } : undefined)
   }
 
   return (
@@ -117,20 +141,8 @@ export default function DashboardPage() {
             <PageWrapper viewKey={detail ? `detail-${detail.title}` : active}>
               {detail ? (
                 <DetailPanel title={detail.title} copy={detail.copy} onBack={() => setDetail(null)} />
-              ) : active === 'overview' ? (
-                <DashboardHome
-                  onAssign={(unit) => goTo('directory')}
-                  onViewUnit={(unit) =>
-                    setDetail({
-                      title: `${unit.room} · ${unit.block}`,
-                      copy: t('dash.unitDetail', { type: unit.type, rent: unit.rent }),
-                    })
-                  }
-                />
-              ) : active === 'insights' ? (
-                <AnalyticsView />
               ) : (
-                <ModuleView viewId={active} title={labelFor(active, t)} />
+                renderView({ active, t, goTo, setDetail })
               )}
             </PageWrapper>
           </div>

@@ -1200,6 +1200,50 @@ html[data-theme="dark"] .room-capacity-grid .card .face.face1 dd {
   }
 }
 
+.room-capacity-grid.block-occupancy-grid .card {
+  height: 148px;
+  max-width: 168px;
+  border-radius: 12px;
+}
+
+.room-capacity-grid.block-occupancy-grid .card .face.face1 {
+  padding: 0.55rem 0.6rem 2.6rem;
+}
+
+.room-capacity-grid.block-occupancy-grid .card .face.face1 .room-card-title {
+  margin-bottom: 0.28rem;
+  font-size: 0.78rem;
+}
+
+.room-capacity-grid.block-occupancy-grid .card .face.face1 dl {
+  gap: 0.18rem;
+}
+
+.room-capacity-grid.block-occupancy-grid .card .face.face1 dd {
+  font-size: 0.68rem;
+}
+
+.room-capacity-grid.block-occupancy-grid .card .face.face2 {
+  border-radius: 12px;
+}
+
+.room-capacity-grid.block-occupancy-grid .card:hover .face.face2,
+.room-capacity-grid.block-occupancy-grid .card:focus-within .face.face2 {
+  height: 42px;
+  border-radius: 0 0 12px 12px;
+}
+
+.room-capacity-grid.block-occupancy-grid .card .face.face2 h2 {
+  font-size: clamp(1.15rem, 3.2vw, 1.55rem);
+  padding: 0 0.35rem;
+  text-align: center;
+}
+
+.room-capacity-grid.block-occupancy-grid .card:hover .face.face2 h2,
+.room-capacity-grid.block-occupancy-grid .card:focus-within .face.face2 h2 {
+  font-size: 0.82rem;
+}
+
 .security-overlay {
   --itemWidth: min(132px, 36vw);
   --itemWidthMinus: calc(-1 * var(--itemWidth));

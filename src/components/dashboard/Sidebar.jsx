@@ -1,6 +1,6 @@
 import { ChevronDown, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { DASH_NAV, groupForView } from '../../lib/dashboardNav.js'
+import { DASH_NAV, groupForView, navItemIsActive } from '../../lib/dashboardNav.js'
 import { useI18n } from '../../lib/i18n.jsx'
 import BrandMark from '../BrandMark.jsx'
 
@@ -67,8 +67,8 @@ export default function Sidebar({ active, onSelect, open, onClose }) {
                 key={item.id}
                 type="button"
                 onClick={() => onSelect(item.id)}
-                aria-current={active === item.id ? 'page' : undefined}
-                className={`mb-1 ${parentClass(active === item.id)}`}
+                aria-current={navItemIsActive(item.id, active) ? 'page' : undefined}
+                className={`mb-1 ${parentClass(navItemIsActive(item.id, active))}`}
               >
                 <item.icon size={16} aria-hidden />
                 {t(`nav.${item.id}`)}
@@ -77,7 +77,7 @@ export default function Sidebar({ active, onSelect, open, onClose }) {
           }
 
           const expanded = Boolean(openGroups[item.id])
-          const childActive = item.children.some((child) => child.id === active)
+          const childActive = item.children.some((child) => navItemIsActive(child.id, active))
 
           return (
             <div key={item.id} className="mb-1">
@@ -107,8 +107,8 @@ export default function Sidebar({ active, onSelect, open, onClose }) {
                       <button
                         type="button"
                         onClick={() => onSelect(child.id)}
-                        aria-current={active === child.id ? 'page' : undefined}
-                        className={childClass(active === child.id)}
+                        aria-current={navItemIsActive(child.id, active) ? 'page' : undefined}
+                        className={childClass(navItemIsActive(child.id, active))}
                       >
                         {t(`nav.${child.id}`)}
                       </button>

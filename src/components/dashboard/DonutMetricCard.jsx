@@ -52,7 +52,7 @@ export default function DonutMetricCard({ metric, delay = 0, onOpen }) {
         </p>
         <IsoDonutChart
           slices={metric.slices.map((slice) => ({ ...slice, name: t(slice.nameKey) }))}
-          summary={t(metric.summaryKey)}
+          summary={metric.summary || t(metric.summaryKey)}
           delay={delay + 0.12}
         />
       </div>

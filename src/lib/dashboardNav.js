@@ -2,6 +2,7 @@ import {
   BarChart3,
   Building2,
   Home,
+  MessageSquare,
   Pin,
   Settings,
   ShieldCheck,
@@ -12,6 +13,7 @@ import {
 export const DASH_NAV = [
   { id: 'overview', label: 'Overview', icon: Home },
   { id: 'insights', label: 'Insights', icon: BarChart3 },
+  { id: 'complaints', label: 'Complaints', icon: MessageSquare },
   {
     id: 'community',
     label: 'Community',
@@ -65,6 +67,7 @@ export const DASH_NAV = [
 
 export const MODULE_COPY = {
   insights: 'Occupancy, revenue, and gate activity broken down by tower and room type.',
+  complaints: 'Track, assign, and resolve resident complaints from a single workspace.',
   directory: 'Directory of every household, owner, and tenant across the community.',
   identity: 'Verify identity documents and approval status for incoming residents.',
   'team-roles': 'Manage admin roles, staff access, and committee permissions.',
@@ -81,8 +84,50 @@ export const MODULE_COPY = {
   'monthly-audit': 'Month-to-date occupancy, revenue, and SLA trends.',
 }
 
+const DIRECTORY_PANELS = {
+  new: 'directory-new',
+  past: 'directory-past',
+  requests: 'directory-requests',
+  'bulk-change': 'directory-bulk-change',
+  'bulk-upload': 'directory-bulk-upload',
+}
+
+export function pathForView(id) {
+  if (id === 'overview') return '/dashboard'
+  if (id === 'insights') return '/analytics'
+  if (id === 'directory') return '/dashboard/directory'
+  if (id === 'directory-new') return '/dashboard/directory/new'
+  if (id === 'directory-past') return '/dashboard/directory/past'
+  if (id === 'directory-requests') return '/dashboard/directory/requests'
+  if (id === 'directory-bulk-change') return '/dashboard/directory/bulk-change'
+  if (id === 'directory-bulk-upload') return '/dashboard/directory/bulk-upload'
+  return `/dashboard/${id}`
+}
+
+export function viewFromPath(pathname) {
+  if (pathname === '/analytics') return 'insights'
+  if (pathname === '/dashboard' || pathname === '/dashboard/') return 'overview'
+  if (pathname.startsWith('/dashboard/directory/')) {
+    const panel = pathname.slice('/dashboard/directory/'.length).replace(/\/$/, '')
+    return DIRECTORY_PANELS[panel] || 'directory'
+  }
+  if (pathname === '/dashboard/directory' || pathname === '/dashboard/directory/') return 'directory'
+  const rest = pathname.replace(/^\/dashboard\/?/, '').replace(/\/$/, '')
+  return rest || 'overview'
+}
+
+export function isDirectoryView(viewId) {
+  return viewId === 'directory' || String(viewId).startsWith('directory-')
+}
+
 export function groupForView(viewId) {
+  if (isDirectoryView(viewId)) return 'community'
   return DASH_NAV.find((item) => item.children?.some((child) => child.id === viewId))?.id
+}
+
+export function navItemIsActive(itemId, active) {
+  if (itemId === 'directory') return isDirectoryView(active)
+  return active === itemId
 }
 
 export const DEFAULT_VIEW = 'overview'
