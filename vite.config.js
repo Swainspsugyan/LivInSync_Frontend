@@ -3,13 +3,13 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-  base: '/LivInSync_Frontend/',
+  base: '/ResiQ_Frontend/',
   plugins: [react(), tailwindcss()],
   build: {
     outDir: 'docs',
     emptyOutDir: true,
   },
   server: {
-    open: '/LivInSync_Frontend/',
+    open: '/ResiQ_Frontend/',
   },
 })

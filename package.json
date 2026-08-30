@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://swainspsugyan.github.io/LivInSync_Frontend",
+  "homepage": "https://swainspsugyan.github.io/ResiQ_Frontend",
   "scripts": {
     "dev": "vite",
     "build": "vite build && node scripts/spa-github-pages.js",

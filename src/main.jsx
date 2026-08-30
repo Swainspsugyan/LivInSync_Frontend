@@ -10,7 +10,7 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ThemeProvider>
       <LocaleProvider>
-        <BrowserRouter basename="/LivInSync_Frontend">
+        <BrowserRouter basename="/ResiQ_Frontend">
           <App />
         </BrowserRouter>
       </LocaleProvider>
