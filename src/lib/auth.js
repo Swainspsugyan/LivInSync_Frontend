@@ -40,3 +40,7 @@ export function logout() {
   sessionStorage.removeItem(KEY)
   localStorage.removeItem(KEY)
 }
+
+export function canManageResidents(session = getSession()) {
+  return Boolean(session?.userId)
+}

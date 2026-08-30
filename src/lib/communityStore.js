@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 export const STORAGE_KEY = 'resiq-community-v1'
-export const STORE_VERSION = 2
+export const STORE_VERSION = 3
 export const TARGET_OCCUPIED = 375
 
 export const BLOCK_SPECS = [
@@ -19,8 +19,34 @@ export const ROOM_TYPES = [
   { type: '3 BHK', typeKey: 'dash.type3bhk', rent: 22000, beds: 6 },
 ]
 
-export const COMPLAINT_CATEGORIES = ['Plumbing', 'Electrical', 'Housekeeping', 'Security', 'Noise', 'Other']
+export const COMPLAINT_CATEGORIES = [
+  'Electricity',
+  'Water',
+  'Housekeeping',
+  'Lift',
+  'Community Management',
+  'Plumbing',
+  'Security',
+  'Noise',
+  'Other',
+]
+export const SUBJECT_WISE_CATEGORIES = [
+  'Electricity',
+  'Water',
+  'Housekeeping',
+  'Lift',
+  'Community Management',
+]
 export const COMPLAINT_TEAMS = ['Maintenance', 'Housekeeping', 'Security', 'Admin']
+
+export function normalizeCategory(category) {
+  if (category === 'Electrical') return 'Electricity'
+  return category || 'Other'
+}
+
+export function isOpenComplaint(item) {
+  return item?.status === 'raised' || item?.status === 'pending'
+}
 
 const listeners = new Set()
 
@@ -331,7 +357,7 @@ function seedState() {
     {
       id: 'cmp-2',
       title: 'Corridor light not working',
-      category: 'Electrical',
+      category: 'Electricity',
       description: 'Floor corridor light flickers and went out after 9 PM.',
       raisedAt: addDays(today, -6),
       status: 'resolved',
@@ -386,7 +412,7 @@ function seedState() {
     {
       id: 'cmp-7',
       title: 'Parking light out',
-      category: 'Electrical',
+      category: 'Electricity',
       description: 'Basement parking bay light is dark near the ramp.',
       raisedAt: today,
       status: 'raised',
@@ -405,7 +431,97 @@ function seedState() {
       assignee: 'Housekeeping',
       resolution: '',
     },
+    {
+      id: 'cmp-9',
+      title: 'Socket sparking in bedroom',
+      category: 'Electricity',
+      description: 'The wall socket near the bed sparks when a charger is plugged in.',
+      raisedAt: addDays(today, -1),
+      status: 'pending',
+      residentId: 'res-anita',
+      assignee: 'Maintenance',
+      resolution: '',
+    },
+    {
+      id: 'cmp-10',
+      title: 'Common-area fan not working',
+      category: 'Electricity',
+      description: 'The ceiling fan on floor 4 lobby has stopped completely.',
+      raisedAt: addDays(today, -3),
+      status: 'raised',
+      residentId: 'res-rahul',
+      assignee: '',
+      resolution: '',
+    },
+    {
+      id: 'cmp-11',
+      title: 'Low water pressure',
+      category: 'Water',
+      description: 'Bathroom tap pressure is very low since morning.',
+      raisedAt: addDays(today, -2),
+      status: 'pending',
+      residentId: 'res-priya',
+      assignee: 'Maintenance',
+      resolution: '',
+    },
+    {
+      id: 'cmp-12',
+      title: 'Overhead tank overflow',
+      category: 'Water',
+      description: 'Water is overflowing from the terrace tank.',
+      raisedAt: addDays(today, -1),
+      status: 'raised',
+      residentId: 'res-suresh',
+      assignee: '',
+      resolution: '',
+    },
+    {
+      id: 'cmp-13',
+      title: 'No water in kitchen',
+      category: 'Water',
+      description: 'Kitchen line has no supply after 8 AM.',
+      raisedAt: today,
+      status: 'pending',
+      residentId: 'res-meera',
+      assignee: 'Maintenance',
+      resolution: '',
+    },
+    {
+      id: 'cmp-14',
+      title: 'Lift stuck between floors',
+      category: 'Lift',
+      description: 'Block 2 lift stopped between floor 2 and 3 this morning.',
+      raisedAt: addDays(today, -2),
+      status: 'pending',
+      residentId: 'res-kavya',
+      assignee: 'Maintenance',
+      resolution: '',
+    },
+    {
+      id: 'cmp-15',
+      title: 'Lift door not closing',
+      category: 'Lift',
+      description: 'The ground-floor lift door stays open and the cabin will not move.',
+      raisedAt: addDays(today, -4),
+      status: 'raised',
+      residentId: 'res-vikram',
+      assignee: '',
+      resolution: '',
+    },
+    {
+      id: 'cmp-16',
+      title: 'Clubhouse booking clash',
+      category: 'Community Management',
+      description: 'Two events were approved for the same clubhouse slot.',
+      raisedAt: addDays(today, -1),
+      status: 'pending',
+      residentId: 'res-arjun',
+      assignee: 'Admin',
+      resolution: '',
+    },
   ]
+
+  const notices = seedNotices(today)
 
   const bills = [
     {
@@ -441,11 +557,59 @@ function seedState() {
     bills,
     roomChanges,
     seedOccupied,
+    notices,
   }
+}
+
+export function seedNotices(today = todayISO()) {
+  return [
+    {
+      id: 'ntc-1',
+      title: 'Maintenance work scheduled',
+      description: 'Water supply will be temporarily unavailable in Block 2 from 10 AM to 2 PM.',
+      createdAt: addDays(today, 0),
+    },
+    {
+      id: 'ntc-2',
+      title: 'Community meeting',
+      description: 'Monthly society meeting at the clubhouse at 6:30 PM. All residents are welcome.',
+      createdAt: addDays(today, -1),
+    },
+    {
+      id: 'ntc-3',
+      title: 'Parking update',
+      description: 'New parking allocation rules take effect this week. Check your assigned bay.',
+      createdAt: addDays(today, -3),
+    },
+    {
+      id: 'ntc-4',
+      title: 'Festival lighting',
+      description: 'Common-area festive lights will be installed this weekend near the entrance plaza.',
+      createdAt: addDays(today, -5),
+    },
+  ]
 }
 
 function canUseStorage() {
   return typeof window !== 'undefined' && typeof window.localStorage !== 'undefined'
+}
+
+function normalizePersisted(parsed) {
+  const complaints = (parsed.complaints || []).map((item) => ({
+    ...item,
+    category: normalizeCategory(item.category),
+  }))
+  const knownIds = new Set(complaints.map((item) => item.id))
+  const extras = seedState().complaints.filter((item) => !knownIds.has(item.id) && Number(parsed.version || 0) < 3)
+  return {
+    version: STORE_VERSION,
+    residents: parsed.residents || [],
+    complaints: extras.length ? [...complaints, ...extras] : complaints,
+    bills: parsed.bills || [],
+    roomChanges: parsed.roomChanges || [],
+    seedOccupied: Array.isArray(parsed.seedOccupied) ? parsed.seedOccupied : pickSeedOccupied([]),
+    notices: Array.isArray(parsed.notices) && parsed.notices.length ? parsed.notices : seedNotices(),
+  }
 }
 
 function loadState() {
@@ -454,15 +618,8 @@ function loadState() {
     const raw = window.localStorage.getItem(STORAGE_KEY)
     if (!raw) return seedState()
     const parsed = JSON.parse(raw)
-    if (parsed?.version !== STORE_VERSION || !Array.isArray(parsed.residents)) return seedState()
-    return {
-      version: STORE_VERSION,
-      residents: parsed.residents || [],
-      complaints: parsed.complaints || [],
-      bills: parsed.bills || [],
-      roomChanges: parsed.roomChanges || [],
-      seedOccupied: Array.isArray(parsed.seedOccupied) ? parsed.seedOccupied : pickSeedOccupied([]),
-    }
+    if (!Array.isArray(parsed?.residents)) return seedState()
+    return normalizePersisted(parsed)
   } catch {
     return seedState()
   }
@@ -478,7 +635,7 @@ function persist(next) {
 }
 
 let state = loadState()
-if (canUseStorage() && !window.localStorage.getItem(STORAGE_KEY)) persist(state)
+if (canUseStorage()) persist(state)
 
 function emit(next) {
   state = next
@@ -487,7 +644,17 @@ function emit(next) {
 }
 
 function update(mutator) {
-  emit(mutator({ ...state, residents: [...state.residents], complaints: [...state.complaints], bills: [...state.bills], roomChanges: [...state.roomChanges], seedOccupied: [...state.seedOccupied] }))
+  emit(
+    mutator({
+      ...state,
+      residents: [...state.residents],
+      complaints: [...state.complaints],
+      bills: [...state.bills],
+      roomChanges: [...state.roomChanges],
+      seedOccupied: [...state.seedOccupied],
+      notices: [...(state.notices || [])],
+    }),
+  )
 }
 
 export function getCommunityState() {
@@ -584,6 +751,36 @@ export function getVacantUnits(stateRef = state, limit = 5) {
   return ALL_ROOMS.filter((room) => !held.has(room.id) && !seed.has(room.id)).slice(0, limit)
 }
 
+export function openComplaintsByCategory(stateRef = state) {
+  const counts = {}
+  for (const item of stateRef.complaints || []) {
+    if (!isOpenComplaint(item)) continue
+    const category = normalizeCategory(item.category)
+    counts[category] = (counts[category] || 0) + 1
+  }
+  const rows = SUBJECT_WISE_CATEGORIES.map((name) => ({
+    id: name,
+    name,
+    count: counts[name] || 0,
+  }))
+  const extras = Object.keys(counts)
+    .filter((name) => !SUBJECT_WISE_CATEGORIES.includes(name))
+    .map((name) => ({ id: name, name, count: counts[name] }))
+    .sort((a, b) => b.count - a.count)
+  return [...rows, ...extras]
+}
+
+export function latestNotices(stateRef = state, limit = 4) {
+  return [...(stateRef.notices || [])]
+    .sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)))
+    .slice(0, limit)
+}
+
+export function isRecentNotice(notice, today = todayISO(), days = 2) {
+  if (!notice?.createdAt) return false
+  return notice.createdAt >= addDays(today, -days)
+}
+
 export function complaintSummary(stateRef = state) {
   const list = stateRef.complaints || []
   return {
@@ -617,17 +814,21 @@ function claimRoom(seedOccupied, roomId) {
   return seedOccupied.filter((id) => id !== roomId)
 }
 
-export function addResident(input) {
-  const resident = {
-    id: uid('res'),
-    name: input.name.trim(),
-    phone: input.phone.trim(),
-    email: input.email.trim(),
+function residentRecord(input, id) {
+  return {
+    id,
+    name: String(input.name || '').trim(),
+    phone: String(input.phone || '').trim(),
+    email: String(input.email || '').trim(),
     startDate: input.startDate,
     endDate: input.endUndecided ? '' : input.endDate || '',
     endUndecided: Boolean(input.endUndecided),
     roomId: input.roomId,
   }
+}
+
+export function addResident(input) {
+  const resident = residentRecord(input, uid('res'))
 
   update((draft) => {
     draft.residents.push(resident)
@@ -637,6 +838,36 @@ export function addResident(input) {
     return draft
   })
   return resident
+}
+
+export function updateResident(id, input) {
+  let updated = null
+  update((draft) => {
+    draft.residents = draft.residents.map((resident) => {
+      if (resident.id !== id) return resident
+      updated = residentRecord(input, id)
+      return updated
+    })
+    if (updated && holdsRoom(updated) && updated.roomId) {
+      draft.seedOccupied = claimRoom(draft.seedOccupied, updated.roomId)
+    }
+    return draft
+  })
+  if (!updated) throw new Error('missing')
+  return updated
+}
+
+export function deleteResident(id) {
+  let removed = null
+  update((draft) => {
+    const resident = draft.residents.find((item) => item.id === id)
+    if (!resident) return draft
+    removed = resident
+    draft.residents = draft.residents.filter((item) => item.id !== id)
+    return draft
+  })
+  if (!removed) throw new Error('missing')
+  return removed
 }
 
 export function createBill(input) {
@@ -662,6 +893,41 @@ export function updateComplaint(id, patch) {
     draft.complaints = draft.complaints.map((item) => (item.id === id ? { ...item, ...patch } : item))
     return draft
   })
+}
+
+export function addComplaint(input) {
+  const complaint = {
+    id: uid('cmp'),
+    title: String(input.title || '').trim(),
+    category: normalizeCategory(input.category),
+    description: String(input.description || '').trim(),
+    raisedAt: input.raisedAt || todayISO(),
+    status: 'raised',
+    residentId: input.residentId || '',
+    assignee: input.assignee || '',
+    resolution: '',
+  }
+  update((draft) => {
+    draft.complaints = [complaint, ...draft.complaints]
+    return draft
+  })
+  return complaint
+}
+
+export function addNotice(input) {
+  const notice = {
+    id: uid('ntc'),
+    title: String(input.title || '').trim(),
+    description: String(input.description || '').trim(),
+    createdAt: input.createdAt || todayISO(),
+    residentId: input.residentId || '',
+    priority: input.priority === 'urgent' ? 'urgent' : 'normal',
+  }
+  update((draft) => {
+    draft.notices = [notice, ...(draft.notices || [])]
+    return draft
+  })
+  return notice
 }
 
 export function addRoomChangeRequest(input) {
@@ -780,8 +1046,9 @@ export function importResidents(rows) {
 export const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 export const PHONE_RE = /^(\+91[\s-]?)?[6-9]\d{9}$/
 
-export function validateResidentForm(values, stateRef = state) {
+export function validateResidentForm(values, stateRef = state, options = {}) {
   const errors = {}
+  const ignoreResidentId = options.ignoreResidentId || values.id
   if (!values.name?.trim()) errors.name = 'ops.errName'
   if (!values.phone?.trim()) errors.phone = 'ops.errPhone'
   else if (!PHONE_RE.test(values.phone.trim())) errors.phone = 'ops.errPhoneInvalid'
@@ -795,7 +1062,7 @@ export function validateResidentForm(values, stateRef = state) {
   if (!values.blockId) errors.blockId = 'ops.errBlock'
   if (!values.floor) errors.floor = 'ops.errFloor'
   if (!values.roomId) errors.roomNo = 'ops.errRoom'
-  else if (isRoomOccupied(stateRef, values.roomId)) errors.roomNo = 'ops.errRoomOccupied'
+  else if (isRoomOccupied(stateRef, values.roomId, ignoreResidentId)) errors.roomNo = 'ops.errRoomOccupied'
   if (values.createBill) {
     if (!values.billAmount || Number(values.billAmount) <= 0) errors.billAmount = 'ops.errBillAmount'
     if (!values.billDueDate) errors.billDueDate = 'ops.errBillDue'

@@ -70,7 +70,9 @@ export default function Sidebar({ active, onSelect, open, onClose }) {
                 aria-current={navItemIsActive(item.id, active) ? 'page' : undefined}
                 className={`mb-1 ${parentClass(navItemIsActive(item.id, active))}`}
               >
-                <item.icon size={16} aria-hidden />
+                <span className="w-5 shrink-0 text-center text-sm leading-none" aria-hidden>
+                  {item.emoji || <item.icon size={16} />}
+                </span>
                 {t(`nav.${item.id}`)}
               </button>
             )
@@ -92,7 +94,9 @@ export default function Sidebar({ active, onSelect, open, onClose }) {
                     : 'text-slate-800 hover:bg-slate-100 hover:text-slate-950 dark:text-slate-100 dark:hover:bg-white/5 dark:hover:text-white'
                 }`}
               >
-                <item.icon size={16} aria-hidden />
+                <span className="w-5 shrink-0 text-center text-sm leading-none" aria-hidden>
+                  {item.emoji || <item.icon size={16} />}
+                </span>
                 <span className="min-w-0 flex-1">{t(`nav.${item.id}`)}</span>
                 <ChevronDown
                   size={14}

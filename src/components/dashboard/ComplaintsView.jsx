@@ -1,14 +1,18 @@
 import { useMemo, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import {
+  COMPLAINT_CATEGORIES,
   COMPLAINT_TEAMS,
   complaintSummary,
   getResident,
+  normalizeCategory,
   roomLabel,
   updateComplaint,
   useCommunity,
 } from '../../lib/communityStore.js'
 import { useI18n } from '../../lib/i18n.jsx'
 import DashBtn from './DashBtn.jsx'
+import RaiseComplaintModal from './RaiseComplaintModal.jsx'
 import StatusBanner from './StatusBanner.jsx'
 
 const STATUS_FILTERS = ['all', 'raised', 'pending', 'resolved', 'rejected']
@@ -29,10 +33,14 @@ function statusBadge(status, t) {
 
 export default function ComplaintsView() {
   const { t, locale } = useI18n()
+  const location = useLocation()
   const state = useCommunity()
   const summary = complaintSummary(state)
   const [query, setQuery] = useState('')
   const [status, setStatus] = useState('all')
+  const [category, setCategory] = useState(location.state?.category || 'all')
+  const [residentId, setResidentId] = useState(location.state?.residentId || '')
+  const [raiseOpen, setRaiseOpen] = useState(Boolean(location.state?.raise))
   const [selectedId, setSelectedId] = useState(state.complaints[0]?.id || '')
   const [resolution, setResolution] = useState('')
   const [assignee, setAssignee] = useState('')
@@ -41,7 +49,9 @@ export default function ComplaintsView() {
   const rows = useMemo(() => {
     const q = query.trim().toLowerCase()
     return state.complaints.filter((item) => {
+      if (residentId && item.residentId !== residentId) return false
       if (status !== 'all' && item.status !== status) return false
+      if (category !== 'all' && normalizeCategory(item.category) !== category) return false
       if (!q) return true
       const resident = getResident(state, item.residentId)
       return [item.title, item.category, item.description, resident?.name, resident?.phone]
@@ -50,9 +60,9 @@ export default function ComplaintsView() {
         .toLowerCase()
         .includes(q)
     })
-  }, [query, state, status])
+  }, [category, query, residentId, state, status])
 
-  const selected = state.complaints.find((item) => item.id === selectedId) || rows[0] || null
+  const selected = rows.find((item) => item.id === selectedId) || rows[0] || null
   const resident = selected ? getResident(state, selected.residentId) : null
 
   const setStatusOf = (next, extra = {}) => {
@@ -86,6 +96,20 @@ export default function ComplaintsView() {
       </div>
 
       {flash ? <StatusBanner tone="success">{flash}</StatusBanner> : null}
+      {residentId ? (
+        <StatusBanner tone="info">
+          <span className="flex flex-wrap items-center justify-between gap-2">
+            <span>
+              {t('ops.complaintsFor', {
+                name: location.state?.residentName || getResident(state, residentId)?.name || t('ops.unknownResident'),
+              })}
+            </span>
+            <DashBtn variant="outline" onClick={() => setResidentId('')}>
+              {t('ops.clearResidentFilter')}
+            </DashBtn>
+          </span>
+        </StatusBanner>
+      ) : null}
 
       <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_minmax(280px,380px)]">
         <section className="dash-card overflow-hidden rounded-2xl">
@@ -94,13 +118,26 @@ export default function ComplaintsView() {
               <h2 className="text-sm font-semibold text-slate-900 dark:text-white">{t('ops.complaintList')}</h2>
               <p className="text-xs text-slate-500 dark:text-slate-400">{t('ops.complaintListHint')}</p>
             </div>
-            <div className="flex min-w-0 flex-1 flex-col gap-2 sm:max-w-md sm:flex-row">
+            <div className="flex min-w-0 flex-1 flex-col gap-2 sm:max-w-xl sm:flex-row">
+              <DashBtn onClick={() => setRaiseOpen(true)}>{t('home.raiseComplaint')}</DashBtn>
               <input
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder={t('ops.searchComplaints')}
                 className="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-800 outline-none placeholder:text-slate-400 focus:border-emerald-400 focus:bg-white dark:border-white/10 dark:bg-white/5 dark:text-white"
               />
+              <select
+                value={category}
+                onChange={(event) => setCategory(event.target.value)}
+                className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-800 dark:border-white/10 dark:bg-white/5 dark:text-white"
+              >
+                <option value="all">{t('home.allCategories')}</option>
+                {COMPLAINT_CATEGORIES.map((item) => (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                ))}
+              </select>
               <select
                 value={status}
                 onChange={(event) => setStatus(event.target.value)}
@@ -261,6 +298,7 @@ export default function ComplaintsView() {
           )}
         </section>
       </div>
+      <RaiseComplaintModal open={raiseOpen} onClose={() => setRaiseOpen(false)} />
     </div>
   )
 }

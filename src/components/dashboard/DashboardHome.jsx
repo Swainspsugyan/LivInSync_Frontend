@@ -1,8 +1,17 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { formatINR, getBlock, getDashboardMetrics, getVacantUnits, occupancyCounts, useCommunity } from '../../lib/communityStore.js'
+import { pathForView } from '../../lib/dashboardNav.js'
 import { useI18n } from '../../lib/i18n.jsx'
 import { METRIC_CARDS } from '../../lib/dashboardMetrics.js'
+import AddNoticeModal from './AddNoticeModal.jsx'
+import ComplaintShortcut from './ComplaintShortcut.jsx'
 import DonutMetricCard from './DonutMetricCard.jsx'
+import FavouritesBar from './FavouritesBar.jsx'
+import NoticeBoardCard from './NoticeBoardCard.jsx'
+import QuickActions from './QuickActions.jsx'
+import RaiseComplaintModal from './RaiseComplaintModal.jsx'
+import SubjectWiseComplaintCard from './SubjectWiseComplaintCard.jsx'
 
 function liveMetricCards(metrics, t) {
   return METRIC_CARDS.map((card) => {
@@ -64,6 +73,13 @@ export default function DashboardHome({ onAssign, onViewUnit }) {
   const counts = occupancyCounts(state)
   const vacantUnits = getVacantUnits(state, 5)
   const cards = liveMetricCards(metrics, t)
+  const [raiseOpen, setRaiseOpen] = useState(false)
+  const [noticeOpen, setNoticeOpen] = useState(false)
+  const [favOpen, setFavOpen] = useState(false)
+
+  const goComplaints = (category) => {
+    navigate(pathForView('complaints'), category ? { state: { category } } : undefined)
+  }
 
   return (
     <div className="space-y-4">
@@ -77,6 +93,31 @@ export default function DashboardHome({ onAssign, onViewUnit }) {
           />
         ))}
       </div>
+
+      <div className="grid gap-4 lg:grid-cols-2">
+        <SubjectWiseComplaintCard onSeeAll={() => goComplaints()} onSelectCategory={goComplaints} />
+        <NoticeBoardCard onSeeAll={() => navigate(pathForView('notice-board'))} />
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2">
+        <ComplaintShortcut onRaise={() => setRaiseOpen(true)} />
+        <QuickActions
+          onRaise={() => setRaiseOpen(true)}
+          onAddNotice={() => setNoticeOpen(true)}
+          onAddFavourite={() => setFavOpen(true)}
+          onAddResident={() => navigate(pathForView('directory-new'))}
+        />
+      </div>
+
+      <FavouritesBar
+        onNavigate={(id) => navigate(pathForView(id))}
+        pickerOpen={favOpen}
+        onPickerOpen={() => setFavOpen(true)}
+        onPickerClose={() => setFavOpen(false)}
+      />
+
+      <RaiseComplaintModal open={raiseOpen} onClose={() => setRaiseOpen(false)} />
+      <AddNoticeModal open={noticeOpen} onClose={() => setNoticeOpen(false)} />
 
       <section className="dash-card flex min-h-0 flex-col rounded-2xl" aria-labelledby="vacant-heading">
         <div className="flex items-center justify-between gap-2 border-b border-slate-200 px-4 py-3 dark:border-white/10">

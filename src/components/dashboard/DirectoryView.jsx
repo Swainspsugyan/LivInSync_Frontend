@@ -1,8 +1,15 @@
 import { useMemo, useState } from 'react'
 import { useLocation } from 'react-router-dom'
+import { canManageResidents } from '../../lib/auth.js'
 import { getBlock, getRoom, placementOf, roomLabel, useCommunity } from '../../lib/communityStore.js'
 import { useI18n } from '../../lib/i18n.jsx'
 import DashBtn from './DashBtn.jsx'
+import ResidentActionsMenu from './ResidentActionsMenu.jsx'
+import ResidentBillsModal from './ResidentBillsModal.jsx'
+import ResidentDeleteDialog from './ResidentDeleteDialog.jsx'
+import ResidentDetailsModal from './ResidentDetailsModal.jsx'
+import ResidentEditModal from './ResidentEditModal.jsx'
+import ResidentNoticeModal from './ResidentNoticeModal.jsx'
 import StatusBanner from './StatusBanner.jsx'
 
 function placementBadge(place, t) {
@@ -22,9 +29,12 @@ export default function DirectoryView({ onNavigate }) {
   const { t } = useI18n()
   const location = useLocation()
   const state = useCommunity()
+  const manage = canManageResidents()
   const [query, setQuery] = useState('')
   const [tab, setTab] = useState('active')
-  const flash = location.state?.flash
+  const [flash, setFlash] = useState(location.state?.flash || '')
+  const [panel, setPanel] = useState(null)
+  const target = panel?.resident || null
 
   const rows = useMemo(() => {
     const q = query.trim().toLowerCase()
@@ -50,6 +60,17 @@ export default function DirectoryView({ onNavigate }) {
     { id: 'directory-past', label: t('ops.pastResidents') },
     { id: 'directory-requests', label: t('ops.roomChangeRequests') },
   ]
+
+  const closePanel = () => setPanel(null)
+
+  const onAction = (type, resident) => {
+    if (type === 'complaints') {
+      onNavigate('complaints', { residentId: resident.id, residentName: resident.name })
+      return
+    }
+    setFlash('')
+    setPanel({ type, resident })
+  }
 
   return (
     <div className="space-y-4">
@@ -103,7 +124,7 @@ export default function DirectoryView({ onNavigate }) {
           <p className="px-4 py-10 text-center text-sm text-slate-500 dark:text-slate-400">{t('ops.noResidents')}</p>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[640px] text-left text-sm">
+            <table className="w-full min-w-[720px] text-left text-sm">
               <thead className="bg-slate-50 text-[11px] uppercase tracking-wide text-slate-500 dark:bg-white/5">
                 <tr>
                   <th className="px-4 py-2 font-semibold">{t('ops.resident')}</th>
@@ -111,6 +132,7 @@ export default function DirectoryView({ onNavigate }) {
                   <th className="px-4 py-2 font-semibold">{t('ops.room')}</th>
                   <th className="px-4 py-2 font-semibold">{t('ops.dates')}</th>
                   <th className="px-4 py-2 font-semibold">{t('ops.statusLabel')}</th>
+                  {manage ? <th className="sticky right-0 bg-slate-50 px-4 py-2 text-right font-semibold dark:bg-[#10233a]">{t('ops.actions')}</th> : null}
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-white/5">
@@ -132,6 +154,11 @@ export default function DirectoryView({ onNavigate }) {
                         {resident.endUndecided ? ` → ${t('ops.openEnded')}` : resident.endDate ? ` → ${resident.endDate}` : ''}
                       </td>
                       <td className="px-4 py-2.5">{placementBadge(place, t)}</td>
+                      {manage ? (
+                        <td className="sticky right-0 bg-[#fafafa] px-4 py-2.5 text-right dark:bg-[#10233a]">
+                          <ResidentActionsMenu resident={resident} onAction={onAction} />
+                        </td>
+                      ) : null}
                     </tr>
                   )
                 })}
@@ -140,7 +167,41 @@ export default function DirectoryView({ onNavigate }) {
           </div>
         )}
       </section>
+
+      <ResidentDetailsModal
+        resident={target}
+        open={panel?.type === 'details'}
+        onClose={closePanel}
+        onEdit={(resident) => setPanel({ type: 'edit', resident })}
+      />
+      <ResidentEditModal
+        resident={target}
+        open={panel?.type === 'edit'}
+        onClose={closePanel}
+        onSaved={(resident) => {
+          closePanel()
+          setFlash(t('ops.updatedResident', { name: resident.name }))
+        }}
+      />
+      <ResidentNoticeModal
+        resident={target}
+        open={panel?.type === 'notice'}
+        onClose={closePanel}
+        onSent={() => {
+          closePanel()
+          setFlash(t('ops.noticeSent', { name: target?.name }))
+        }}
+      />
+      <ResidentDeleteDialog
+        resident={target}
+        open={panel?.type === 'delete'}
+        onClose={closePanel}
+        onDeleted={(resident) => {
+          closePanel()
+          setFlash(t('ops.deletedResident', { name: resident.name }))
+        }}
+      />
+      <ResidentBillsModal resident={target} open={panel?.type === 'bills'} onClose={closePanel} />
     </div>
   )
 }
-

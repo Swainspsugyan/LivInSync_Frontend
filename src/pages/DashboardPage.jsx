@@ -10,6 +10,7 @@ import DetailPanel from '../components/dashboard/DetailPanel.jsx'
 import DirectoryView from '../components/dashboard/DirectoryView.jsx'
 import Header from '../components/dashboard/Header.jsx'
 import ModuleView from '../components/dashboard/ModuleView.jsx'
+import NoticesView from '../components/dashboard/NoticesView.jsx'
 import PageWrapper from '../components/dashboard/PageWrapper.jsx'
 import PastResidentsView from '../components/dashboard/PastResidentsView.jsx'
 import ResidentForm from '../components/dashboard/ResidentForm.jsx'
@@ -56,6 +57,7 @@ function renderView({ active, t, goTo, setDetail }) {
   }
   if (active === 'insights') return <AnalyticsView />
   if (active === 'complaints') return <ComplaintsView />
+  if (active === 'notice-board') return <NoticesView />
   if (active === 'directory') return <DirectoryView onNavigate={goTo} />
   if (active === 'directory-new') return <ResidentForm />
   if (active === 'directory-past') return <PastResidentsView onBack={() => goTo('directory')} />
